@@ -6,14 +6,14 @@ const QUESTIONS = [
     roundName: "Round 1: Cultural Icons",
     roundNum: 1,
     qNum: 1,
-    canadian: "Terry Fox",
+    canadian: "Ryan Reynolds",
     facts: [
-      "Diagnosed with bone cancer at age 18, leading to the amputation of his right leg.",
-      "In 1980, he began the 'Marathon of Hope' to raise money and awareness for cancer research.",
-      "Ran close to a marathon a day (approx. 42 km) for 143 days, totaling 5,373 kilometres.",
-      "He remains the youngest person ever named a Companion of the Order of Canada."
+      "Raised in Vancouver, BC, he failed his high school drama class but kept acting.",
+      "He became co-owner of the historic Welsh professional association football club Wrexham AFC.",
+      "Owned a substantial stake in Mint Mobile, which sold to T-Mobile in a multi-billion dollar deal.",
+      "He portrays the quick-witted, fourth-wall-breaking Marvel superhero Deadpool."
     ],
-    notes: "Terry Fox ran starting in St. John's, NL, and had to stop in Thunder Bay, ON, when the cancer spread to his lungs. The annual Terry Fox Run is now the world's largest one-day fundraiser for cancer research."
+    notes: "Ryan Reynolds is a major Hollywood star and creative marketer, managing his production company Maximum Effort alongside various business ventures."
   },
   {
     id: 2,
