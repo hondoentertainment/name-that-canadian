@@ -164,14 +164,14 @@ const QUESTIONS = [
     roundName: "Round 3: Modern Legends",
     roundNum: 3,
     qNum: 4,
-    canadian: "Ryan Reynolds",
+    canadian: "Drake",
     facts: [
-      "Raised in Vancouver, BC, he failed his high school drama class but kept acting.",
-      "He became co-owner of the historic Welsh professional association football club Wrexham AFC.",
-      "Owned a substantial stake in Mint Mobile, which sold to T-Mobile in a multi-billion dollar deal.",
-      "He portrays the quick-witted, fourth-wall-breaking Marvel superhero Deadpool."
+      "Started his career as an actor, playing wheelchair-bound Jimmy Brooks on the teen drama series 'Degrassi: The Next Generation'.",
+      "He is a global ambassador for the Toronto Raptors and is frequently seen courtside at their games.",
+      "Founded the record label OVO Sound and popularized terms like 'YOLO' and 'The 6ix'.",
+      "He is the highest-certified digital singles artist in US history, with hits like 'Hotline Bling' and 'God's Plan'."
     ],
-    notes: "Ryan Reynolds is a major Hollywood star and creative marketer, managing his production company Maximum Effort alongside various business ventures."
+    notes: "Aubrey Drake Graham, known mononymously as Drake, is one of the most influential and commercially successful figures in modern music, holding numerous Billboard chart records."
   },
 
   // Final Round
