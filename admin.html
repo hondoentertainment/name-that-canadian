@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Name That Canadian! — Admin Controller</title>
+  <meta name="description" content="Host controller interface for managing the live game show.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- Root container for Admin Page -->
+  <div id="view-container" data-current-view="admin">
+
+    <!-- Admin Control Panel -->
+    <div id="view-admin" class="admin-container">
+      <!-- Admin Sidebar -->
+      <div class="admin-sidebar">
+        <div class="admin-sidebar-header">
+          <div class="admin-logo">Admin <span>Controller</span></div>
+          <div class="sync-status-box">
+            <div id="admin-sync-status" class="sync-indicator disconnected">
+              Sync Offline
+            </div>
+          </div>
+        </div>
+
+        <!-- Questions navigation list -->
+        <div id="admin-q-list" class="admin-q-list-container">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Sidebar footer -->
+        <div class="admin-sidebar-footer">
+          <button class="btn btn-outline btn-back-menu">🚪 Main Menu</button>
+          <button class="btn btn-danger btn-reset-game">🔄 Reset Game</button>
+        </div>
+      </div>
+
+      <!-- Admin Main Workspace -->
+      <div class="admin-main">
+        <!-- Controller Section -->
+        <div class="control-dashboard">
+          <div class="admin-panel-card">
+            <div class="admin-panel-title">🕹️ Question Controls</div>
+            
+            <div class="dashboard-timer-display">
+              <div id="admin-time-tracker" class="time-left-tracker">Time Left: 40s</div>
+              <div id="admin-fact-progress" class="fact-tracker">Facts: 1/4</div>
+            </div>
+
+            <!-- Core host actions -->
+            <div class="main-controls-row">
+              <button id="admin-play-btn" class="btn btn-success btn-glow">▶️ Start</button>
+              <button id="admin-reset-q-btn" class="btn btn-outline">🔁 Restart Q</button>
+            </div>
+
+            <div class="game-flow-actions">
+              <button id="admin-next-fact-btn" class="btn btn-outline">💡 Next Hint</button>
+              <button id="admin-reveal-answer-btn" class="btn btn-primary btn-glow">🔓 Reveal Answer</button>
+            </div>
+
+            <div class="time-controls">
+              <span>Adjust Remaining Time:</span>
+              <div class="time-controls-btns">
+                <button id="admin-time-minus" class="btn btn-outline" style="padding: 0.5rem 1rem;">-5s</button>
+                <button id="admin-time-plus" class="btn btn-outline" style="padding: 0.5rem 1rem;">+5s</button>
+              </div>
+            </div>
+
+            <div class="toggle-control">
+              <span class="switch-label">Auto-reveal hints on timer ticks</span>
+              <label class="switch">
+                <input id="admin-auto-advance-toggle" type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Soundboard Card -->
+          <div class="admin-panel-card">
+            <div class="admin-panel-title">
+              🔊 Game Show Soundboard
+              <button id="admin-mute-btn" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">🔊 Mute Host</button>
+            </div>
+            <div class="soundboard-grid">
+              <button class="btn btn-outline admin-sound-btn" data-sound="correct">⭐ Correct</button>
+              <button class="btn btn-outline admin-sound-btn" data-sound="incorrect">❌ Wrong/Buzzer</button>
+              <button class="btn btn-outline admin-sound-btn" data-sound="reveal">✨ Hint Sparkle</button>
+              <button class="btn btn-outline admin-sound-btn" data-sound="fanfare">🎺 Victory Fanfare</button>
+            </div>
+          </div>
+
+          <!-- Navigation footer -->
+          <div class="admin-panel-card" style="padding: 1.25rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <button id="admin-prev-q-btn" class="btn btn-outline">⬅️ Previous Q</button>
+              <button id="admin-next-q-btn" class="btn btn-outline">Next Q ➡️</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cheat Sheet Section -->
+        <div class="cheat-sheet-card">
+          <div class="admin-panel-card" style="margin-bottom: 0;">
+            <div class="cheat-sheet-header">
+              <div id="admin-cheat-round" class="cheat-round">Round 1: Cultural Icons</div>
+              <h3 id="admin-cheat-title" class="cheat-title">Terry Fox</h3>
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+              <h4 style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase;">Hints:</h4>
+              <ul id="admin-cheat-facts" class="cheat-facts-list">
+                <!-- Populated by JS -->
+              </ul>
+            </div>
+
+            <div id="admin-cheat-notes-container" class="cheat-notes-box">
+              <h5>Host Discussion Notes:</h5>
+              <p id="admin-cheat-notes">Discussion pointers go here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Load script resources -->
+  <script src="audio.js"></script>
+  <script src="sync.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
