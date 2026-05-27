@@ -407,7 +407,8 @@ function adjustTime(amount) {
 function prefetchWikipediaImage(canadianName) {
   if (wikipediaImages[canadianName]) return;
   
-  const queryName = encodeURIComponent(canadianName);
+  const searchName = canadianName === 'Drake' ? 'Drake (musician)' : canadianName;
+  const queryName = encodeURIComponent(searchName);
   const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${queryName}&prop=pageimages&format=json&pithumbsize=400&origin=*`;
   
   fetch(url)
