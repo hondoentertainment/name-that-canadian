@@ -786,7 +786,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   // Common setups (image prefetching, fullscreen, initial render)
-  prefetchWikipediaImage(QUESTIONS[0].canadian);
+  QUESTIONS.forEach(q => prefetchWikipediaImage(q.canadian));
 
   document.querySelectorAll('.btn-fullscreen').forEach(btn => {
     btn.onclick = () => {
