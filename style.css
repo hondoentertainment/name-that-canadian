@@ -1129,28 +1129,269 @@ input:checked + .slider:before {
 }
 
 @media (max-width: 768px) {
+  body {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
   .splash-title {
-    font-size: 2.75rem;
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+  .splash-desc {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
   }
   .splash-wrapper {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
+    margin: 1rem auto;
+    width: 95%;
   }
   .role-buttons-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
   }
+  .role-card {
+    padding: 1.25rem 1rem;
+  }
+  
+  /* Presenter Screen Mobile Enhancements */
   .presenter-container {
-    padding: 1.25rem;
+    padding: 1rem;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+  .presenter-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .presenter-round-info {
+    text-align: center;
   }
   .presenter-round-name {
     font-size: 1.25rem;
   }
+  .presenter-main {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .presenter-timer-layout {
+    order: -1;
+    margin-bottom: 1rem;
+  }
+  .timer-circle {
+    width: 140px;
+    height: 140px;
+  }
+  .timer-circle svg {
+    width: 140px;
+    height: 140px;
+  }
+  .timer-value {
+    font-size: 3rem;
+  }
   .fact-card {
-    padding: 1.25rem;
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  .fact-badge {
+    width: 32px;
+    height: 32px;
+    font-size: 0.95rem;
+    margin-right: 1rem;
   }
   .fact-text {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  
+  /* Reveal Overlay on Mobile */
+  .reveal-overlay {
+    padding: 1.5rem 1rem;
+    justify-content: flex-start;
+    overflow-y: auto;
+  }
+  .reveal-subtitle {
+    font-size: 0.95rem;
+    letter-spacing: 0.25em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
   .reveal-title {
-    font-size: 3rem;
+    font-size: 2.25rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+  .reveal-media-container {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 1.5rem;
+  }
+  .reveal-notes-box {
+    padding: 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .presenter-footer {
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    align-items: stretch;
+  }
+  .presenter-footer .btn {
+    width: 100%;
+  }
+
+  /* Admin Controller Mobile Layout */
+  .admin-container {
+    grid-template-columns: 1fr;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .admin-sidebar {
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .admin-sidebar-header {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sync-status-box {
+    margin-top: 0;
+  }
+  .admin-q-list-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0.75rem 1rem;
+    gap: 0.5rem;
+    scrollbar-width: thin;
+  }
+  .admin-q-item {
+    flex: 0 0 auto;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    border-left: none;
+  }
+  .admin-q-item.active {
+    border-color: var(--accent-blue);
+    background: rgba(59, 130, 246, 0.12);
+  }
+  .q-num-badge {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
+  }
+  .q-name {
+    font-size: 0.85rem;
+  }
+  .q-round {
+    display: none;
+  }
+  .admin-sidebar-footer {
+    flex-direction: row;
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+  .admin-sidebar-footer .btn {
+    flex: 1;
+    padding: 0.65rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  .admin-main {
+    padding: 1rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .admin-panel-card {
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .admin-panel-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  .dashboard-timer-display {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .time-left-tracker {
+    font-size: 1.35rem;
+  }
+  .fact-tracker {
+    font-size: 0.9rem;
+  }
+  .main-controls-row {
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .game-flow-actions {
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .time-controls {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+    padding: 0.75rem;
+  }
+  .time-controls-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .soundboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  .soundboard-grid .btn {
+    font-size: 0.85rem;
+    padding: 0.65rem 0.5rem;
+  }
+  
+  /* Cheat Sheet on Mobile */
+  .cheat-sheet-card {
+    position: static;
+  }
+  .cheat-title {
+    font-size: 1.35rem;
+  }
+  .cheat-facts-list li {
+    font-size: 0.85rem;
+    padding: 0.65rem 0.85rem;
+  }
+  .cheat-notes-box {
+    padding: 1rem;
+  }
+  
+  /* Solo / Split View Mobile */
+  .solo-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow: auto;
+  }
+  .solo-presenter-pane {
+    border-right: none;
+    border-bottom: 2px solid var(--border-subtle);
+    height: auto;
+    padding: 1rem;
+  }
+  .solo-admin-pane {
+    height: auto;
+    padding: 1rem;
   }
 }

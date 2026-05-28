@@ -20,14 +20,14 @@ const QUESTIONS = [
     roundName: "Round 1: Cultural Icons",
     roundNum: 1,
     qNum: 2,
-    canadian: "Alexander Graham Bell",
+    canadian: "Ryan Gosling",
     facts: [
-      "Born in Scotland, he immigrated to Ontario in 1870 and spent decades working in Canada.",
-      "Much of his life was dedicated to inventing communication aids and teaching deaf students.",
-      "In 1876, he secured the first United States patent for the telephone.",
-      "He co-founded the National Geographic Society and pioneered early hydrofoils and aviation."
+      "Began his career as a child star on the Disney Channel's 'The Mickey Mouse Club' alongside Britney Spears.",
+      "Starred in the cult classic romantic drama 'The Notebook' and the stylish neo-noir thriller 'Drive'.",
+      "Received an Academy Award nomination for playing a neon-clad, horse-loving doll sidekick in a 2023 blockbuster.",
+      "He performed the Oscar-nominated hit song 'I'm Just Ken' live at the Academy Awards."
     ],
-    notes: "Bell did much of his core work at his family home in Brantford, ON (the Homestead) and later in Baddeck, NS, where he built the Silver Dart airplane and the HD-4 hydrofoil boat."
+    notes: "Ryan Gosling is a critically acclaimed Canadian actor and musician known for his versatility, charm, and iconic film roles."
   },
   {
     id: 3,
@@ -64,28 +64,28 @@ const QUESTIONS = [
     roundName: "Round 2: Pioneers & Trailblazers",
     roundNum: 2,
     qNum: 1,
-    canadian: "Chris Hadfield",
+    canadian: "Michael Cera",
     facts: [
-      "He was the first Canadian astronaut to perform a spacewalk (extravehicular activity).",
-      "In 2013, he served as the Commander of the International Space Station.",
-      "Gained viral fame by recording a cover of David Bowie's 'Space Oddity' while in orbit.",
-      "He was a fighter pilot in the Royal Canadian Air Force, intercepting Soviet bombers."
+      "Played the awkward teenager George Michael Bluth in the critically acclaimed television comedy series 'Arrested Development'.",
+      "Starred as the title character in 'Scott Pilgrim vs. the World' and co-starred in the high school comedy hit 'Superbad'.",
+      "Known for his iconic soft-spoken, awkward screen persona, and played a fictionalized version of himself in 'This Is the End'.",
+      "Played the unique doll named Allan in Greta Gerwig's 'Barbie' (2023) movie."
     ],
-    notes: "Hadfield spent 166 days in space. His rendition of 'Space Oddity' has over 50 million views on YouTube and was praised by David Bowie himself."
+    notes: "Michael Cera is a beloved Canadian actor and musician who became a defining face of 2000s and 2010s indie comedy cinema."
   },
   {
     id: 6,
     roundName: "Round 2: Pioneers & Trailblazers",
     roundNum: 2,
     qNum: 2,
-    canadian: "Margaret Atwood",
+    canadian: "Avril Lavigne",
     facts: [
-      "Spent her childhood in the Canadian northern bush as her father was a forest entomologist.",
-      "She is a twice-winner of the Booker Prize, first in 2000 and again in 2019.",
-      "She invented the 'LongPen', a robotic device allowing authors to sign books from anywhere.",
-      "She wrote the famous 1985 dystopian novel set in the oppressive Republic of Gilead."
+      "Born in Belleville, Ontario, she signed a two-album recording contract worth $1.25 million at age 16.",
+      "Known as the 'Pop-Punk Queen' who paved the way for female-driven, punk-influenced pop music in the early 2000s.",
+      "Her debut album 'Let Go' featured massive global hit singles like 'Complicated' and 'Sk8er Boi'.",
+      "Her 2007 hit single 'Girlfriend' was her first song to reach number one on the US Billboard Hot 100."
     ],
-    notes: "Atwood is a prolific poet, novelist, and environmental activist. Her work 'The Handmaid's Tale' has been adapted into an award-winning television series."
+    notes: "Avril Lavigne is a hugely influential singer-songwriter who defined the 2000s pop-punk aesthetic and sold over 40 million albums."
   },
   {
     id: 7,
@@ -106,14 +106,14 @@ const QUESTIONS = [
     roundName: "Round 2: Pioneers & Trailblazers",
     roundNum: 2,
     qNum: 4,
-    canadian: "Frederick Banting",
+    canadian: "Justin Bieber",
     facts: [
-      "He was a WWI military doctor awarded the Military Cross for treating wounded under fire.",
-      "At age 32, he became the youngest person to receive the Nobel Prize in Medicine.",
-      "He sold the patent rights for his life-saving discovery to the University of Toronto for $1.",
-      "Co-discovered the pancreatic hormone secretion used to treat diabetes: insulin."
+      "Discovered in 2007 on YouTube by a talent manager after posting videos of himself singing covers.",
+      "His 2010 hit song 'Baby' became one of the most-viewed and most-disliked YouTube videos of its time.",
+      "He was the first artist to have seven songs from a debut record chart on the Billboard Hot 100.",
+      "Known for major pop hits like 'Sorry', 'Love Yourself', and 'Peaches', and his dedicated fanbase called 'Beliebers'."
     ],
-    notes: "Banting discovered insulin alongside Charles Best in 1921. He shared his Nobel Prize money with Best, protesting that Best was not officially named in the award."
+    notes: "Justin Bieber is a global pop superstar who rose to fame as a teen idol, becoming one of the best-selling music artists of all time."
   },
 
   // Round 3
@@ -122,14 +122,14 @@ const QUESTIONS = [
     roundName: "Round 3: Modern Legends",
     roundNum: 3,
     qNum: 1,
-    canadian: "Lucy Maud Montgomery",
+    canadian: "The Weeknd",
     facts: [
-      "Raised by her grandparents in Cavendish, Prince Edward Island, which inspired her writing.",
-      "Her debut novel was rejected by all publishers, so she stored it in a hatbox for years.",
-      "She wrote 20 novels, 530 short stories, and over 500 poems in her lifetime.",
-      "Best known as the creator of the spirited, red-haired orphan Anne Shirley."
+      "Began anonymously uploading music to YouTube under his stage name in 2010 before releasing the mixtape 'House of Balloons'.",
+      "His 2019 song 'Blinding Lights' became the longest-charting song in Billboard Hot 100 history and the most-streamed song on Spotify.",
+      "Performed the Super Bowl LV halftime show in 2021, spending $7 million of his own money to produce it.",
+      "Known for his signature cinematic synth-pop and R&B style, and starred in and co-created the HBO series 'The Idol'."
     ],
-    notes: "L.M. Montgomery published 'Anne of Green Gables' in 1908. It became an instant bestseller, making PEI a major tourist destination to this day."
+    notes: "Abel Tesfaye, known as The Weeknd, is one of the most successful and decorated contemporary musicians, winning multiple Grammys."
   },
   {
     id: 10,
@@ -150,14 +150,14 @@ const QUESTIONS = [
     roundName: "Round 3: Modern Legends",
     roundNum: 3,
     qNum: 3,
-    canadian: "Tommy Douglas",
+    canadian: "Seth Rogen",
     facts: [
-      "He was an accomplished amateur boxer, winning the Lightweight Championship of Saskatchewan.",
-      "Led the first democratic socialist government in North America as Premier of Saskatchewan.",
-      "Voted 'The Greatest Canadian' in a nationwide CBC television poll in 2004.",
-      "Known as the father of Canada's universal, single-payer health care system (Medicare)."
+      "Started as a stand-up comedian in Vancouver during his teenage years before moving to LA to star in the cult series 'Freaks and Geeks'.",
+      "Co-wrote and starred in iconic R-rated comedy movies like 'Superbad', 'Pineapple Express', and 'This Is the End'.",
+      "He is known for his distinctive gravelly laugh, love of cannabis culture, and running a successful ceramics brand called Houseplant.",
+      "Voiced iconic animated characters including Pumbaa in 'The Lion King' (2019) and Donkey Kong in 'The Super Mario Bros. Movie' (2023)."
     ],
-    notes: "Douglas was premier from 1944 to 1961. He is also the grandfather of actor Kiefer Sutherland."
+    notes: "Seth Rogen is an actor, writer, producer, and entrepreneur who has defined modern stoner comedy and comedy filmmaking in the 21st century."
   },
   {
     id: 12,
