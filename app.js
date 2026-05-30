@@ -1,228 +1,119 @@
-// Questions Database (13 questions: 3 rounds of 4, 1 final round)
-const QUESTIONS = [
-  // Round 1
-  {
-    id: 1,
-    roundName: "Round 1: Cultural Icons",
-    roundNum: 1,
-    qNum: 1,
-    canadian: "Ryan Reynolds",
-    facts: [
-      "Raised in Vancouver, BC, he failed his high school drama class but kept acting.",
-      "He became co-owner of the historic Welsh professional association football club Wrexham AFC.",
-      "Owned a substantial stake in Mint Mobile, which sold to T-Mobile in a multi-billion dollar deal.",
-      "He portrays the quick-witted, fourth-wall-breaking Marvel superhero Deadpool."
-    ],
-    notes: "Ryan Reynolds is a major Hollywood star and creative marketer, managing his production company Maximum Effort alongside various business ventures."
-  },
-  {
-    id: 2,
-    roundName: "Round 1: Cultural Icons",
-    roundNum: 1,
-    qNum: 2,
-    canadian: "Ryan Gosling",
-    facts: [
-      "Began his career as a child star on the Disney Channel's 'The Mickey Mouse Club' alongside Britney Spears.",
-      "Starred in the cult classic romantic drama 'The Notebook' and the stylish neo-noir thriller 'Drive'.",
-      "Received an Academy Award nomination for playing a neon-clad, horse-loving doll sidekick in a 2023 blockbuster.",
-      "He performed the Oscar-nominated hit song 'I'm Just Ken' live at the Academy Awards."
-    ],
-    notes: "Ryan Gosling is a critically acclaimed Canadian actor and musician known for his versatility, charm, and iconic film roles."
-  },
-  {
-    id: 3,
-    roundName: "Round 1: Cultural Icons",
-    roundNum: 1,
-    qNum: 3,
-    canadian: "Céline Dion",
-    facts: [
-      "She grew up as the youngest of 14 children in a musical family in Charlemagne, Quebec.",
-      "She won the 1988 Eurovision Song Contest in Dublin, representing Switzerland.",
-      "She recorded the award-winning theme song for Disney's 1991 animated film 'Beauty and the Beast'.",
-      "Her Las Vegas show 'A New Day...' is the highest-grossing concert residency of all time."
-    ],
-    notes: "With over 200 million records sold worldwide, Céline is one of the most successful pop vocalists in history. She sings fluently in both French and English."
-  },
-  {
-    id: 4,
-    roundName: "Round 1: Cultural Icons",
-    roundNum: 1,
-    qNum: 4,
-    canadian: "Keanu Reeves",
-    facts: [
-      "Born in Beirut, Lebanon, he grew up in Toronto and was an MVP goalie in high school hockey.",
-      "He played bass guitar for the alternative rock band Dogstar during the 1990s.",
-      "He is celebrated for his extreme generosity, often donating millions to crew members and cancer charities.",
-      "He played the iconic characters 'Neo' in a sci-fi trilogy and a legendary dog-loving assassin."
-    ],
-    notes: "Keanu Reeves was nicknamed 'The Wall' in hockey. He has starred in massive franchises like The Matrix, John Wick, Bill & Ted, and Speed."
-  },
+/* global QUESTIONS_PER_ROUND, FINAL_ROUND_NUM, TIMER_OPTIONS, WIKI_IMAGE_OVERRIDES, ROUND_OVERLAY_COPY, KEYBOARD_SHORTCUTS */
 
-  // Round 2
-  {
-    id: 5,
-    roundName: "Round 2: Pioneers & Trailblazers",
-    roundNum: 2,
-    qNum: 1,
-    canadian: "Michael Cera",
-    facts: [
-      "Played the awkward teenager George Michael Bluth in the critically acclaimed television comedy series 'Arrested Development'.",
-      "Starred as the title character in 'Scott Pilgrim vs. the World' and co-starred in the high school comedy hit 'Superbad'.",
-      "Known for his iconic soft-spoken, awkward screen persona, and played a fictionalized version of himself in 'This Is the End'.",
-      "Played the unique doll named Allan in Greta Gerwig's 'Barbie' (2023) movie."
-    ],
-    notes: "Michael Cera is a beloved Canadian actor and musician who became a defining face of 2000s and 2010s indie comedy cinema."
-  },
-  {
-    id: 6,
-    roundName: "Round 2: Pioneers & Trailblazers",
-    roundNum: 2,
-    qNum: 2,
-    canadian: "Avril Lavigne",
-    facts: [
-      "Born in Belleville, Ontario, she signed a two-album recording contract worth $1.25 million at age 16.",
-      "Known as the 'Pop-Punk Queen' who paved the way for female-driven, punk-influenced pop music in the early 2000s.",
-      "Her debut album 'Let Go' featured massive global hit singles like 'Complicated' and 'Sk8er Boi'.",
-      "Her 2007 hit single 'Girlfriend' was her first song to reach number one on the US Billboard Hot 100."
-    ],
-    notes: "Avril Lavigne is a hugely influential singer-songwriter who defined the 2000s pop-punk aesthetic and sold over 40 million albums."
-  },
-  {
-    id: 7,
-    roundName: "Round 2: Pioneers & Trailblazers",
-    roundNum: 2,
-    qNum: 3,
-    canadian: "Wayne Gretzky",
-    facts: [
-      "Nicknamed 'The Great One', he played 20 seasons in the National Hockey League.",
-      "He holds the NHL record for most career goals, most assists, and most total points.",
-      "Upon his retirement in 1999, his jersey number 99 was retired league-wide.",
-      "He is the only player to score over 200 points in a single season, doing so four times."
-    ],
-    notes: "Gretzky won four Stanley Cups with the Edmonton Oilers. When he retired, he held 61 NHL records, many of which are considered unbreakable."
-  },
-  {
-    id: 8,
-    roundName: "Round 2: Pioneers & Trailblazers",
-    roundNum: 2,
-    qNum: 4,
-    canadian: "Justin Bieber",
-    facts: [
-      "Discovered in 2007 on YouTube by a talent manager after posting videos of himself singing covers.",
-      "His 2010 hit song 'Baby' became one of the most-viewed and most-disliked YouTube videos of its time.",
-      "He was the first artist to have seven songs from a debut record chart on the Billboard Hot 100.",
-      "Known for major pop hits like 'Sorry', 'Love Yourself', and 'Peaches', and his dedicated fanbase called 'Beliebers'."
-    ],
-    notes: "Justin Bieber is a global pop superstar who rose to fame as a teen idol, becoming one of the best-selling music artists of all time."
-  },
+let CATEGORIES = {};
+let CATEGORY_META = {};
+let gameState = {};
+let timerInterval = null;
+let wikipediaImages = {};
+let categoriesLoaded = false;
 
-  // Round 3
-  {
-    id: 9,
-    roundName: "Round 3: Modern Legends",
-    roundNum: 3,
-    qNum: 1,
-    canadian: "The Weeknd",
-    facts: [
-      "Began anonymously uploading music to YouTube under his stage name in 2010 before releasing the mixtape 'House of Balloons'.",
-      "His 2019 song 'Blinding Lights' became the longest-charting song in Billboard Hot 100 history and the most-streamed song on Spotify.",
-      "Performed the Super Bowl LV halftime show in 2021, spending $7 million of his own money to produce it.",
-      "Known for his signature cinematic synth-pop and R&B style, and starred in and co-created the HBO series 'The Idol'."
-    ],
-    notes: "Abel Tesfaye, known as The Weeknd, is one of the most successful and decorated contemporary musicians, winning multiple Grammys."
-  },
-  {
-    id: 10,
-    roundName: "Round 3: Modern Legends",
-    roundNum: 3,
-    qNum: 2,
-    canadian: "Jim Carrey",
-    facts: [
-      "Born in Newmarket, Ontario, his family lived in a Volkswagen van during financial hardship.",
-      "He secured his big break as a cast member on the comedy sketch show 'In Living Color'.",
-      "The first actor to star in three $100M+ blockbusters in a single calendar year (1994).",
-      "Famous for rubber-faced physical comedy in 'Ace Ventura', 'The Mask', and 'Dumb and Dumber'."
-    ],
-    notes: "Jim Carrey went on to display impressive dramatic range in films like 'The Truman Show' and 'Eternal Sunshine of the Spotless Mind'."
-  },
-  {
-    id: 11,
-    roundName: "Round 3: Modern Legends",
-    roundNum: 3,
-    qNum: 3,
-    canadian: "Seth Rogen",
-    facts: [
-      "Started as a stand-up comedian in Vancouver during his teenage years before moving to LA to star in the cult series 'Freaks and Geeks'.",
-      "Co-wrote and starred in iconic R-rated comedy movies like 'Superbad', 'Pineapple Express', and 'This Is the End'.",
-      "He is known for his distinctive gravelly laugh, love of cannabis culture, and running a successful ceramics brand called Houseplant.",
-      "Voiced iconic animated characters including Pumbaa in 'The Lion King' (2019) and Donkey Kong in 'The Super Mario Bros. Movie' (2023)."
-    ],
-    notes: "Seth Rogen is an actor, writer, producer, and entrepreneur who has defined modern stoner comedy and comedy filmmaking in the 21st century."
-  },
-  {
-    id: 12,
-    roundName: "Round 3: Modern Legends",
-    roundNum: 3,
-    qNum: 4,
-    canadian: "Drake",
-    facts: [
-      "Started his career as an actor, playing wheelchair-bound Jimmy Brooks on the teen drama series 'Degrassi: The Next Generation'.",
-      "He is a global ambassador for the Toronto Raptors and is frequently seen courtside at their games.",
-      "Founded the record label OVO Sound and popularized terms like 'YOLO' and 'The 6ix'.",
-      "He is the highest-certified digital singles artist in US history, with hits like 'Hotline Bling' and 'God's Plan'."
-    ],
-    notes: "Aubrey Drake Graham, known mononymously as Drake, is one of the most influential and commercially successful figures in modern music, holding numerous Billboard chart records."
-  },
+const isAdminPage = !!document.getElementById('view-admin') && !document.getElementById('view-splash');
 
-  // Final Round
-  {
-    id: 13,
-    roundName: "Final Round: The Showstopper",
-    roundNum: 4,
-    qNum: 1,
-    canadian: "Sandra Oh",
-    facts: [
-      "Born in Nepean, Ontario, she rejected a journalism scholarship to study acting.",
-      "Won a Golden Globe for playing brilliant cardiothoracic surgeon Dr. Cristina Yang on TV.",
-      "She was the first person of Asian descent to host the Golden Globe Awards.",
-      "She voiced the mother, Ming Lee, in the Toronto-set Pixar animated movie 'Turning Red'."
-    ],
-    notes: "Sandra Oh received critical acclaim for Grey's Anatomy and Killing Eve. She is one of the most prominent Canadian dramatic actresses of her generation."
-  }
-];
-
-// Global Game State
 const DEFAULT_STATE = {
   view: 'splash',
   currentQuestionIndex: 0,
   revealedFacts: 1,
   timeLeft: 40,
+  timerMax: 40,
+  timerDuration: 40,
   timerRunning: false,
   answerRevealed: false,
   autoReveal: true,
-  muted: false
+  muted: false,
+  activeCategory: 'celebrities',
+  teams: [],
+  showScoreboard: false,
+  shuffleQuestions: false,
+  questionOrder: [],
+  theme: 'midnight',
+  bigText: false,
+  screenOverlay: null,
+  pendingQuestionIndex: null,
+  gameComplete: false
 };
 
-let gameState = { ...DEFAULT_STATE };
-let timerInterval = null;
-let wikipediaImages = {}; // Cache of wiki image URLs
-
-// Detect if running on the standalone admin page
-const isAdminPage = !!document.getElementById('view-admin') && !document.getElementById('view-splash');
-
-// Global state updater (previously missing)
-function updateState(newState) {
-  gameState = { ...gameState, ...newState };
-  saveState();
-  broadcastState();
-  render();
+function getWikiSearchTitle(name) {
+  return WIKI_IMAGE_OVERRIDES[name] || name;
 }
 
-// Reset game entirely
-function resetGame() {
-  stopTimerInterval();
-  gameState = { ...DEFAULT_STATE };
-  gameState.view = document.getElementById('view-container').dataset.currentView || 'splash';
+function shouldSyncToPresenter() {
+  return isAdminPage;
+}
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildQuestionOrder(categoryKey) {
+  const base = CATEGORIES[categoryKey] || [];
+  const r1 = [], r2 = [], fin = [];
+  base.forEach((q, i) => {
+    if (q.roundNum === 1) r1.push(i);
+    else if (q.roundNum === 2) r2.push(i);
+    else fin.push(i);
+  });
+  return [...shuffleArray(r1), ...shuffleArray(r2), ...fin];
+}
+
+function getBaseQuestions() {
+  const cat = gameState.activeCategory || 'celebrities';
+  return CATEGORIES[cat] || CATEGORIES.celebrities || [];
+}
+
+function getQuestions() {
+  const base = getBaseQuestions();
+  if (gameState.shuffleQuestions && gameState.questionOrder?.length === base.length) {
+    return gameState.questionOrder.map(i => base[i]);
+  }
+  return base;
+}
+
+function getTimerDuration() {
+  return gameState.timerDuration || 40;
+}
+
+function applyTimerDuration() {
+  const d = getTimerDuration();
+  gameState.timerDuration = d;
+  gameState.timeLeft = d;
+  gameState.timerMax = d;
+}
+
+function getRevealThresholds() {
+  const max = gameState.timerMax || getTimerDuration();
+  return {
+    t2: Math.floor(max * 0.75),
+    t2Low: Math.floor(max * 0.5) + 1,
+    t3: Math.floor(max * 0.5),
+    t3Low: Math.floor(max * 0.25) + 1,
+    t4: Math.floor(max * 0.25)
+  };
+}
+
+async function loadCategories() {
+  try {
+    const res = await fetch('data/categories.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    CATEGORY_META = data.categoryMeta || {};
+    CATEGORIES = {};
+    Object.keys(CATEGORY_META).forEach(k => {
+      if (Array.isArray(data[k])) CATEGORIES[k] = data[k];
+    });
+    categoriesLoaded = true;
+  } catch (e) {
+    console.error('Failed to load categories.json', e);
+    categoriesLoaded = false;
+  }
+}
+
+function updateState(newState) {
+  gameState = { ...gameState, ...newState };
   saveState();
   broadcastState();
   render();
@@ -233,18 +124,23 @@ function saveState() {
 }
 
 function loadState() {
+  gameState = { ...DEFAULT_STATE };
   const saved = localStorage.getItem('name_that_canadian_state');
   if (saved) {
     try {
-      gameState = JSON.parse(saved);
-      // Ensure local mute matches state
-      if (window.gameAudio) {
-        window.gameAudio.setMuted(gameState.muted);
+      gameState = { ...DEFAULT_STATE, ...JSON.parse(saved) };
+      if (!gameState.timerMax) gameState.timerMax = gameState.timeLeft || getTimerDuration();
+      if (!gameState.timerDuration) gameState.timerDuration = 40;
+      const base = getBaseQuestions();
+      if (base.length && gameState.currentQuestionIndex >= base.length) {
+        gameState.currentQuestionIndex = 0;
       }
+      if (window.gameAudio) window.gameAudio.setMuted(gameState.muted);
     } catch (e) {
-      console.error("Error loading saved state", e);
+      console.error('Error loading saved state', e);
     }
   }
+  if (isAdminPage) gameState.view = 'admin';
 }
 
 function broadcastState() {
@@ -253,25 +149,25 @@ function broadcastState() {
   }
 }
 
-// Timer Controls
+function applyTheme(theme) {
+  document.body.dataset.theme = theme || 'midnight';
+  document.body.classList.toggle('big-text', !!gameState.bigText);
+}
+
 function stopTimerInterval() {
   if (timerInterval) {
     clearInterval(timerInterval);
     timerInterval = null;
   }
-  if (window.gameAudio) {
-    window.gameAudio.stopSuspense();
-  }
+  if (window.gameAudio) window.gameAudio.stopSuspense();
 }
 
 function startTimer() {
-  if (gameState.timerRunning) return;
-  
+  if (gameState.timerRunning || gameState.screenOverlay) return;
   if (window.gameAudio) {
     window.gameAudio.init();
     window.gameAudio.startSuspense();
   }
-  
   gameState.timerRunning = true;
   saveState();
   broadcastState();
@@ -280,44 +176,39 @@ function startTimer() {
   timerInterval = setInterval(() => {
     let nextTime = gameState.timeLeft - 1;
     let nextRevealed = gameState.revealedFacts;
+    const th = getRevealThresholds();
 
     if (nextTime < 0) {
-      nextTime = 0;
       stopTimerInterval();
       gameState.timerRunning = false;
       gameState.timeLeft = 0;
-      
-      if (window.gameAudio) {
-        window.gameAudio.playIncorrect();
-      }
-      if (gameState.view === 'admin') {
-        window.gameSync.triggerSound('incorrect');
-      }
-      
+      gameState.revealedFacts = 4;
+      gameState.answerRevealed = true;
+      if (window.gameAudio) window.gameAudio.playIncorrect();
+      if (shouldSyncToPresenter()) window.gameSync.triggerSound('incorrect');
+      checkGameEnd();
       saveState();
       broadcastState();
       render();
       return;
     }
 
-    // Play ticking sounds
     if (nextTime <= 5 && nextTime > 0) {
       if (window.gameAudio) window.gameAudio.playWarning();
-      if (gameState.view === 'admin') window.gameSync.triggerSound('warning');
+      if (shouldSyncToPresenter()) window.gameSync.triggerSound('warning');
     } else if (nextTime > 0) {
       if (window.gameAudio) window.gameAudio.playTick();
-      if (gameState.view === 'admin') window.gameSync.triggerSound('tick');
+      if (shouldSyncToPresenter()) window.gameSync.triggerSound('tick');
     }
 
-    // Auto-reveal logic at thresholds
     if (gameState.autoReveal) {
-      if (nextTime <= 30 && nextTime > 20 && nextRevealed < 2) {
+      if (nextTime <= th.t2 && nextTime >= th.t2Low && nextRevealed < 2) {
         nextRevealed = 2;
         triggerLocalAndRemoteSound('reveal');
-      } else if (nextTime <= 20 && nextTime > 10 && nextRevealed < 3) {
+      } else if (nextTime <= th.t3 && nextTime >= th.t3Low && nextRevealed < 3) {
         nextRevealed = 3;
         triggerLocalAndRemoteSound('reveal');
-      } else if (nextTime <= 10 && nextTime > 0 && nextRevealed < 4) {
+      } else if (nextTime <= th.t4 && nextTime > 0 && nextRevealed < 4) {
         nextRevealed = 4;
         triggerLocalAndRemoteSound('reveal');
       }
@@ -347,197 +238,426 @@ function triggerLocalAndRemoteSound(soundName) {
     if (soundName === 'incorrect') window.gameAudio.playIncorrect();
     if (soundName === 'fanfare') window.gameAudio.playFanfare();
   }
-  if (gameState.view === 'admin') {
-    window.gameSync.triggerSound(soundName);
-  }
+  if (shouldSyncToPresenter()) window.gameSync.triggerSound(soundName);
 }
 
-// Navigation & Actions
-function selectQuestion(idx) {
-  if (idx < 0 || idx >= QUESTIONS.length) return;
+function getTransitionOverlay(targetIdx) {
+  const qs = getQuestions();
+  if (targetIdx <= 0 || targetIdx >= qs.length) return null;
+  const q = qs[targetIdx];
+  if (targetIdx === 5 && q.roundNum === 2 && q.qNum === 1) return { type: 'round2_start', ...ROUND_OVERLAY_COPY.round2_start };
+  if (targetIdx === 10 && q.roundNum === FINAL_ROUND_NUM) return { type: 'final_intro', ...ROUND_OVERLAY_COPY.final_intro };
+  return null;
+}
+
+function getTransitionOverlayAfter(currentIdx) {
+  const qs = getQuestions();
+  if (currentIdx === 4 && qs[4]?.roundNum === 1) return { type: 'round1_end', ...ROUND_OVERLAY_COPY.round1_end };
+  if (currentIdx === 9 && qs[9]?.roundNum === 2) return { type: 'round2_end', ...ROUND_OVERLAY_COPY.round2_end };
+  return null;
+}
+
+function showScreenOverlay(overlay, pendingIdx) {
+  gameState.screenOverlay = overlay;
+  gameState.pendingQuestionIndex = pendingIdx ?? null;
   stopTimerInterval();
-  gameState.currentQuestionIndex = idx;
-  gameState.timeLeft = 40;
-  gameState.revealedFacts = 1;
   gameState.timerRunning = false;
-  gameState.answerRevealed = false;
-  
   saveState();
   broadcastState();
   render();
-  
-  // Pre-fetch Wikipedia image for the new question
-  prefetchWikipediaImage(QUESTIONS[idx].canadian);
 }
 
-function revealNextFact() {
-  if (gameState.revealedFacts < 4) {
-    gameState.revealedFacts += 1;
-    triggerLocalAndRemoteSound('reveal');
+function dismissScreenOverlay() {
+  const pending = gameState.pendingQuestionIndex;
+  gameState.screenOverlay = null;
+  gameState.pendingQuestionIndex = null;
+  if (pending !== null && pending !== undefined) {
+    selectQuestion(pending, { skipOverlay: true });
+  } else {
     saveState();
     broadcastState();
     render();
   }
 }
 
-function revealAnswer() {
-  stopTimerInterval();
-  gameState.timerRunning = false;
-  gameState.answerRevealed = true;
-  
-  triggerLocalAndRemoteSound('correct');
-  
+function showPodium() {
+  gameState.gameComplete = true;
+  gameState.screenOverlay = { type: 'podium', title: '🏆 Final Scores', subtitle: 'Thanks for playing!' };
+  triggerLocalAndRemoteSound('fanfare');
   saveState();
   broadcastState();
   render();
+}
+
+function checkGameEnd() {
+  if (gameState.currentQuestionIndex === getQuestions().length - 1 && gameState.answerRevealed) {
+    showPodium();
+  }
+}
+
+function selectQuestion(idx, options = {}) {
+  const qs = getQuestions();
+  if (idx < 0 || idx >= qs.length) return;
+
+  if (!options.skipOverlay && !options.fromOverlay) {
+    const overlay = getTransitionOverlay(idx);
+    if (overlay) {
+      showScreenOverlay(overlay, idx);
+      return;
+    }
+  }
+
+  stopTimerInterval();
+  gameState.currentQuestionIndex = idx;
+  gameState.gameComplete = false;
+  applyTimerDuration();
+  gameState.revealedFacts = 1;
+  gameState.timerRunning = false;
+  gameState.answerRevealed = false;
+  gameState.screenOverlay = null;
+  gameState.pendingQuestionIndex = null;
+
+  saveState();
+  broadcastState();
+  render();
+
+  prefetchWikipediaImage(qs[idx].canadian, qs[idx].imageUrl);
+}
+
+function goToNextQuestion() {
+  const idx = gameState.currentQuestionIndex;
+  const nextIdx = Math.min(getQuestions().length - 1, idx + 1);
+  if (nextIdx === idx) return;
+
+  if (gameState.answerRevealed) {
+    const afterOverlay = getTransitionOverlayAfter(idx);
+    if (afterOverlay) {
+      showScreenOverlay(afterOverlay, nextIdx);
+      return;
+    }
+  }
+  selectQuestion(nextIdx);
+}
+
+function goToPrevQuestion() {
+  selectQuestion(Math.max(0, gameState.currentQuestionIndex - 1), { skipOverlay: true });
+}
+
+function revealNextFact() {
+  if (gameState.screenOverlay || gameState.revealedFacts >= 4) return;
+  gameState.revealedFacts += 1;
+  triggerLocalAndRemoteSound('reveal');
+  saveState();
+  broadcastState();
+  render();
+}
+
+function revealAnswer() {
+  if (gameState.screenOverlay) return;
+  stopTimerInterval();
+  gameState.timerRunning = false;
+  gameState.answerRevealed = true;
+  triggerLocalAndRemoteSound('correct');
+  saveState();
+  broadcastState();
+  render();
+  checkGameEnd();
 }
 
 function adjustTime(amount) {
   let newTime = gameState.timeLeft + amount;
   if (newTime < 0) newTime = 0;
-  if (newTime > 99) newTime = 99; // Cap at 99
-  
+  if (newTime > 99) newTime = 99;
   gameState.timeLeft = newTime;
+  if (newTime > gameState.timerMax) gameState.timerMax = newTime;
   saveState();
   broadcastState();
   render();
 }
 
-// Wiki Image Fetcher with Caching
-function prefetchWikipediaImage(canadianName) {
+function setTimerDuration(seconds) {
+  stopTimerInterval();
+  gameState.timerDuration = seconds;
+  applyTimerDuration();
+  gameState.timerRunning = false;
+  gameState.revealedFacts = gameState.answerRevealed ? 4 : Math.min(gameState.revealedFacts, 4);
+  saveState();
+  broadcastState();
+  render();
+}
+
+function changeCategory(categoryKey) {
+  if (!CATEGORIES[categoryKey]) return;
+  stopTimerInterval();
+  gameState.activeCategory = categoryKey;
+  gameState.currentQuestionIndex = 0;
+  gameState.gameComplete = false;
+  gameState.screenOverlay = null;
+  if (gameState.shuffleQuestions) {
+    gameState.questionOrder = buildQuestionOrder(categoryKey);
+  }
+  applyTimerDuration();
+  gameState.revealedFacts = 1;
+  gameState.timerRunning = false;
+  gameState.answerRevealed = false;
+  getQuestions().forEach(q => prefetchWikipediaImage(q.canadian, q.imageUrl));
+  saveState();
+  broadcastState();
+  render();
+}
+
+function toggleShuffle(enabled) {
+  gameState.shuffleQuestions = enabled;
+  if (enabled) {
+    gameState.questionOrder = buildQuestionOrder(gameState.activeCategory);
+  } else {
+    gameState.questionOrder = [];
+  }
+  gameState.currentQuestionIndex = 0;
+  saveState();
+  broadcastState();
+  render();
+}
+
+function addTeam(name) {
+  if (!name || name.trim() === '') return;
+  const id = Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
+  if (!gameState.teams) gameState.teams = [];
+  gameState.teams.push({ id, name: name.trim(), score: 0 });
+  saveState();
+  broadcastState();
+  render();
+}
+
+function removeTeam(id) {
+  if (!gameState.teams) return;
+  gameState.teams = gameState.teams.filter(t => t.id !== id);
+  saveState();
+  broadcastState();
+  render();
+}
+
+function adjustScore(id, amount) {
+  if (!gameState.teams) return;
+  const team = gameState.teams.find(t => t.id === id);
+  if (team) {
+    team.score += amount;
+    saveState();
+    broadcastState();
+    render();
+  }
+}
+
+function awardTeam(id, amount) {
+  adjustScore(id, amount);
+  triggerLocalAndRemoteSound('correct');
+}
+
+function clearScores() {
+  if (!gameState.teams) return;
+  gameState.teams.forEach(t => { t.score = 0; });
+  saveState();
+  broadcastState();
+  render();
+}
+
+function exportScores() {
+  if (!gameState.teams?.length) return;
+  const sorted = [...gameState.teams].sort((a, b) => b.score - a.score);
+  const lines = sorted.map((t, i) => `${i + 1}. ${t.name}: ${t.score} pts`);
+  const text = `Name That Canadian — Scores\n${new Date().toLocaleString()}\n\n${lines.join('\n')}`;
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('Scores copied to clipboard!');
+  }).catch(() => {
+    prompt('Copy scores:', text);
+  });
+}
+
+function playAgain() {
+  stopTimerInterval();
+  gameState.currentQuestionIndex = 0;
+  gameState.gameComplete = false;
+  gameState.screenOverlay = null;
+  gameState.pendingQuestionIndex = null;
+  if (gameState.shuffleQuestions) {
+    gameState.questionOrder = buildQuestionOrder(gameState.activeCategory);
+  }
+  applyTimerDuration();
+  gameState.revealedFacts = 1;
+  gameState.timerRunning = false;
+  gameState.answerRevealed = false;
+  saveState();
+  broadcastState();
+  render();
+}
+
+function resetGame() {
+  stopTimerInterval();
+  const view = document.getElementById('view-container')?.dataset.currentView || 'splash';
+  gameState = { ...DEFAULT_STATE, view: isAdminPage ? 'admin' : view };
+  applyTimerDuration();
+  saveState();
+  broadcastState();
+  applyTheme(gameState.theme);
+  render();
+}
+
+function resetQuestion() {
+  stopTimerInterval();
+  applyTimerDuration();
+  gameState.revealedFacts = 1;
+  gameState.timerRunning = false;
+  gameState.answerRevealed = false;
+  saveState();
+  broadcastState();
+  render();
+}
+
+function showToast(msg) {
+  let el = document.getElementById('game-toast');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'game-toast';
+    el.className = 'game-toast';
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  el.classList.add('visible');
+  setTimeout(() => el.classList.remove('visible'), 3000);
+}
+
+function prefetchWikipediaImage(canadianName, imageUrl) {
   if (wikipediaImages[canadianName]) return;
-  
-  const searchName = canadianName === 'Drake' ? 'Drake (musician)' : canadianName;
-  const queryName = encodeURIComponent(searchName);
-  const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${queryName}&prop=pageimages&format=json&pithumbsize=400&origin=*`;
-  
+  if (imageUrl) {
+    wikipediaImages[canadianName] = imageUrl;
+    return;
+  }
+  const searchName = getWikiSearchTitle(canadianName);
+  const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(searchName)}&prop=pageimages&format=json&pithumbsize=400&origin=*`;
   fetch(url)
     .then(res => res.json())
     .then(data => {
-      if (data && data.query && data.query.pages) {
-        const pages = data.query.pages;
-        const pageId = Object.keys(pages)[0];
-        if (pageId !== "-1" && pages[pageId].thumbnail) {
-          wikipediaImages[canadianName] = pages[pageId].thumbnail.source;
-          // If the answer is currently revealed and we are displaying this question, re-render to show it
-          if (gameState.answerRevealed && QUESTIONS[gameState.currentQuestionIndex].canadian === canadianName) {
-            render();
-          }
+      const pages = data?.query?.pages;
+      if (!pages) return;
+      const pageId = Object.keys(pages)[0];
+      if (pageId !== '-1' && pages[pageId].thumbnail) {
+        wikipediaImages[canadianName] = pages[pageId].thumbnail.source;
+        if (gameState.answerRevealed && getQuestions()[gameState.currentQuestionIndex]?.canadian === canadianName) {
+          render();
         }
       }
     })
-    .catch(err => console.warn("Failed to fetch image for " + canadianName, err));
+    .catch(err => console.warn('Failed to fetch image for ' + canadianName, err));
 }
 
-// DOM Rendering
-function render() {
-  const container = document.getElementById('view-container');
-  if (!container) return;
+function populateCategorySelects() {
+  document.querySelectorAll('[data-category-select]').forEach(select => {
+    const current = select.value;
+    select.innerHTML = '';
+    Object.entries(CATEGORY_META).forEach(([key, meta]) => {
+      const opt = document.createElement('option');
+      opt.value = key;
+      opt.textContent = meta.label;
+      select.appendChild(opt);
+    });
+    select.value = gameState.activeCategory || current || 'celebrities';
+  });
+}
 
-  if (isAdminPage) {
-    container.dataset.currentView = 'admin';
-    const adminEl = document.getElementById('view-admin');
-    if (adminEl) adminEl.classList.remove('hidden');
-    renderAdminScreen('admin');
-  } else {
-    // If state view is 'admin' but we are on index.html, force it to 'splash'
-    if (gameState.view === 'admin') {
-      gameState.view = 'splash';
-    }
-    
-    container.dataset.currentView = gameState.view;
-    
-    // Clean active views safely
-    const splashEl = document.getElementById('view-splash');
-    const presenterEl = document.getElementById('view-presenter');
-    const soloEl = document.getElementById('view-solo');
-    
-    if (splashEl) splashEl.classList.add('hidden');
-    if (presenterEl) presenterEl.classList.add('hidden');
-    if (soloEl) soloEl.classList.add('hidden');
+function renderScreenOverlay(targetPrefix) {
+  const overlayEl = document.getElementById(`${targetPrefix}-screen-overlay`);
+  if (!overlayEl) return;
 
-    if (gameState.view === 'splash' && splashEl) {
-      splashEl.classList.remove('hidden');
-    } else if (gameState.view === 'presenter' && presenterEl) {
-      presenterEl.classList.remove('hidden');
-      renderPresenterScreen('presenter');
-    } else if (gameState.view === 'solo' && soloEl) {
-      soloEl.classList.remove('hidden');
-      renderPresenterScreen('solo-presenter');
-      renderAdminScreen('solo-admin');
+  if (!gameState.screenOverlay) {
+    overlayEl.classList.add('hidden');
+    overlayEl.classList.remove('visible');
+    return;
+  }
+
+  overlayEl.classList.remove('hidden');
+  overlayEl.classList.add('visible');
+
+  const o = gameState.screenOverlay;
+  const titleEl = document.getElementById(`${targetPrefix}-overlay-title`);
+  const subEl = document.getElementById(`${targetPrefix}-overlay-subtitle`);
+  const podiumEl = document.getElementById(`${targetPrefix}-overlay-podium`);
+  const continueBtn = overlayEl.querySelector('.btn-dismiss-overlay');
+
+  if (titleEl) titleEl.textContent = o.title || '';
+  if (subEl) subEl.textContent = o.subtitle || '';
+
+  if (podiumEl) {
+    if (o.type === 'podium' && gameState.teams?.length) {
+      podiumEl.classList.remove('hidden');
+      const sorted = [...gameState.teams].sort((a, b) => b.score - a.score);
+      const medals = ['🥇', '🥈', '🥉'];
+      podiumEl.innerHTML = sorted.map((t, i) => `
+        <div class="podium-entry ${i < 3 ? 'podium-top' : ''}">
+          <span class="podium-rank">${medals[i] || `#${i + 1}`}</span>
+          <span class="podium-name">${t.name}</span>
+          <span class="podium-score">${t.score} pts</span>
+        </div>
+      `).join('');
+    } else {
+      podiumEl.classList.add('hidden');
+      podiumEl.innerHTML = '';
     }
+  }
+
+  if (continueBtn) {
+    continueBtn.style.display = (isAdminPage || gameState.view === 'solo') ? '' : 'none';
   }
 }
 
-// Render the Presenter Screen UI components
 function renderPresenterScreen(targetPrefix) {
-  const question = QUESTIONS[gameState.currentQuestionIndex];
-  
-  // Update Round & Question Headers
-  document.getElementById(`${targetPrefix}-round-name`).textContent = question.roundName;
-  document.getElementById(`${targetPrefix}-q-num`).textContent = `Question ${question.qNum} of 4`;
-  if (question.roundNum === 4) {
-    document.getElementById(`${targetPrefix}-q-num`).textContent = `Final Showstopper`;
-  }
+  if (!categoriesLoaded || !getQuestions().length) return;
+  const question = getQuestions()[gameState.currentQuestionIndex];
+  if (!question) return;
 
-  // Timer Circle SVG dasharray updates
+  document.getElementById(`${targetPrefix}-round-name`).textContent = question.roundName;
+  const qNumEl = document.getElementById(`${targetPrefix}-q-num`);
+  qNumEl.textContent = question.roundNum === FINAL_ROUND_NUM
+    ? 'Final Showstopper'
+    : `Question ${question.qNum} of ${QUESTIONS_PER_ROUND}`;
+
   const timeLeft = gameState.timeLeft;
-  const timePercent = timeLeft / 40;
-  const timerValElement = document.getElementById(`${targetPrefix}-timer-value`);
-  timerValElement.textContent = timeLeft;
-  
+  const timerMax = gameState.timerMax || getTimerDuration();
+  const timePercent = Math.min(1, timeLeft / timerMax);
+  document.getElementById(`${targetPrefix}-timer-value`).textContent = timeLeft;
+
   const ring = document.getElementById(`${targetPrefix}-timer-ring`);
   if (ring) {
-    const circumference = 2 * Math.PI * 54; // r=54
-    const offset = circumference - (timePercent * circumference);
-    ring.style.strokeDashoffset = offset;
-    
-    // Class shifts based on remaining time
+    const radius = parseFloat(ring.getAttribute('r')) || 54;
+    const circumference = 2 * Math.PI * radius;
+    ring.setAttribute('stroke-dasharray', circumference);
+    ring.style.strokeDashoffset = circumference - (timePercent * circumference);
     const timerCircle = document.getElementById(`${targetPrefix}-timer`);
-    timerCircle.className = "timer-circle";
-    if (timeLeft <= 5) {
-      timerCircle.classList.add('low-time-critical');
-    } else if (timeLeft <= 15) {
-      timerCircle.classList.add('low-time');
-    }
+    timerCircle.className = 'timer-circle';
+    if (timeLeft <= 5) timerCircle.classList.add('low-time-critical');
+    else if (timeLeft <= 15) timerCircle.classList.add('low-time');
   }
 
-  // Facts Cards
   const factsContainer = document.getElementById(`${targetPrefix}-facts-container`);
   factsContainer.innerHTML = '';
-  
   question.facts.forEach((factText, index) => {
     const factNum = index + 1;
     const isRevealed = gameState.revealedFacts >= factNum;
-    
     const card = document.createElement('div');
     card.className = `fact-card ${isRevealed ? 'revealed' : 'locked'}`;
-    
-    if (isRevealed) {
-      card.innerHTML = `
-        <div class="fact-badge">${factNum}</div>
-        <div class="fact-text">${factText}</div>
-      `;
-    } else {
-      card.innerHTML = `
-        <div class="fact-badge locked"><span class="lock-icon">🔒</span></div>
-        <div class="fact-text locked-text">Fact Locked</div>
-      `;
-    }
+    card.innerHTML = isRevealed
+      ? `<div class="fact-badge">${factNum}</div><div class="fact-text">${factText}</div>`
+      : `<div class="fact-badge locked"><span class="lock-icon">🔒</span></div><div class="fact-text locked-text">Fact Locked</div>`;
     factsContainer.appendChild(card);
   });
 
-  // Answer Overlay / Reveal Area
   const revealOverlay = document.getElementById(`${targetPrefix}-reveal-overlay`);
-  if (gameState.answerRevealed) {
+  if (gameState.answerRevealed && !gameState.screenOverlay) {
     revealOverlay.classList.remove('hidden');
     revealOverlay.classList.add('visible');
-    
     document.getElementById(`${targetPrefix}-answer-name`).textContent = question.canadian;
     document.getElementById(`${targetPrefix}-answer-notes`).textContent = question.notes;
-    
     const imgEl = document.getElementById(`${targetPrefix}-answer-image`);
-    const imgUrl = wikipediaImages[question.canadian];
+    const imgUrl = question.imageUrl || wikipediaImages[question.canadian];
     if (imgUrl) {
       imgEl.src = imgUrl;
       imgEl.classList.remove('hidden');
@@ -546,343 +666,568 @@ function renderPresenterScreen(targetPrefix) {
       imgEl.classList.add('hidden');
       const fallback = document.getElementById(`${targetPrefix}-avatar-fallback`);
       fallback.classList.remove('hidden');
-      
-      // Get initials
-      const initials = question.canadian.split(' ').map(n => n[0]).join('');
-      fallback.textContent = initials;
+      fallback.textContent = question.canadian.split(' ').map(n => n[0]).join('').slice(0, 3);
     }
   } else {
     revealOverlay.classList.add('hidden');
     revealOverlay.classList.remove('visible');
   }
-}
 
-// Render the Admin Panel UI components
-function renderAdminScreen(targetPrefix) {
-  const question = QUESTIONS[gameState.currentQuestionIndex];
-  
-  // Timer buttons status
-  const playBtn = document.getElementById(`${targetPrefix}-play-btn`);
-  if (playBtn) {
-    if (gameState.timerRunning) {
-      playBtn.innerHTML = `⏸️ Pause`;
-      playBtn.className = "btn btn-warning btn-glow";
+  const leaderboardContainer = document.getElementById(`${targetPrefix}-leaderboard-container`);
+  if (leaderboardContainer) {
+    if (gameState.teams?.length > 0 && gameState.showScoreboard && !gameState.screenOverlay) {
+      leaderboardContainer.classList.remove('hidden');
+      const entriesContainer = document.getElementById(`${targetPrefix}-leaderboard-entries`);
+      entriesContainer.innerHTML = '';
+      [...gameState.teams].sort((a, b) => b.score - a.score).forEach((team, index) => {
+        const entry = document.createElement('div');
+        entry.className = 'leaderboard-entry';
+        entry.innerHTML = `
+          <div class="leaderboard-rank-info">
+            <span class="leaderboard-rank">${index === 0 ? '👑' : `#${index + 1}`}</span>
+            <span class="leaderboard-team-name">${team.name}</span>
+          </div>
+          <span class="leaderboard-score">${team.score} pts</span>`;
+        entriesContainer.appendChild(entry);
+      });
     } else {
-      playBtn.innerHTML = `▶️ Start`;
-      playBtn.className = "btn btn-success btn-glow";
+      leaderboardContainer.classList.add('hidden');
     }
   }
 
-  // Revealed facts progress on Admin panel
-  const factProgress = document.getElementById(`${targetPrefix}-fact-progress`);
-  if (factProgress) {
-    factProgress.textContent = `Facts: ${gameState.revealedFacts}/4`;
-  }
-  
-  // Sync Next Fact button status
-  const nextFactBtn = document.getElementById(`${targetPrefix}-next-fact-btn`);
-  if (nextFactBtn) {
-    nextFactBtn.disabled = gameState.revealedFacts >= 4;
+  renderScreenOverlay(targetPrefix);
+}
+
+function renderAdminScreen(targetPrefix) {
+  if (!categoriesLoaded || !getQuestions().length) return;
+  const question = getQuestions()[gameState.currentQuestionIndex];
+
+  const playBtn = document.getElementById(`${targetPrefix}-play-btn`);
+  if (playBtn) {
+    const disabled = !!gameState.screenOverlay;
+    playBtn.disabled = disabled;
+    if (gameState.timerRunning) {
+      playBtn.innerHTML = '⏸️ Pause';
+      playBtn.className = 'btn btn-warning btn-glow';
+    } else {
+      playBtn.innerHTML = '▶️ Start';
+      playBtn.className = 'btn btn-success btn-glow';
+    }
   }
 
-  // Answer reveal status
+  document.getElementById(`${targetPrefix}-fact-progress`) && (document.getElementById(`${targetPrefix}-fact-progress`).textContent = `Facts: ${gameState.revealedFacts}/4`);
+
+  const nextFactBtn = document.getElementById(`${targetPrefix}-next-fact-btn`);
+  if (nextFactBtn) nextFactBtn.disabled = gameState.revealedFacts >= 4 || !!gameState.screenOverlay;
+
   const answerBtn = document.getElementById(`${targetPrefix}-reveal-answer-btn`);
   if (answerBtn) {
     if (gameState.answerRevealed) {
-      answerBtn.textContent = "Answer Revealed";
-      answerBtn.className = "btn btn-disabled";
+      answerBtn.textContent = 'Answer Revealed';
+      answerBtn.className = 'btn btn-disabled';
       answerBtn.disabled = true;
     } else {
-      answerBtn.textContent = "🔓 Reveal Answer";
-      answerBtn.className = "btn btn-primary btn-glow";
-      answerBtn.disabled = false;
+      answerBtn.textContent = '🔓 Reveal Answer';
+      answerBtn.className = 'btn btn-primary btn-glow';
+      answerBtn.disabled = !!gameState.screenOverlay;
     }
   }
 
-  // Admin Cheat Sheet updates
-  document.getElementById(`${targetPrefix}-cheat-title`).textContent = `Q${question.id}: ${question.canadian}`;
-  document.getElementById(`${targetPrefix}-cheat-round`).textContent = question.roundName;
-  document.getElementById(`${targetPrefix}-cheat-notes`).textContent = question.notes;
-  
-  const cheatFactsList = document.getElementById(`${targetPrefix}-cheat-facts`);
-  cheatFactsList.innerHTML = '';
-  question.facts.forEach((fact, i) => {
-    const li = document.createElement('li');
-    li.className = gameState.revealedFacts > i ? "revealed" : "locked";
-    li.innerHTML = `<strong>Fact ${i+1}:</strong> ${fact}`;
-    cheatFactsList.appendChild(li);
-  });
+  const cheatTitle = document.getElementById(`${targetPrefix}-cheat-title`);
+  const cheatRound = document.getElementById(`${targetPrefix}-cheat-round`);
+  const cheatNotes = document.getElementById(`${targetPrefix}-cheat-notes`);
+  if (cheatTitle) cheatTitle.textContent = `Q${question.id}: ${question.canadian}`;
+  if (cheatRound) cheatRound.textContent = question.roundName;
+  if (cheatNotes) cheatNotes.textContent = question.notes;
 
-  // Time tracker
+  const cheatFactsList = document.getElementById(`${targetPrefix}-cheat-facts`);
+  if (cheatFactsList) {
+    cheatFactsList.innerHTML = '';
+    question.facts.forEach((fact, i) => {
+      const li = document.createElement('li');
+      li.className = gameState.revealedFacts > i ? 'revealed' : 'locked';
+      li.innerHTML = `<strong>Fact ${i + 1}:</strong> ${fact}`;
+      cheatFactsList.appendChild(li);
+    });
+  }
+
   const timeTracker = document.getElementById(`${targetPrefix}-time-tracker`);
   if (timeTracker) {
     timeTracker.textContent = `Time Left: ${gameState.timeLeft}s`;
-    timeTracker.className = gameState.timeLeft <= 5 ? "low" : "";
+    timeTracker.className = gameState.timeLeft <= 5 ? 'time-left-tracker low' : 'time-left-tracker';
   }
 
-  // Questions sidebar/list rendering
+  const timerSelect = document.getElementById(`${targetPrefix}-timer-duration`);
+  if (timerSelect) timerSelect.value = String(getTimerDuration());
+
   const qList = document.getElementById(`${targetPrefix}-q-list`);
   if (qList) {
     qList.innerHTML = '';
-    QUESTIONS.forEach((q, idx) => {
-      const activeState = (gameState.currentQuestionIndex === idx) ? 'active' : '';
+    getQuestions().forEach((q, idx) => {
       const card = document.createElement('div');
-      card.className = `admin-q-item ${activeState}`;
+      card.className = `admin-q-item ${gameState.currentQuestionIndex === idx ? 'active' : ''}`;
       card.onclick = () => selectQuestion(idx);
-      
       card.innerHTML = `
         <div class="q-num-badge">Q${q.id}</div>
         <div class="q-info">
           <div class="q-name">${q.canadian}</div>
-          <div class="q-round">${q.roundNum === 4 ? 'Final' : 'Round ' + q.roundNum}</div>
-        </div>
-      `;
+          <div class="q-round">${q.roundNum === FINAL_ROUND_NUM ? 'Final' : 'Round ' + q.roundNum}</div>
+        </div>`;
       qList.appendChild(card);
     });
   }
 
-  // Local sound controls
   const muteBtn = document.getElementById(`${targetPrefix}-mute-btn`);
   if (muteBtn) {
-    if (gameState.muted) {
-      muteBtn.innerHTML = "🔇 Unmute Controller";
-      muteBtn.className = "btn btn-outline btn-active-red";
-    } else {
-      muteBtn.innerHTML = "🔊 Mute Controller";
-      muteBtn.className = "btn btn-outline";
-    }
+    muteBtn.innerHTML = gameState.muted ? '🔇 Unmute Controller' : '🔊 Mute Controller';
+    muteBtn.className = gameState.muted ? 'btn btn-outline btn-active-red' : 'btn btn-outline';
   }
 
-  // Presenter Sync Status indicator
   const syncStatus = document.getElementById(`${targetPrefix}-sync-status`);
   if (syncStatus && window.gameSync) {
     if (window.gameSync.isPresenterConnected) {
-      syncStatus.className = "sync-indicator connected";
+      syncStatus.className = 'sync-indicator connected';
       syncStatus.innerHTML = "<span class='pulse-dot'></span> Sync Active";
     } else {
-      syncStatus.className = "sync-indicator disconnected";
-      syncStatus.innerHTML = "Sync Offline (Open Presenter Tab)";
+      syncStatus.className = 'sync-indicator disconnected';
+      syncStatus.innerHTML = 'Sync Offline (Open Presenter Tab)';
     }
   }
 
-  // Auto-advance toggle status
-  const autoToggle = document.getElementById(`${targetPrefix}-auto-advance-toggle`);
-  if (autoToggle) {
-    autoToggle.checked = gameState.autoReveal;
+  document.getElementById(`${targetPrefix}-auto-advance-toggle`) && (document.getElementById(`${targetPrefix}-auto-advance-toggle`).checked = gameState.autoReveal);
+  const sbToggle = document.getElementById(`${targetPrefix}-show-scoreboard-toggle`);
+  if (sbToggle) sbToggle.checked = !!gameState.showScoreboard;
+
+  const shuffleToggle = document.getElementById(`${targetPrefix}-shuffle-toggle`);
+  if (shuffleToggle) shuffleToggle.checked = !!gameState.shuffleQuestions;
+
+  const catSelect = document.getElementById(`${targetPrefix}-category-select`);
+  if (catSelect) catSelect.value = gameState.activeCategory || 'celebrities';
+
+  const overlayPanel = document.getElementById(`${targetPrefix}-overlay-controls`);
+  if (overlayPanel) {
+    overlayPanel.classList.toggle('hidden', !gameState.screenOverlay);
+  }
+
+  const awardPanel = document.getElementById(`${targetPrefix}-award-panel`);
+  if (awardPanel) {
+    awardPanel.classList.toggle('hidden', !gameState.answerRevealed || !!gameState.screenOverlay);
+    if (gameState.answerRevealed && gameState.teams?.length) {
+      awardPanel.innerHTML = `<div class="award-panel-title">⭐ Award Points</div>
+        <div class="award-buttons">${gameState.teams.map(t => `
+          <div class="award-team-row">
+            <span>${t.name}</span>
+            <div>
+              <button class="btn btn-outline btn-sm" onclick="awardTeam('${t.id}', 5)">+5</button>
+              <button class="btn btn-success btn-sm" onclick="awardTeam('${t.id}', 10)">+10</button>
+            </div>
+          </div>`).join('')}</div>`;
+    }
+  }
+
+  const teamsList = document.getElementById(`${targetPrefix}-teams-list`);
+  if (teamsList) {
+    teamsList.innerHTML = '';
+    if (gameState.teams?.length) {
+      gameState.teams.forEach(team => {
+        const row = document.createElement('div');
+        row.className = 'team-manager-row';
+        row.innerHTML = `
+          <span class="team-name">${team.name}</span>
+          <div class="team-score-controls">
+            <button class="btn btn-outline btn-sm" onclick="adjustScore('${team.id}', -10)">-10</button>
+            <span class="team-score">${team.score}</span>
+            <button class="btn btn-outline btn-sm" onclick="adjustScore('${team.id}', 10)">+10</button>
+            <button class="btn btn-outline btn-active-red btn-sm" onclick="removeTeam('${team.id}')">🗑️</button>
+          </div>`;
+        teamsList.appendChild(row);
+      });
+    } else {
+      teamsList.innerHTML = '<div class="empty-teams-msg">No teams added yet.</div>';
+    }
+  }
+
+  updateMobileHostDock();
+}
+
+function render() {
+  const container = document.getElementById('view-container');
+  if (!container) return;
+
+  applyTheme(gameState.theme);
+  document.body.classList.toggle('big-text', !!gameState.bigText);
+
+  if (!categoriesLoaded) {
+    const err = document.getElementById('categories-load-error');
+    if (err) err.classList.remove('hidden');
+    return;
+  }
+
+  if (isAdminPage) {
+    container.dataset.currentView = 'admin';
+    document.getElementById('view-admin')?.classList.remove('hidden');
+    renderAdminScreen('admin');
+  } else {
+    if (gameState.view === 'admin') gameState.view = 'splash';
+    container.dataset.currentView = gameState.view;
+
+    ['view-splash', 'view-presenter', 'view-solo'].forEach(id => {
+      document.getElementById(id)?.classList.add('hidden');
+    });
+
+    if (gameState.view === 'splash') {
+      document.getElementById('view-splash')?.classList.remove('hidden');
+    } else if (gameState.view === 'presenter') {
+      document.getElementById('view-presenter')?.classList.remove('hidden');
+      renderPresenterScreen('presenter');
+    } else if (gameState.view === 'solo') {
+      const soloEl = document.getElementById('view-solo');
+      soloEl?.classList.remove('hidden');
+      renderPresenterScreen('solo-presenter');
+      renderAdminScreen('solo-admin');
+      if (isMobileDevice() && soloEl) {
+        document.getElementById('solo-mobile-dock')?.classList.toggle(
+          'hidden',
+          soloEl.classList.contains('solo-tab-presenter')
+        );
+      }
+    }
   }
 }
 
-// Global Event Listeners & Bootstrapping
-window.addEventListener('DOMContentLoaded', () => {
+function setupAdminActionListeners(prefix) {
+  document.getElementById(`${prefix}-play-btn`)?.addEventListener('click', () => {
+    gameState.timerRunning ? pauseTimer() : startTimer();
+  });
+
+  document.getElementById(`${prefix}-reset-q-btn`)?.addEventListener('click', resetQuestion);
+
+  document.getElementById(`${prefix}-time-plus`)?.addEventListener('click', () => adjustTime(5));
+  document.getElementById(`${prefix}-time-minus`)?.addEventListener('click', () => adjustTime(-5));
+  document.getElementById(`${prefix}-next-fact-btn`)?.addEventListener('click', revealNextFact);
+  document.getElementById(`${prefix}-reveal-answer-btn`)?.addEventListener('click', revealAnswer);
+  document.getElementById(`${prefix}-prev-q-btn`)?.addEventListener('click', goToPrevQuestion);
+  document.getElementById(`${prefix}-next-q-btn`)?.addEventListener('click', goToNextQuestion);
+
+  document.querySelectorAll(`.${prefix}-sound-btn`).forEach(btn => {
+    btn.addEventListener('click', () => triggerLocalAndRemoteSound(btn.dataset.sound));
+  });
+
+  document.getElementById(`${prefix}-mute-btn`)?.addEventListener('click', () => {
+    gameState.muted = !gameState.muted;
+    window.gameAudio?.setMuted(gameState.muted);
+    saveState();
+    render();
+  });
+
+  document.getElementById(`${prefix}-auto-advance-toggle`)?.addEventListener('change', e => {
+    gameState.autoReveal = e.target.checked;
+    saveState();
+    broadcastState();
+    render();
+  });
+
+  document.getElementById(`${prefix}-show-scoreboard-toggle`)?.addEventListener('change', e => {
+    gameState.showScoreboard = e.target.checked;
+    saveState();
+    broadcastState();
+    render();
+  });
+
+  document.getElementById(`${prefix}-shuffle-toggle`)?.addEventListener('change', e => {
+    toggleShuffle(e.target.checked);
+  });
+
+  document.getElementById(`${prefix}-category-select`)?.addEventListener('change', e => {
+    changeCategory(e.target.value);
+  });
+
+  document.getElementById(`${prefix}-timer-duration`)?.addEventListener('change', e => {
+    setTimerDuration(parseInt(e.target.value, 10));
+  });
+
+  document.getElementById(`${prefix}-clear-scores-btn`)?.addEventListener('click', () => {
+    if (confirm('Clear all team scores?')) clearScores();
+  });
+
+  document.getElementById(`${prefix}-export-scores-btn`)?.addEventListener('click', exportScores);
+  document.getElementById(`${prefix}-play-again-btn`)?.addEventListener('click', playAgain);
+  document.getElementById(`${prefix}-dismiss-overlay-btn`)?.addEventListener('click', dismissScreenOverlay);
+
+  const teamInput = document.getElementById(`${prefix}-team-input`);
+  const addTeamBtn = document.getElementById(`${prefix}-add-team-btn`);
+  const doAdd = () => { addTeam(teamInput.value); teamInput.value = ''; };
+  addTeamBtn?.addEventListener('click', doAdd);
+  teamInput?.addEventListener('keydown', e => { if (e.key === 'Enter') doAdd(); });
+}
+
+function setupKeyboardShortcuts() {
+  document.addEventListener('keydown', e => {
+    if (!isAdminPage && gameState.view !== 'solo') return;
+
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+
+    if (gameState.screenOverlay && e.key !== 'Enter') return;
+
+    switch (e.key) {
+      case ' ':
+        e.preventDefault();
+        gameState.timerRunning ? pauseTimer() : startTimer();
+        break;
+      case 'n':
+      case 'N':
+        revealNextFact();
+        break;
+      case 'r':
+      case 'R':
+        if (!gameState.answerRevealed) revealAnswer();
+        break;
+      case 'ArrowLeft':
+        goToPrevQuestion();
+        break;
+      case 'ArrowRight':
+        goToNextQuestion();
+        break;
+      case 'Enter':
+        if (gameState.screenOverlay) dismissScreenOverlay();
+        break;
+      case '1':
+        triggerLocalAndRemoteSound('correct');
+        break;
+      case '2':
+        triggerLocalAndRemoteSound('incorrect');
+        break;
+      case '3':
+        triggerLocalAndRemoteSound('reveal');
+        break;
+      case '4':
+        triggerLocalAndRemoteSound('fanfare');
+        break;
+    }
+  });
+}
+
+function isMobileDevice() {
+  return window.matchMedia('(max-width: 768px)').matches;
+}
+
+function setupMobileDetection() {
+  const update = () => {
+    document.body.classList.toggle('is-mobile', isMobileDevice());
+  };
+  update();
+  window.addEventListener('resize', update);
+}
+
+function setupSoloMobileTabs() {
+  const soloLayout = document.getElementById('view-solo');
+  if (!soloLayout) return;
+
+  soloLayout.classList.add('solo-tab-presenter');
+
+  document.querySelectorAll('.solo-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.soloTab;
+      soloLayout.classList.remove('solo-tab-presenter', 'solo-tab-host');
+      soloLayout.classList.add(`solo-tab-${tab}`);
+      document.querySelectorAll('.solo-tab-btn').forEach(b => {
+        const active = b.dataset.soloTab === tab;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      document.getElementById('solo-mobile-dock')?.classList.toggle('hidden', tab === 'presenter');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+}
+
+function setupMobileHostDock(prefix) {
+  const dockId = prefix === 'admin' ? 'admin-mobile-dock' : 'solo-mobile-dock';
+  const dock = document.getElementById(dockId);
+  if (!dock) return;
+
+  const actions = {
+    prev: () => goToPrevQuestion(),
+    next: () => goToNextQuestion(),
+    play: () => { gameState.timerRunning ? pauseTimer() : startTimer(); },
+    hint: () => revealNextFact(),
+    reveal: () => { if (!gameState.answerRevealed) revealAnswer(); }
+  };
+
+  dock.querySelectorAll('[data-dock-action]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const action = btn.dataset.dockAction;
+      if (actions[action]) actions[action]();
+    });
+  });
+}
+
+function updateMobileHostDock() {
+  document.querySelectorAll('.mobile-host-dock').forEach(dock => {
+    if (dock.classList.contains('hidden')) return;
+    const playBtn = dock.querySelector('[data-dock-action="play"]');
+    const hintBtn = dock.querySelector('[data-dock-action="hint"]');
+    const revealBtn = dock.querySelector('[data-dock-action="reveal"]');
+    if (playBtn) {
+      playBtn.textContent = gameState.timerRunning ? '⏸️' : '▶️';
+      playBtn.setAttribute('aria-label', gameState.timerRunning ? 'Pause timer' : 'Start timer');
+      playBtn.classList.toggle('dock-btn-warning', gameState.timerRunning);
+      playBtn.classList.toggle('dock-btn-primary', !gameState.timerRunning);
+    }
+    if (hintBtn) hintBtn.disabled = gameState.revealedFacts >= 4 || !!gameState.screenOverlay;
+    if (revealBtn) revealBtn.disabled = gameState.answerRevealed || !!gameState.screenOverlay;
+  });
+}
+
+function setupTouchFeedback() {
+  document.addEventListener('touchstart', () => {}, { passive: true });
+}
+
+function setupMobileAudioUnlock() {
+  const unlock = () => {
+    window.gameAudio?.init();
+    document.removeEventListener('touchstart', unlock);
+    document.removeEventListener('click', unlock);
+  };
+  document.addEventListener('touchstart', unlock, { once: true, passive: true });
+  document.addEventListener('click', unlock, { once: true });
+}
+
+function enterPresenterView() {
+  window.gameSync?.setPresenterMode(true);
+  updateState({ view: 'presenter' });
+  window.gameSync?.requestState();
+  if (!isMobileDevice()) {
+    document.documentElement.requestFullscreen?.().catch(() => {});
+  }
+}
+
+function setupThemePicker() {
+  document.querySelectorAll('[data-theme-option]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.themeOption === (gameState.theme || 'midnight'));
+    btn.addEventListener('click', () => {
+      gameState.theme = btn.dataset.themeOption;
+      applyTheme(gameState.theme);
+      saveState();
+      document.querySelectorAll('[data-theme-option]').forEach(b => {
+        b.classList.toggle('active', b.dataset.themeOption === gameState.theme);
+      });
+    });
+  });
+  document.getElementById('big-text-toggle')?.addEventListener('change', e => {
+    gameState.bigText = e.target.checked;
+    saveState();
+    broadcastState();
+    render();
+  });
+  const bigTextEl = document.getElementById('big-text-toggle');
+  if (bigTextEl) bigTextEl.checked = !!gameState.bigText;
+}
+
+function setupFullscreenHide() {
+  document.addEventListener('fullscreenchange', () => {
+    document.body.classList.toggle('is-fullscreen', !!document.fullscreenElement);
+  });
+}
+
+async function initApp() {
+  await loadCategories();
   loadState();
+  applyTheme(gameState.theme);
+  populateCategorySelects();
 
   if (isAdminPage) {
-    // Standalone Admin Page Listeners
-    
-    // Back to Menu redirects to main index page
     document.querySelectorAll('.btn-back-menu').forEach(btn => {
-      btn.onclick = () => {
-        stopTimerInterval();
-        window.location.href = 'index.html';
-      };
+      btn.onclick = () => { stopTimerInterval(); window.location.href = 'index.html'; };
     });
-
-    // Reset buttons
     document.querySelectorAll('.btn-reset-game').forEach(btn => {
-      btn.onclick = () => {
-        if (confirm("Are you sure you want to reset the entire game?")) {
-          resetGame();
-        }
-      };
+      btn.onclick = () => { if (confirm('Reset the entire game?')) resetGame(); };
     });
 
-    // Sync status & host requests
     if (window.gameSync) {
-      window.gameSync.onRequestStateReceived(() => {
-        window.gameSync.broadcastState(gameState);
-      });
-
-      window.gameSync.onPresenterStatusChange((isConnected) => {
+      window.gameSync.setAdminMode(true);
+      window.gameSync.onRequestStateReceived(() => window.gameSync.broadcastState(gameState));
+      window.gameSync.onPresenterStatusChange((connected) => {
         render();
+        if (connected) showToast('Presenter connected!');
       });
+      window.gameSync.startHeartbeatMonitor(9000);
+      setInterval(() => window.gameSync.pingPresenter(), 3000);
     }
 
-    // Setup Admin Panel actions
     setupAdminActionListeners('admin');
-
-    // Ping for presenter periodically from Admin
-    setInterval(() => {
-      if (window.gameSync) {
-        window.gameSync.pingPresenter();
-      }
-    }, 3000);
-
+    setupMobileHostDock('admin');
   } else {
-    // Main index.html page listeners
-    
-    // Splash button controls
-    const btnPresenter = document.getElementById('btn-view-presenter');
-    if (btnPresenter) {
-      btnPresenter.onclick = () => {
-        updateState({ view: 'presenter' });
-        if (window.gameSync) window.gameSync.requestState();
-      };
-    }
+    document.getElementById('btn-view-presenter')?.addEventListener('click', enterPresenterView);
+    document.getElementById('btn-view-admin')?.addEventListener('click', () => { window.location.href = 'admin.html'; });
+    document.getElementById('btn-view-solo')?.addEventListener('click', () => updateState({ view: 'solo' }));
 
-    const btnAdmin = document.getElementById('btn-view-admin');
-    if (btnAdmin) {
-      btnAdmin.onclick = () => {
-        window.location.href = 'admin.html';
-      };
-    }
-
-    const btnSolo = document.getElementById('btn-view-solo');
-    if (btnSolo) {
-      btnSolo.onclick = () => {
-        updateState({ view: 'solo' });
-      };
-    }
-
-    // Back to Menu buttons
     document.querySelectorAll('.btn-back-menu').forEach(btn => {
       btn.onclick = () => {
         stopTimerInterval();
+        window.gameSync?.setPresenterMode(false);
         updateState({ view: 'splash' });
       };
     });
-
-    // Reset buttons
     document.querySelectorAll('.btn-reset-game').forEach(btn => {
-      btn.onclick = () => {
-        if (confirm("Are you sure you want to reset the entire game?")) {
-          resetGame();
-        }
-      };
+      btn.onclick = () => { if (confirm('Reset the entire game?')) resetGame(); };
     });
 
-    // Sync state events for Presenter projection
     if (window.gameSync) {
-      window.gameSync.onStateReceived((remoteState) => {
+      if (gameState.view === 'presenter') window.gameSync.setPresenterMode(true);
+      window.gameSync.onStateReceived(remoteState => {
         if (gameState.view === 'presenter') {
           gameState = { ...remoteState, view: 'presenter' };
+          applyTheme(gameState.theme);
           render();
         }
       });
-
-      window.gameSync.onSoundReceived((soundName) => {
+      window.gameSync.onSoundReceived(soundName => {
         if (gameState.view === 'presenter' && window.gameAudio) {
-          if (soundName === 'tick') window.gameAudio.playTick();
-          if (soundName === 'warning') window.gameAudio.playWarning();
-          if (soundName === 'reveal') window.gameAudio.playReveal();
-          if (soundName === 'correct') window.gameAudio.playCorrect();
-          if (soundName === 'incorrect') window.gameAudio.playIncorrect();
-          if (soundName === 'fanfare') window.gameAudio.playFanfare();
+          const map = { tick: 'playTick', warning: 'playWarning', reveal: 'playReveal', correct: 'playCorrect', incorrect: 'playIncorrect', fanfare: 'playFanfare' };
+          window.gameAudio[map[soundName]]?.();
         }
+      });
+      window.gameSync.onPresenterStatusChange(connected => {
+        if (gameState.view === 'presenter' && connected) showToast('Host connected!');
       });
     }
 
-    // Setup Solo Mode admin controllers
     setupAdminActionListeners('solo-admin');
+    setupThemePicker();
+    setupSoloMobileTabs();
+    setupMobileHostDock('solo-admin');
   }
 
-  // Common setups (image prefetching, fullscreen, initial render)
-  QUESTIONS.forEach(q => prefetchWikipediaImage(q.canadian));
+  setupMobileDetection();
+  setupTouchFeedback();
+  setupMobileAudioUnlock();
+
+  getQuestions().forEach(q => prefetchWikipediaImage(q.canadian, q.imageUrl));
 
   document.querySelectorAll('.btn-fullscreen').forEach(btn => {
     btn.onclick = () => {
-      const element = document.documentElement;
-      if (!document.fullscreenElement) {
-        element.requestFullscreen().catch(err => {
-          console.error(`Error attempting to enable fullscreen: ${err.message}`);
-        });
-      } else {
-        document.exitFullscreen();
-      }
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+      else document.exitFullscreen();
     };
   });
 
+  document.querySelectorAll('.btn-dismiss-overlay').forEach(btn => {
+    btn.onclick = dismissScreenOverlay;
+  });
+
+  setupFullscreenHide();
   render();
-});
 
-// Setup actions for a particular admin panel instance safely
-function setupAdminActionListeners(prefix) {
-  const playBtn = document.getElementById(`${prefix}-play-btn`);
-  if (playBtn) {
-    playBtn.onclick = () => {
-      if (gameState.timerRunning) {
-        pauseTimer();
-      } else {
-        startTimer();
-      }
-    };
-  }
-
-  const resetQBtn = document.getElementById(`${prefix}-reset-q-btn`);
-  if (resetQBtn) {
-    resetQBtn.onclick = () => {
-      stopTimerInterval();
-      gameState.timeLeft = 40;
-      gameState.revealedFacts = 1;
-      gameState.timerRunning = false;
-      gameState.answerRevealed = false;
-      saveState();
-      broadcastState();
-      render();
-    };
-  }
-
-  const timePlus = document.getElementById(`${prefix}-time-plus`);
-  if (timePlus) timePlus.onclick = () => adjustTime(5);
-
-  const timeMinus = document.getElementById(`${prefix}-time-minus`);
-  if (timeMinus) timeMinus.onclick = () => adjustTime(-5);
-
-  const nextFactBtn = document.getElementById(`${prefix}-next-fact-btn`);
-  if (nextFactBtn) nextFactBtn.onclick = () => revealNextFact();
-
-  const revealAnswerBtn = document.getElementById(`${prefix}-reveal-answer-btn`);
-  if (revealAnswerBtn) revealAnswerBtn.onclick = () => revealAnswer();
-
-  const prevQBtn = document.getElementById(`${prefix}-prev-q-btn`);
-  if (prevQBtn) {
-    prevQBtn.onclick = () => {
-      selectQuestion(Math.max(0, gameState.currentQuestionIndex - 1));
-    };
-  }
-
-  const nextQBtn = document.getElementById(`${prefix}-next-q-btn`);
-  if (nextQBtn) {
-    nextQBtn.onclick = () => {
-      selectQuestion(Math.min(QUESTIONS.length - 1, gameState.currentQuestionIndex + 1));
-    };
-  }
-
-  document.querySelectorAll(`.${prefix}-sound-btn`).forEach(btn => {
-    btn.onclick = () => {
-      const sound = btn.dataset.sound;
-      triggerLocalAndRemoteSound(sound);
-    };
-  });
-
-  const muteBtn = document.getElementById(`${prefix}-mute-btn`);
-  if (muteBtn) {
-    muteBtn.onclick = () => {
-      gameState.muted = !gameState.muted;
-      if (window.gameAudio) {
-        window.gameAudio.setMuted(gameState.muted);
-      }
-      saveState();
-      render();
-    };
-  }
-
-  const autoToggle = document.getElementById(`${prefix}-auto-advance-toggle`);
-  if (autoToggle) {
-    autoToggle.onchange = (e) => {
-      gameState.autoReveal = e.target.checked;
-      saveState();
-      broadcastState();
-      render();
-    };
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
   }
 }
+
+window.addEventListener('DOMContentLoaded', initApp);
+
+// Expose for inline onclick handlers
+window.adjustScore = adjustScore;
+window.awardTeam = awardTeam;
+window.removeTeam = removeTeam;

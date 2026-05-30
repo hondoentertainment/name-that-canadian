@@ -1,0 +1,795 @@
+{
+  "categoryMeta": {
+    "celebrities": { "label": "Celebrity Stars" },
+    "historical_legends": { "label": "Historical Legends" },
+    "culture_geography": { "label": "Culture & Landmarks" },
+    "sports_heroes": { "label": "Sports Heroes" },
+    "science_innovation": { "label": "Science & Innovation" }
+  },
+  "celebrities": [
+    {
+      "id": 1,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 1,
+      "canadian": "Ryan Reynolds",
+      "facts": [
+        "Raised in Vancouver, BC, he failed his high school drama class but kept acting.",
+        "He became co-owner of the historic Welsh professional association football club Wrexham AFC.",
+        "Owned a substantial stake in Mint Mobile, which sold to T-Mobile in a multi-billion dollar deal.",
+        "He portrays the quick-witted, fourth-wall-breaking Marvel superhero Deadpool."
+      ],
+      "notes": "Ryan Reynolds is a major Hollywood star and creative marketer, managing his production company Maximum Effort alongside various business ventures."
+    },
+    {
+      "id": 2,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 2,
+      "canadian": "Ryan Gosling",
+      "facts": [
+        "Began his career as a child star on the Disney Channel's 'The Mickey Mouse Club' alongside Britney Spears.",
+        "Starred in the cult classic romantic drama 'The Notebook' and the stylish neo-noir thriller 'Drive'.",
+        "Received an Academy Award nomination for playing a neon-clad, horse-loving doll sidekick in a 2023 blockbuster.",
+        "He performed the Oscar-nominated hit song 'I'm Just Ken' live at the Academy Awards."
+      ],
+      "notes": "Ryan Gosling is a critically acclaimed Canadian actor and musician known for his versatility, charm, and iconic film roles."
+    },
+    {
+      "id": 3,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 3,
+      "canadian": "Céline Dion",
+      "facts": [
+        "She grew up as the youngest of 14 children in a musical family in Charlemagne, Quebec.",
+        "She won the 1988 Eurovision Song Contest in Dublin, representing Switzerland.",
+        "She recorded the award-winning theme song for Disney's 1991 animated film 'Beauty and the Beast'.",
+        "Her Las Vegas show 'A New Day...' is the highest-grossing concert residency of all time."
+      ],
+      "notes": "With over 200 million records sold worldwide, Céline is one of the most successful pop vocalists in history. She sings fluently in both French and English."
+    },
+    {
+      "id": 4,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 4,
+      "canadian": "Keanu Reeves",
+      "facts": [
+        "Born in Beirut, Lebanon, he grew up in Toronto and was an MVP goalie in high school hockey.",
+        "He played bass guitar for the alternative rock band Dogstar during the 1990s.",
+        "He is celebrated for his extreme generosity, often donating millions to crew members and cancer charities.",
+        "He played the iconic characters 'Neo' in a sci-fi trilogy and a legendary dog-loving assassin."
+      ],
+      "notes": "Keanu Reeves was nicknamed 'The Wall' in hockey. He has starred in massive franchises like The Matrix, John Wick, Bill & Ted, and Speed."
+    },
+    {
+      "id": 5,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 5,
+      "canadian": "Michael Cera",
+      "facts": [
+        "Played the awkward teenager George Michael Bluth in the critically acclaimed television comedy series 'Arrested Development'.",
+        "Starred as the title character in 'Scott Pilgrim vs. the World' and co-starred in the high school comedy hit 'Superbad'.",
+        "Known for his iconic soft-spoken, awkward screen persona, and played a fictionalized version of himself in 'This Is the End'.",
+        "Played the unique doll named Allan in Greta Gerwig's 'Barbie' (2023) movie."
+      ],
+      "notes": "Michael Cera is a beloved Canadian actor and musician who became a defining face of 2000s and 2010s indie comedy cinema."
+    },
+    {
+      "id": 6,
+      "roundName": "Round 2: Stars & Legends",
+      "roundNum": 2,
+      "qNum": 1,
+      "canadian": "Avril Lavigne",
+      "facts": [
+        "Born in Belleville, Ontario, she signed a two-album recording contract worth $1.25 million at age 16.",
+        "Known as the 'Pop-Punk Queen' who paved the way for female-driven, punk-influenced pop music in the early 2000s.",
+        "Her debut album 'Let Go' featured massive global hit singles like 'Complicated' and 'Sk8er Boi'.",
+        "Her 2007 hit single 'Girlfriend' was her first song to reach number one on the US Billboard Hot 100."
+      ],
+      "notes": "Avril Lavigne is a hugely influential singer-songwriter who defined the 2000s pop-punk aesthetic and sold over 40 million albums."
+    },
+    {
+      "id": 7,
+      "roundName": "Round 2: Stars & Legends",
+      "roundNum": 2,
+      "qNum": 2,
+      "canadian": "Wayne Gretzky",
+      "facts": [
+        "Nicknamed 'The Great One', he played 20 seasons in the National Hockey League.",
+        "He holds the NHL record for most career goals, most assists, and most total points.",
+        "Upon his retirement in 1999, his jersey number 99 was retired league-wide.",
+        "He is the only player to score over 200 points in a single season, doing so four times."
+      ],
+      "notes": "Gretzky won four Stanley Cups with the Edmonton Oilers. When he retired, he held 61 NHL records, many of which are considered unbreakable."
+    },
+    {
+      "id": 8,
+      "roundName": "Round 2: Stars & Legends",
+      "roundNum": 2,
+      "qNum": 3,
+      "canadian": "Justin Bieber",
+      "facts": [
+        "Discovered in 2007 on YouTube by a talent manager after posting videos of himself singing covers.",
+        "His 2010 hit song 'Baby' became one of the most-viewed and most-disliked YouTube videos of its time.",
+        "He was the first artist to have seven songs from a debut record chart on the Billboard Hot 100.",
+        "Known for major pop hits like 'Sorry', 'Love Yourself', and 'Peaches', and his dedicated fanbase called 'Beliebers'."
+      ],
+      "notes": "Justin Bieber is a global pop superstar who rose to fame as a teen idol, becoming one of the best-selling music artists of all time."
+    },
+    {
+      "id": 9,
+      "roundName": "Round 2: Stars & Legends",
+      "roundNum": 2,
+      "qNum": 4,
+      "canadian": "The Weeknd",
+      "facts": [
+        "Began anonymously uploading music to YouTube under his stage name in 2010 before releasing the mixtape 'House of Balloons'.",
+        "His 2019 song 'Blinding Lights' became the longest-charting song in Billboard Hot 100 history and the most-streamed song on Spotify.",
+        "Performed the Super Bowl LV halftime show in 2021, spending $7 million of his own money to produce it.",
+        "Known for his signature cinematic synth-pop and R&B style, and starred in and co-created the HBO series 'The Idol'."
+      ],
+      "notes": "Abel Tesfaye, known as The Weeknd, is one of the most successful and decorated contemporary musicians, winning multiple Grammys."
+    },
+    {
+      "id": 10,
+      "roundName": "Round 2: Stars & Legends",
+      "roundNum": 2,
+      "qNum": 5,
+      "canadian": "Jim Carrey",
+      "facts": [
+        "Born in Newmarket, Ontario, his family lived in a Volkswagen van during financial hardship.",
+        "He secured his big break as a cast member on the comedy sketch show 'In Living Color'.",
+        "The first actor to star in three $100M+ blockbusters in a single calendar year (1994).",
+        "Famous for rubber-faced physical comedy in 'Ace Ventura', 'The Mask', and 'Dumb and Dumber'."
+      ],
+      "notes": "Jim Carrey went on to display impressive dramatic range in films like 'The Truman Show' and 'Eternal Sunshine of the Spotless Mind'."
+    },
+    {
+      "id": 11,
+      "roundName": "Final Round: The Showstopper",
+      "roundNum": 3,
+      "qNum": 1,
+      "canadian": "Sandra Oh",
+      "facts": [
+        "Born in Nepean, Ontario, she rejected a journalism scholarship to study acting.",
+        "Won a Golden Globe for playing brilliant cardiothoracic surgeon Dr. Cristina Yang on TV.",
+        "She was the first person of Asian descent to host the Golden Globe Awards.",
+        "She voiced the mother, Ming Lee, in the Toronto-set Pixar animated movie 'Turning Red'."
+      ],
+      "notes": "Sandra Oh received critical acclaim for Grey's Anatomy and Killing Eve. She is one of the most prominent Canadian dramatic actresses of her generation."
+    }
+  ],
+  "historical_legends": [
+    {
+      "id": 1,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 1,
+      "canadian": "Terry Fox",
+      "facts": [
+        "Diagnosed with bone cancer at age 18, leading to the amputation of his right leg.",
+        "In 1980, he began the 'Marathon of Hope' to raise money and awareness for cancer research.",
+        "Ran close to a marathon a day (approx. 42 km) for 143 days, totaling 5,373 kilometres.",
+        "He remains the youngest person ever named a Companion of the Order of Canada."
+      ],
+      "notes": "Terry Fox ran starting in St. John's, NL, and had to stop in Thunder Bay, ON, when the cancer spread to his lungs. The annual Terry Fox Run is now the world's largest one-day fundraiser for cancer research."
+    },
+    {
+      "id": 2,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 2,
+      "canadian": "Alexander Graham Bell",
+      "facts": [
+        "Born in Scotland, he immigrated to Ontario in 1870 and spent decades working in Canada.",
+        "Much of his life was dedicated to inventing communication aids and teaching deaf students.",
+        "In 1876, he secured the first United States patent for the telephone.",
+        "He co-founded the National Geographic Society and pioneered early hydrofoils and aviation."
+      ],
+      "notes": "Bell did much of his core work at his family home in Brantford, ON (the Homestead) and later in Baddeck, NS, where he built the Silver Dart airplane and the HD-4 hydrofoil boat."
+    },
+    {
+      "id": 3,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 3,
+      "canadian": "Margaret Atwood",
+      "facts": [
+        "Spent her childhood in the Canadian northern bush as her father was a forest entomologist.",
+        "She is a twice-winner of the Booker Prize, first in 2000 and again in 2019.",
+        "She invented the 'LongPen', a robotic device allowing authors to sign books from anywhere.",
+        "She wrote the famous 1985 dystopian novel set in the oppressive Republic of Gilead."
+      ],
+      "notes": "Atwood is a prolific poet, novelist, and environmental activist. Her work 'The Handmaid's Tale' has been adapted into an award-winning television series."
+    },
+    {
+      "id": 4,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 4,
+      "canadian": "Frederick Banting",
+      "facts": [
+        "He was a WWI military doctor awarded the Military Cross for treating wounded under fire.",
+        "At age 32, he became the youngest person to receive the Nobel Prize in Medicine.",
+        "He sold the patent rights for his life-saving discovery to the University of Toronto for $1.",
+        "Co-discovered the pancreatic hormone secretion used to treat diabetes: insulin."
+      ],
+      "notes": "Banting discovered insulin alongside Charles Best in 1921. He shared his Nobel Prize money with Best, protesting that Best was not officially named in the award."
+    },
+    {
+      "id": 5,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 5,
+      "canadian": "Lucy Maud Montgomery",
+      "facts": [
+        "Raised by her grandparents in Cavendish, Prince Edward Island, which inspired her writing.",
+        "Her debut novel was rejected by all publishers, so she stored it in a hatbox for years.",
+        "She wrote 20 novels, 530 short stories, and over 500 poems in her lifetime.",
+        "Best known as the creator of the spirited, red-haired orphan Anne Shirley."
+      ],
+      "notes": "L.M. Montgomery published 'Anne of Green Gables' in 1908. It became an instant bestseller, making PEI a major tourist destination to this day."
+    },
+    {
+      "id": 6,
+      "roundName": "Round 2: Pioneers & Trailblazers",
+      "roundNum": 2,
+      "qNum": 1,
+      "canadian": "Tommy Douglas",
+      "facts": [
+        "He was an accomplished amateur boxer, winning the Lightweight Championship of Saskatchewan.",
+        "Led the first democratic socialist government in North America as Premier of Saskatchewan.",
+        "Voted 'The Greatest Canadian' in a nationwide CBC television poll in 2004.",
+        "Known as the father of Canada's universal, single-payer health care system (Medicare)."
+      ],
+      "notes": "Douglas was premier from 1944 to 1961. He is also the grandfather of actor Kiefer Sutherland."
+    },
+    {
+      "id": 7,
+      "roundName": "Round 2: Pioneers & Trailblazers",
+      "roundNum": 2,
+      "qNum": 2,
+      "canadian": "Chris Hadfield",
+      "facts": [
+        "He was the first Canadian astronaut to perform a spacewalk (extravehicular activity).",
+        "In 2013, he served as the Commander of the International Space Station.",
+        "Gained viral fame by recording a cover of David Bowie's 'Space Oddity' while in orbit.",
+        "He was a fighter pilot in the Royal Canadian Air Force, intercepting Soviet bombers."
+      ],
+      "notes": "Hadfield spent 166 days in space. His rendition of 'Space Oddity' has over 50 million views on YouTube and was praised by David Bowie himself."
+    },
+    {
+      "id": 8,
+      "roundName": "Round 2: Pioneers & Trailblazers",
+      "roundNum": 2,
+      "qNum": 3,
+      "canadian": "Viola Desmond",
+      "facts": [
+        "She was a successful Black beautician and businesswoman in Nova Scotia who launched a beauty school.",
+        "In 1946, she refused to leave a whites-only section of a movie theatre in New Glasgow, NS.",
+        "She was arrested, convicted, and fined under the pretext of tax evasion on a one-cent ticket difference.",
+        "She is the first Canadian woman to be featured on a regularly circulating Canadian banknote (the vertical $10 bill)."
+      ],
+      "notes": "Viola Desmond's courageous stand against segregation helped catalyze the civil rights movement in Canada. In 2010, Nova Scotia granted her a posthumous free pardon."
+    },
+    {
+      "id": 9,
+      "roundName": "Round 2: Pioneers & Trailblazers",
+      "roundNum": 2,
+      "qNum": 4,
+      "canadian": "David Suzuki",
+      "facts": [
+        "A geneticist by training, he earned a PhD from the University of Chicago and taught at UBC.",
+        "Co-founded the David Suzuki Foundation in 1990 to work on environmental conservation.",
+        "He is globally known as the host of the long-running science and nature television series 'The Nature of Things'.",
+        "He is a prominent climate activist, author, and recipient of the Order of Canada."
+      ],
+      "notes": "David Suzuki is a science broadcaster and environmental activist who has spent decades educating the public about ecology and sustainability."
+    },
+    {
+      "id": 10,
+      "roundName": "Round 2: Pioneers & Trailblazers",
+      "roundNum": 2,
+      "qNum": 5,
+      "canadian": "Emily Carr",
+      "facts": [
+        "Born in Victoria, BC, she was one of the first Canadian artists to adopt Modernist and Post-Impressionist styles.",
+        "Her paintings were heavily inspired by the indigenous peoples and landscapes of the Pacific Northwest Coast.",
+        "She was closely associated with the 'Group of Seven' painters, who hailed her as a pioneer.",
+        "She is famous for her paintings of towering rainforests, totem poles, and coastal villages."
+      ],
+      "notes": "Emily Carr did not receive widespread acclaim until late in life. She is now recognized as a national art icon, and her former home in Victoria is a National Historic Site."
+    },
+    {
+      "id": 11,
+      "roundName": "Final Round: The Showstopper",
+      "roundNum": 3,
+      "qNum": 1,
+      "canadian": "Gord Downie",
+      "facts": [
+        "He was the charismatic lead singer and lyricist for the legendary rock band The Tragically Hip.",
+        "His poetic lyrics focused heavily on Canadian geography, history, and cultural lore.",
+        "Embarked on a historic, highly emotional final national tour in 2016 after diagnosing terminal brain cancer.",
+        "Dedicated his final months to raising awareness and funding for indigenous reconciliation."
+      ],
+      "notes": "Gord Downie's final concert in Kingston, Ontario, was broadcast live nationally to over 11 million viewers, serving as a historic cultural moment."
+    }
+  ],
+  "culture_geography": [
+    {
+      "id": 1,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 1,
+      "canadian": "Poutine",
+      "facts": [
+        "A culinary dish originating in rural Quebec during the late 1950s.",
+        "Consists of three core ingredients: french fries, fresh cheese curds, and hot brown gravy.",
+        "The cheese curds are traditionally fresh and must 'squeak' when bitten into.",
+        "It is celebrated worldwide as Canada's signature comfort food, found in both diners and high-end restaurants."
+      ],
+      "notes": "Poutine is a beloved Canadian dish. There are annual 'Poutine Weeks' in cities across the country, featuring creative variations with pulled pork, lobster, or duck."
+    },
+    {
+      "id": 2,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 2,
+      "canadian": "Tim Hortons",
+      "facts": [
+        "Co-founded in Hamilton, Ontario, in 1964 by a legendary NHL defenceman.",
+        "Famous for popularizing a line of bite-sized donut holes known as 'Timbits'.",
+        "Hosts a highly popular annual spring promotional campaign called 'Roll Up the Rim to Win'.",
+        "Known for the iconic Canadian coffee order: a 'Double-Double' (two creams, two sugars)."
+      ],
+      "notes": "Tim Hortons is Canada's largest quick-service restaurant chain, serving as a cultural touchstone of everyday Canadian life."
+    },
+    {
+      "id": 3,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 3,
+      "canadian": "Niagara Falls",
+      "facts": [
+        "A massive group of waterfalls straddling the international border between Ontario and New York.",
+        "Composed of three distinct falls: the Horseshoe Falls, the American Falls, and the Bridal Veil Falls.",
+        "It has the highest flow rate of any waterfall in North America, with a vertical drop of over 50 metres.",
+        "Famous for the historic 'Maid of the Mist' (and 'Hornblower') boat tours that take passengers directly into the spray."
+      ],
+      "notes": "Niagara Falls is a major tourist destination and a key source of hydroelectric power in North America."
+    },
+    {
+      "id": 4,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 4,
+      "canadian": "The Maple Leaf",
+      "facts": [
+        "It has served as a symbol of Canadian identity since the early 1700s, used by French-Canadians and pioneers.",
+        "It was officially adopted as the central feature of the national flag in 1965.",
+        "The official design on the national flag features a stylized version with exactly 11 points.",
+        "It was featured on the Canadian penny from 1937 until the coin was discontinued in 2012."
+      ],
+      "notes": "The Maple Leaf represents unity, clean nature, and Canadian identity, recognized globally as the country's national symbol."
+    },
+    {
+      "id": 5,
+      "roundName": "Round 1: Cultural Icons",
+      "roundNum": 1,
+      "qNum": 5,
+      "canadian": "The Beaver",
+      "facts": [
+        "It is the national animal of Canada, officially designated as a sovereign symbol in 1975.",
+        "Played a critical role in Canadian history, as the early European exploration of the country was driven by the fur trade.",
+        "Known as a 'nature engineer' due to its ability to build complex dams, lodges, and canals.",
+        "It has been depicted on the reverse side of the Canadian five-cent coin (nickel) since 1937."
+      ],
+      "notes": "The Beaver is a symbol of industriousness and conservation. Beaver dams provide crucial habitats for fish, birds, and other wildlife."
+    },
+    {
+      "id": 6,
+      "roundName": "Round 2: Landmarks & Traditions",
+      "roundNum": 2,
+      "qNum": 1,
+      "canadian": "CN Tower",
+      "facts": [
+        "A concrete communications and observation tower located in downtown Toronto.",
+        "Completed in 1976, it held the record for the world's tallest free-standing structure for 34 years.",
+        "Features a glass-bottomed floor observation deck and a revolving '360 Restaurant'.",
+        "Offers the 'EdgeWalk', a hands-free walk along the top of the tower's main pod, 356 metres up."
+      ],
+      "notes": "The CN Tower stands at 553.3 metres tall. It is one of the Seven Wonders of the Modern World according to the American Society of Civil Engineers."
+    },
+    {
+      "id": 7,
+      "roundName": "Round 2: Landmarks & Traditions",
+      "roundNum": 2,
+      "qNum": 2,
+      "canadian": "Banff National Park",
+      "facts": [
+        "Established in 1885 in the Rocky Mountains of Alberta, it is Canada's oldest national park.",
+        "Famous for its scenic, turquoise-colored glacial lakes, including Lake Louise and Moraine Lake.",
+        "Began as a 26-square-kilometre hot springs reserve around the Cave and Basin site.",
+        "Contains the historic Banff Springs Hotel and is home to abundant wildlife like grizzly bears, elk, and wolves."
+      ],
+      "notes": "Banff National Park is a UNESCO World Heritage Site, welcoming millions of visitors annually for skiing, hiking, and sightseeing."
+    },
+    {
+      "id": 8,
+      "roundName": "Round 2: Landmarks & Traditions",
+      "roundNum": 2,
+      "qNum": 3,
+      "canadian": "Nanaimo Bar",
+      "facts": [
+        "A layered dessert bar that requires no baking, named after a city on Vancouver Island, BC.",
+        "Consists of three layers: a wafer/nut/coconut crumb base, custard-flavored butter icing middle, and chocolate ganache top.",
+        "The first known recipe was published in a local cookbook in 1952, labeled as 'chocolate square'.",
+        "Voted 'Canada's favorite confection' in a national newspaper poll."
+      ],
+      "notes": "The Nanaimo Bar is a classic Canadian treat, often served at coffee shops, bakeries, and family gatherings across the nation."
+    },
+    {
+      "id": 9,
+      "roundName": "Round 2: Landmarks & Traditions",
+      "roundNum": 2,
+      "qNum": 4,
+      "canadian": "Loonie",
+      "facts": [
+        "A gold-colored, eleven-sided Canadian coin introduced in 1987.",
+        "Features a common loon on one side and a portrait of the reigning British monarch on the other.",
+        "Replaced the paper one-dollar bill, saving the government tens of millions in printing costs.",
+        "Became legendary in sports lore when a 'lucky' one was buried under center ice at the 2002 Winter Olympics."
+      ],
+      "notes": "The Loonie is the slang and official term for the Canadian one-dollar coin. Its introduction paved the way for the two-dollar coin, the 'Toonie', in 1996."
+    },
+    {
+      "id": 10,
+      "roundName": "Round 2: Landmarks & Traditions",
+      "roundNum": 2,
+      "qNum": 5,
+      "canadian": "Maple Syrup",
+      "facts": [
+        "A sweet condiment made from the concentrated sap of red, black, or sugar maple trees.",
+        "Canada is the world's leading producer, responsible for approximately 70% of the global supply.",
+        "The process of harvesting sap is known as 'tapping' the trees during late winter and early spring.",
+        "The sap is boiled down in 'sugar shacks' (cabanes à sucre) to create the rich, golden syrup."
+      ],
+      "notes": "Maple syrup is a staple of Canadian breakfasts, poured over pancakes, waffles, and French toast. It takes about 40 litres of sap to make just 1 litre of syrup."
+    },
+    {
+      "id": 11,
+      "roundName": "Final Round: The Showstopper",
+      "roundNum": 3,
+      "qNum": 1,
+      "canadian": "Hudson's Bay Point Blanket",
+      "facts": [
+        "A type of wool blanket created by a historic English charter company in 1779 for trade with First Nations.",
+        "Features a characteristic cream background color with four distinct colored stripes: green, red, yellow, and blue.",
+        "Marked with short black lines woven into the edge, indicating its size and weight in 'points'.",
+        "One of the most enduring symbols of Canada's colonial era and the fur trade history."
+      ],
+      "notes": "The Hudson's Bay Point Blanket is a highly collectible item today. Its iconic multi-stripe pattern is licensed on various apparel and home goods."
+    }
+  ],
+  "sports_heroes": [
+    {
+      "id": 1,
+      "roundName": "Round 1: Game Changers",
+      "roundNum": 1,
+      "qNum": 1,
+      "canadian": "Carey Price",
+      "facts": [
+        "Born in Anahim Lake, BC, he grew up playing hockey on a backyard rink his father built.",
+        "He backstopped the Montreal Canadiens to a Stanley Cup championship in 2021.",
+        "Won Olympic gold with Team Canada at the 2014 Sochi Winter Games.",
+        "Known for his calm, composed style in net and five Vezina Trophy nominations as the NHL's best goalie."
+      ],
+      "notes": "Carey Price is widely regarded as one of the greatest goaltenders in NHL history and a role model for Indigenous youth in Canada."
+    },
+    {
+      "id": 2,
+      "roundName": "Round 1: Game Changers",
+      "roundNum": 1,
+      "qNum": 2,
+      "canadian": "Christine Sinclair",
+      "facts": [
+        "Born in Burnaby, BC, she has captained Canada's national women's soccer team for over two decades.",
+        "She holds the all-time international goal-scoring record for men and women, surpassing 190 career goals.",
+        "Led Canada to Olympic gold at Tokyo 2020, scoring the winning penalty in the final shootout.",
+        "Has competed in six FIFA Women's World Cups and five Olympic Games for Canada."
+      ],
+      "notes": "Christine Sinclair is considered the greatest Canadian soccer player ever and one of the most decorated athletes in the sport's history."
+    },
+    {
+      "id": 3,
+      "roundName": "Round 1: Game Changers",
+      "roundNum": 1,
+      "qNum": 3,
+      "canadian": "Sidney Crosby",
+      "facts": [
+        "Raised in Cole Harbour, Nova Scotia, he was drafted first overall by the Pittsburgh Penguins in 2005.",
+        "Scored the overtime 'Golden Goal' to win Olympic gold for Canada at the 2010 Vancouver Winter Games.",
+        "Has won three Stanley Cups and two Olympic gold medals with Team Canada.",
+        "Known as 'Sid the Kid', he has captained the Penguins since age 19 and won two Hart Trophies as NHL MVP."
+      ],
+      "notes": "Sidney Crosby is one of hockey's most complete players, celebrated for his leadership, clutch performances, and community work in Nova Scotia."
+    },
+    {
+      "id": 4,
+      "roundName": "Round 1: Game Changers",
+      "roundNum": 1,
+      "qNum": 4,
+      "canadian": "Bianca Andreescu",
+      "facts": [
+        "Born in Mississauga, Ontario, to Romanian parents, she began playing tennis at age seven.",
+        "At age 19, she defeated Serena Williams to win the 2019 US Open, becoming the first Canadian to win a Grand Slam singles title.",
+        "She did not drop a set in her run to the US Open title, including a straight-sets victory in the final.",
+        "Known for her powerful groundstrokes, creative shot-making, and meditation practice on court."
+      ],
+      "notes": "Bianca Andreescu's US Open triumph made her a national sensation and proved Canada could produce Grand Slam champions in tennis."
+    },
+    {
+      "id": 5,
+      "roundName": "Round 1: Game Changers",
+      "roundNum": 1,
+      "qNum": 5,
+      "canadian": "Connor McDavid",
+      "facts": [
+        "Born in Richmond Hill, Ontario, he was granted 'exceptional player' status to enter the OHL draft a year early.",
+        "Drafted first overall by the Edmonton Oilers in 2015 and named captain at age 19.",
+        "Has won multiple Art Ross Trophies as the NHL's leading scorer and Hart Trophies as league MVP.",
+        "Known for his explosive speed, often compared to the fastest skaters in hockey history."
+      ],
+      "notes": "Connor McDavid is widely considered the best player of his generation and the face of the Edmonton Oilers franchise."
+    },
+    {
+      "id": 6,
+      "roundName": "Round 2: Hall of Fame",
+      "roundNum": 2,
+      "qNum": 1,
+      "canadian": "Hayley Wickenheiser",
+      "facts": [
+        "Born in Shaunavon, Saskatchewan, she is one of the most decorated players in women's hockey history.",
+        "Won four Olympic gold medals and one silver with Canada's national women's hockey team.",
+        "Later earned a medical degree and served as assistant general manager for the Toronto Maple Leafs.",
+        "Also competed professionally in men's minor-league hockey, a rare crossover achievement."
+      ],
+      "notes": "Hayley Wickenheiser broke barriers in hockey on and off the ice, inspiring generations of female athletes and later working in NHL front offices."
+    },
+    {
+      "id": 7,
+      "roundName": "Round 2: Hall of Fame",
+      "roundNum": 2,
+      "qNum": 2,
+      "canadian": "Donovan Bailey",
+      "facts": [
+        "Born in Manchester, Jamaica, he moved to Oakville, Ontario, as a teenager.",
+        "Won Olympic gold in the 100 metres at the 1996 Atlanta Games with a world-record time of 9.84 seconds.",
+        "Also anchored Canada's 4x100 relay team to gold at the same Olympics.",
+        "Known for his explosive starts and confident personality, famously declaring himself 'the world's fastest man'."
+      ],
+      "notes": "Donovan Bailey's Atlanta double-gold performance remains one of the greatest moments in Canadian track and field history."
+    },
+    {
+      "id": 8,
+      "roundName": "Round 2: Hall of Fame",
+      "roundNum": 2,
+      "qNum": 3,
+      "canadian": "Clara Hughes",
+      "facts": [
+        "Born in Winnipeg, Manitoba, she is the only athlete in history to win multiple medals at both Summer and Winter Olympics.",
+        "Won two bronze medals in road cycling at Atlanta 1996 and four medals in speed skating at later Winter Games.",
+        "She carried Canada's flag at both the 2007 Pan American Games and the 2010 Vancouver Winter Olympics.",
+        "Has become a prominent mental-health advocate, sharing her own struggles with depression."
+      ],
+      "notes": "Clara Hughes is a unique dual-sport Olympic champion whose advocacy work earned her the Order of Canada."
+    },
+    {
+      "id": 9,
+      "roundName": "Round 2: Hall of Fame",
+      "roundNum": 2,
+      "qNum": 4,
+      "canadian": "Eugenie Bouchard",
+      "facts": [
+        "Born in Montreal, Quebec, she reached the Wimbledon final in 2014 as a 20-year-old.",
+        "Also reached the semifinals of the Australian Open and French Open in the same breakthrough 2014 season.",
+        "Became the first Canadian to reach a Grand Slam singles final and climbed to a career-high world ranking of No. 5.",
+        "Known for her aggressive baseline game and massive social media following during her peak years."
+      ],
+      "notes": "Eugenie Bouchard's 2014 run captivated Canadian tennis fans and helped grow the sport's popularity nationwide."
+    },
+    {
+      "id": 10,
+      "roundName": "Round 2: Hall of Fame",
+      "roundNum": 2,
+      "qNum": 5,
+      "canadian": "Patrick Roy",
+      "facts": [
+        "Born in Quebec City, he is considered one of the greatest goaltenders in NHL history.",
+        "Won four Stanley Cups—two with the Montreal Canadiens and two with the Colorado Avalanche.",
+        "Famous for his intense rivalry with the Detroit Red Wings and his 'Statue of Liberty' glove save.",
+        "Later coached the Avalanche to a Stanley Cup in 2001 and the Quebec Remparts to a Memorial Cup."
+      ],
+      "notes": "Patrick Roy revolutionized goaltending with his butterfly style and remains a legendary figure in Quebec hockey culture."
+    },
+    {
+      "id": 11,
+      "roundName": "Final Round: The Showstopper",
+      "roundNum": 3,
+      "qNum": 1,
+      "canadian": "2010 Vancouver Olympics",
+      "facts": [
+        "Canada hosted its third Olympic Games and first-ever Winter Olympics on home soil in February 2010.",
+        "Team Canada set a record with 14 gold medals, the most ever by a host nation at a Winter Games.",
+        "Sidney Crosby scored the overtime 'Golden Goal' in the men's hockey final against the United States.",
+        "Joannie Rochette won a bronze medal in figure skating days after her mother passed away, moving the nation."
+      ],
+      "notes": "The 2010 Vancouver Olympics united Canadians in a month-long celebration of sport, culminating in the iconic hockey gold-medal game at Canada Hockey Place.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Vancouver_2010_Olympic_Cauldron.jpg/440px-Vancouver_2010_Olympic_Cauldron.jpg"
+    }
+  ],
+  "science_innovation": [
+    {
+      "id": 1,
+      "roundName": "Round 1: Breakthroughs & Inventions",
+      "roundNum": 1,
+      "qNum": 1,
+      "canadian": "Alexander Graham Bell",
+      "facts": [
+        "Born in Scotland, he immigrated to Ontario in 1870 and spent decades working in Canada.",
+        "Much of his life was dedicated to inventing communication aids and teaching deaf students.",
+        "In 1876, he secured the first United States patent for the telephone.",
+        "He co-founded the National Geographic Society and pioneered early hydrofoils and aviation."
+      ],
+      "notes": "Bell did much of his core work at his family home in Brantford, ON (the Homestead) and later in Baddeck, NS, where he built the Silver Dart airplane and the HD-4 hydrofoil boat."
+    },
+    {
+      "id": 2,
+      "roundName": "Round 1: Breakthroughs & Inventions",
+      "roundNum": 1,
+      "qNum": 2,
+      "canadian": "Frederick Banting",
+      "facts": [
+        "He was a WWI military doctor awarded the Military Cross for treating wounded under fire.",
+        "At age 32, he became the youngest person to receive the Nobel Prize in Medicine.",
+        "He sold the patent rights for his life-saving discovery to the University of Toronto for $1.",
+        "Co-discovered the pancreatic hormone secretion used to treat diabetes: insulin."
+      ],
+      "notes": "Banting discovered insulin alongside Charles Best in 1921. He shared his Nobel Prize money with Best, protesting that Best was not officially named in the award."
+    },
+    {
+      "id": 3,
+      "roundName": "Round 1: Breakthroughs & Inventions",
+      "roundNum": 1,
+      "qNum": 3,
+      "canadian": "CANADARM",
+      "facts": [
+        "A robotic manipulator arm developed by the Canadian Space Agency for NASA's Space Shuttle program.",
+        "First flew aboard Space Shuttle Columbia in 1981 and was used on nearly every shuttle mission.",
+        "Could capture, deploy, and repair satellites, earning Canada the nickname 'The Canadarm Country'.",
+        "Designed and built primarily by Spar Aerospace in Toronto, with contributions from engineers across Canada."
+      ],
+      "notes": "The original Canadarm was a Canadian engineering triumph that opened the door to Canada's ongoing leadership in space robotics.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Canadarm1_in_Payload_Bay.jpg/440px-Canadarm1_in_Payload_Bay.jpg"
+    },
+    {
+      "id": 4,
+      "roundName": "Round 1: Breakthroughs & Inventions",
+      "roundNum": 1,
+      "qNum": 4,
+      "canadian": "BlackBerry",
+      "facts": [
+        "Originally founded as Research In Motion (RIM) in Waterloo, Ontario, in 1984.",
+        "Its smartphones with physical keyboards and BBM messaging dominated business and government use in the 2000s.",
+        "At its peak, the company held over 40% of the US smartphone market share.",
+        "The name 'BlackBerry' was inspired by the appearance of the device's keyboard keys, resembling blackberry drupelets."
+      ],
+      "notes": "BlackBerry put Waterloo on the map as a global tech hub and helped launch Canada's reputation as a smartphone innovator.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/BlackBerry-logo.png/440px-BlackBerry-logo.png"
+    },
+    {
+      "id": 5,
+      "roundName": "Round 1: Breakthroughs & Inventions",
+      "roundNum": 1,
+      "qNum": 5,
+      "canadian": "Bombardier",
+      "facts": [
+        "Founded in Valcourt, Quebec, in 1942 by Joseph-Armand Bombardier, who invented the first snowmobile.",
+        "Grew into a global aerospace and transportation company, building regional jets and business aircraft.",
+        "Its C Series airliner program was later sold to Airbus and rebranded as the Airbus A220.",
+        "Also manufactures rail vehicles and transit systems used in cities worldwide, including Toronto and Montreal."
+      ],
+      "notes": "Bombardier is one of Canada's largest industrial companies, with roots in Quebec snow-country innovation and global reach in aviation and rail.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Bombardier_logo.svg/440px-Bombardier_logo.svg.png"
+    },
+    {
+      "id": 6,
+      "roundName": "Round 2: Minds & Missions",
+      "roundNum": 2,
+      "qNum": 1,
+      "canadian": "David Suzuki",
+      "facts": [
+        "A geneticist by training, he earned a PhD from the University of Chicago and taught at UBC.",
+        "Co-founded the David Suzuki Foundation in 1990 to work on environmental conservation.",
+        "He is globally known as the host of the long-running science and nature television series 'The Nature of Things'.",
+        "He is a prominent climate activist, author, and recipient of the Order of Canada."
+      ],
+      "notes": "David Suzuki is a science broadcaster and environmental activist who has spent decades educating the public about ecology and sustainability."
+    },
+    {
+      "id": 7,
+      "roundName": "Round 2: Minds & Missions",
+      "roundNum": 2,
+      "qNum": 2,
+      "canadian": "Chris Hadfield",
+      "facts": [
+        "He was the first Canadian astronaut to perform a spacewalk (extravehicular activity).",
+        "In 2013, he served as the Commander of the International Space Station.",
+        "Gained viral fame by recording a cover of David Bowie's 'Space Oddity' while in orbit.",
+        "He was a fighter pilot in the Royal Canadian Air Force, intercepting Soviet bombers."
+      ],
+      "notes": "Hadfield spent 166 days in space. His rendition of 'Space Oddity' has over 50 million views on YouTube and was praised by David Bowie himself."
+    },
+    {
+      "id": 8,
+      "roundName": "Round 2: Minds & Missions",
+      "roundNum": 2,
+      "qNum": 3,
+      "canadian": "Geoffrey Hinton",
+      "facts": [
+        "Born in London, England, he became a leading AI researcher based at the University of Toronto.",
+        "Co-invented backpropagation and deep learning techniques that power modern artificial intelligence.",
+        "Shared the 2018 Turing Award, computing's highest honour, for breakthroughs in neural networks.",
+        "Worked at Google and later warned publicly about the risks of advanced AI systems."
+      ],
+      "notes": "Geoffrey Hinton is often called the 'Godfather of AI' and helped establish Toronto as a world centre for machine learning research."
+    },
+    {
+      "id": 9,
+      "roundName": "Round 2: Minds & Missions",
+      "roundNum": 2,
+      "qNum": 4,
+      "canadian": "Mike Lazaridis",
+      "facts": [
+        "Co-founded Research In Motion (later BlackBerry) in Waterloo, Ontario, while still a university student.",
+        "Donated over $100 million to establish the Perimeter Institute for Theoretical Physics in Waterloo.",
+        "Also funded the Institute for Quantum Computing at the University of Waterloo.",
+        "Received the Order of Canada for contributions to technology and scientific research philanthropy."
+      ],
+      "notes": "Mike Lazaridis transformed Waterloo into a global tech and research hub through both entrepreneurship and major philanthropic investments in physics."
+    },
+    {
+      "id": 10,
+      "roundName": "Round 2: Minds & Missions",
+      "roundNum": 2,
+      "qNum": 5,
+      "canadian": "DeepMind Toronto",
+      "facts": [
+        "A research office of DeepMind, the AI company owned by Google, located in downtown Toronto.",
+        "Opened in 2017 to tap into Canada's world-class talent pool in machine learning and AI.",
+        "Works on fundamental AI research including reinforcement learning and protein structure prediction.",
+        "Part of a broader AI ecosystem anchored by the Vector Institute and the University of Toronto."
+      ],
+      "notes": "DeepMind Toronto reflects Canada's status as a global AI powerhouse, attracting top researchers from around the world.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/DeepMind_logo.png/440px-DeepMind_logo.png"
+    },
+    {
+      "id": 11,
+      "roundName": "Final Round: The Showstopper",
+      "roundNum": 3,
+      "qNum": 1,
+      "canadian": "Canadarm2",
+      "facts": [
+        "A larger, more advanced robotic arm installed on the International Space Station in 2001.",
+        "Built by MacDonald, Dettwiler and Associates (MDA) in Brampton, Ontario, for the Canadian Space Agency.",
+        "Can move across the station on a Mobile Base System, unlike the original shuttle-mounted Canadarm.",
+        "Regularly captures visiting cargo spacecraft and assists astronauts during complex spacewalks."
+      ],
+      "notes": "Canadarm2 remains Canada's most visible contribution to the ISS and a symbol of Canadian excellence in space robotics.",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Canadarm2_iss.jpg/440px-Canadarm2_iss.jpg"
+    }
+  ]
+}

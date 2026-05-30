@@ -2,58 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Name That Canadian! — Admin Controller</title>
   <meta name="description" content="Host controller interface for managing the live game show.">
+  <meta name="theme-color" content="#060913">
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-theme="midnight">
 
-  <!-- Ambient background glow elements -->
   <div class="ambient-glow-1"></div>
   <div class="ambient-glow-2"></div>
 
-  <!-- Root container for Admin Page -->
   <div id="view-container" data-current-view="admin">
 
-    <!-- Admin Control Panel -->
     <div id="view-admin" class="admin-container">
-      <!-- Admin Sidebar -->
       <div class="admin-sidebar">
         <div class="admin-sidebar-header">
           <div class="admin-logo">Admin <span>Controller</span></div>
           <div class="sync-status-box">
-            <div id="admin-sync-status" class="sync-indicator disconnected">
-              Sync Offline
-            </div>
+            <div id="admin-sync-status" class="sync-indicator disconnected">Sync Offline</div>
           </div>
         </div>
 
-        <!-- Questions navigation list -->
-        <div id="admin-q-list" class="admin-q-list-container">
-          <!-- Populated by JS -->
+        <div class="category-selector-card sidebar-category">
+          <label for="admin-category-select">Category Pack</label>
+          <select id="admin-category-select" class="form-select" data-category-select></select>
         </div>
 
-        <!-- Sidebar footer -->
+        <div id="admin-q-list" class="admin-q-list-container"></div>
+
         <div class="admin-sidebar-footer">
           <button class="btn btn-outline btn-back-menu">🚪 Main Menu</button>
           <button class="btn btn-danger btn-reset-game">🔄 Reset Game</button>
         </div>
       </div>
 
-      <!-- Admin Main Workspace -->
       <div class="admin-main">
-        <!-- Controller Section -->
         <div class="control-dashboard">
           <div class="admin-panel-card">
             <div class="admin-panel-title">🕹️ Question Controls</div>
-            
+
             <div class="dashboard-timer-display">
               <div id="admin-time-tracker" class="time-left-tracker">Time Left: 40s</div>
               <div id="admin-fact-progress" class="fact-tracker">Facts: 1/4</div>
             </div>
 
-            <!-- Core host actions -->
+            <div class="timer-duration-row">
+              <label for="admin-timer-duration">Default Timer</label>
+              <select id="admin-timer-duration" class="form-select">
+                <option value="30">30 seconds</option>
+                <option value="40" selected>40 seconds</option>
+                <option value="60">60 seconds</option>
+              </select>
+            </div>
+
             <div class="main-controls-row">
               <button id="admin-play-btn" class="btn btn-success btn-glow">▶️ Start</button>
               <button id="admin-reset-q-btn" class="btn btn-outline">🔁 Restart Q</button>
@@ -67,8 +73,8 @@
             <div class="time-controls">
               <span>Adjust Remaining Time:</span>
               <div class="time-controls-btns">
-                <button id="admin-time-minus" class="btn btn-outline" style="padding: 0.5rem 1rem;">-5s</button>
-                <button id="admin-time-plus" class="btn btn-outline" style="padding: 0.5rem 1rem;">+5s</button>
+                <button id="admin-time-minus" class="btn btn-outline">-5s</button>
+                <button id="admin-time-plus" class="btn btn-outline">+5s</button>
               </div>
             </div>
 
@@ -79,24 +85,69 @@
                 <span class="slider"></span>
               </label>
             </div>
+
+            <div class="toggle-control">
+              <span class="switch-label">Shuffle question order per round</span>
+              <label class="switch">
+                <input id="admin-shuffle-toggle" type="checkbox">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div id="admin-overlay-controls" class="overlay-controls hidden">
+              <button id="admin-dismiss-overlay-btn" class="btn btn-primary btn-glow overlay-continue-btn">Continue ▶</button>
+            </div>
+
+            <div id="admin-award-panel" class="award-panel hidden"></div>
           </div>
 
-          <!-- Soundboard Card -->
+          <div class="admin-panel-card">
+            <div class="admin-panel-title">🏆 Scoreboard Manager</div>
+            <div class="scoreboard-manager-content">
+              <div class="add-team-row">
+                <input type="text" id="admin-team-input" placeholder="New Team Name..." class="form-input">
+                <button id="admin-add-team-btn" class="btn btn-success">Add Team</button>
+              </div>
+              <div id="admin-teams-list" class="admin-teams-list"></div>
+              <div class="toggle-control scoreboard-toggle-row">
+                <span class="switch-label">Show Scoreboard on Presenter Screen</span>
+                <label class="switch">
+                  <input id="admin-show-scoreboard-toggle" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="scoreboard-actions">
+                <button id="admin-clear-scores-btn" class="btn btn-outline btn-sm">Clear Scores</button>
+                <button id="admin-export-scores-btn" class="btn btn-outline btn-sm">Export Scores</button>
+                <button id="admin-play-again-btn" class="btn btn-success btn-sm">Play Again</button>
+              </div>
+            </div>
+          </div>
+
           <div class="admin-panel-card">
             <div class="admin-panel-title">
               🔊 Game Show Soundboard
-              <button id="admin-mute-btn" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">🔊 Mute Host</button>
+              <button id="admin-mute-btn" class="btn btn-outline btn-sm">🔊 Mute Host</button>
             </div>
             <div class="soundboard-grid">
-              <button class="btn btn-outline admin-sound-btn" data-sound="correct">⭐ Correct</button>
-              <button class="btn btn-outline admin-sound-btn" data-sound="incorrect">❌ Wrong/Buzzer</button>
-              <button class="btn btn-outline admin-sound-btn" data-sound="reveal">✨ Hint Sparkle</button>
-              <button class="btn btn-outline admin-sound-btn" data-sound="fanfare">🎺 Victory Fanfare</button>
+              <button class="btn btn-outline admin-sound-btn" data-sound="correct">⭐ <kbd>1</kbd> Correct</button>
+              <button class="btn btn-outline admin-sound-btn" data-sound="incorrect">❌ <kbd>2</kbd> Wrong</button>
+              <button class="btn btn-outline admin-sound-btn" data-sound="reveal">✨ <kbd>3</kbd> Hint</button>
+              <button class="btn btn-outline admin-sound-btn" data-sound="fanfare">🎺 <kbd>4</kbd> Fanfare</button>
             </div>
           </div>
 
-          <!-- Navigation footer -->
-          <div class="admin-panel-card" style="padding: 1.25rem;">
+          <div class="admin-panel-card keyboard-hints">
+            <div class="admin-panel-title">⌨️ Keyboard Shortcuts</div>
+            <ul class="shortcut-list">
+              <li><kbd>Space</kbd> Start / pause timer</li>
+              <li><kbd>N</kbd> Next hint · <kbd>R</kbd> Reveal answer</li>
+              <li><kbd>←</kbd> <kbd>→</kbd> Previous / next question</li>
+              <li><kbd>Enter</kbd> Dismiss round overlay</li>
+            </ul>
+          </div>
+
+          <div class="admin-panel-card">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <button id="admin-prev-q-btn" class="btn btn-outline">⬅️ Previous Q</button>
               <button id="admin-next-q-btn" class="btn btn-outline">Next Q ➡️</button>
@@ -104,22 +155,17 @@
           </div>
         </div>
 
-        <!-- Cheat Sheet Section -->
         <div class="cheat-sheet-card">
           <div class="admin-panel-card" style="margin-bottom: 0;">
             <div class="cheat-sheet-header">
               <div id="admin-cheat-round" class="cheat-round">Round 1: Cultural Icons</div>
               <h3 id="admin-cheat-title" class="cheat-title">Terry Fox</h3>
             </div>
-            
             <div style="margin-bottom: 1.5rem;">
-              <h4 style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase;">Hints:</h4>
-              <ul id="admin-cheat-facts" class="cheat-facts-list">
-                <!-- Populated by JS -->
-              </ul>
+              <h4 class="cheat-facts-label">Hints:</h4>
+              <ul id="admin-cheat-facts" class="cheat-facts-list"></ul>
             </div>
-
-            <div id="admin-cheat-notes-container" class="cheat-notes-box">
+            <div class="cheat-notes-box">
               <h5>Host Discussion Notes:</h5>
               <p id="admin-cheat-notes">Discussion pointers go here.</p>
             </div>
@@ -127,13 +173,20 @@
         </div>
       </div>
     </div>
-
   </div>
 
-  <!-- Load script resources -->
+  <!-- Mobile quick-action dock (admin) -->
+  <nav class="mobile-host-dock mobile-only" id="admin-mobile-dock" aria-label="Quick host controls">
+    <button type="button" class="dock-btn" data-dock-action="prev" aria-label="Previous question">⬅️</button>
+    <button type="button" class="dock-btn dock-btn-primary" data-dock-action="play" aria-label="Start or pause timer">▶️</button>
+    <button type="button" class="dock-btn" data-dock-action="hint" aria-label="Next hint">💡</button>
+    <button type="button" class="dock-btn dock-btn-accent" data-dock-action="reveal" aria-label="Reveal answer">🔓</button>
+    <button type="button" class="dock-btn" data-dock-action="next" aria-label="Next question">➡️</button>
+  </nav>
+
+  <script src="js/config.js"></script>
   <script src="audio.js"></script>
   <script src="sync.js"></script>
   <script src="app.js"></script>
-
 </body>
 </html>

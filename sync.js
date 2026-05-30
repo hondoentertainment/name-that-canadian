@@ -7,6 +7,10 @@ class GameSync {
     this.requestStateCallbacks = [];
     this.isPresenterConnected = false;
     this.presenterStatusCallbacks = [];
+    this.isPresenterMode = false;
+    this.isAdminMode = false;
+    this.lastPresenterPing = 0;
+    this.heartbeatInterval = null;
 
     this.init();
   }
@@ -35,32 +39,59 @@ class GameSync {
     }
   }
 
+  setPresenterMode(enabled) {
+    this.isPresenterMode = !!enabled;
+  }
+
+  setAdminMode(enabled) {
+    this.isAdminMode = !!enabled;
+  }
+
+  startHeartbeatMonitor(timeoutMs = 9000) {
+    if (this.heartbeatInterval) return;
+
+    this.heartbeatInterval = setInterval(() => {
+      if (!this.isAdminMode) return;
+
+      if (this.isPresenterConnected && this.lastPresenterPing > 0) {
+        if (Date.now() - this.lastPresenterPing > timeoutMs) {
+          this.isPresenterConnected = false;
+          this.lastPresenterPing = 0;
+          this.notifyPresenterStatus(false);
+        }
+      }
+    }, 2000);
+  }
+
   handleMessage(msg) {
     if (!msg || !msg.type) return;
 
     switch (msg.type) {
       case 'STATE_UPDATE':
         this.stateCallbacks.forEach(cb => cb(msg.payload));
-        if (!this.isPresenterConnected) {
-          this.isPresenterConnected = true;
-          this.notifyPresenterStatus(true);
-        }
         break;
       case 'TRIGGER_SOUND':
         this.soundCallbacks.forEach(cb => cb(msg.payload));
         break;
       case 'REQUEST_STATE':
         this.requestStateCallbacks.forEach(cb => cb());
-        this.send({ type: 'PRESENTER_PING' });
+        if (this.isPresenterMode) {
+          this.send({ type: 'PRESENTER_PING' });
+        }
         break;
       case 'PRESENTER_PING':
-        if (!this.isPresenterConnected) {
-          this.isPresenterConnected = true;
-          this.notifyPresenterStatus(true);
+        if (this.isAdminMode) {
+          this.lastPresenterPing = Date.now();
+          if (!this.isPresenterConnected) {
+            this.isPresenterConnected = true;
+            this.notifyPresenterStatus(true);
+          }
         }
         break;
       case 'ADMIN_PING':
-        this.send({ type: 'PRESENTER_PING' });
+        if (this.isPresenterMode) {
+          this.send({ type: 'PRESENTER_PING' });
+        }
         break;
     }
   }
