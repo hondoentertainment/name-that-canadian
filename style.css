@@ -2320,8 +2320,167 @@ body.mobile-only-app #view-container {
 }
 
 body.mobile-only-app.host-page #view-container {
-  max-width: 480px;
+  max-width: 560px;
 }
+
+body.mobile-only-app.host-page .host-layout {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body.mobile-only-app.host-page .solo-admin-pane {
+  padding: 0.75rem;
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+}
+
+body.mobile-only-app.host-page .host-top-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.25rem 0 0.75rem;
+}
+
+body.mobile-only-app.host-page .host-top-bar .mobile-app-title {
+  font-size: 1.25rem;
+  margin: 0 0 0.25rem;
+}
+
+body.mobile-only-app.host-page .host-top-bar .mobile-app-desc {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+body.mobile-only-app.host-page .host-top-bar .sync-indicator {
+  flex-shrink: 0;
+  margin-top: 0;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.6rem;
+}
+
+body.mobile-only-app.host-page .host-command-deck {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: rgba(6, 9, 19, 0.97);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+body.mobile-only-app.host-page .host-now-playing {
+  margin-bottom: 0.75rem;
+}
+
+body.mobile-only-app.host-page .host-now-round {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+body.mobile-only-app.host-page .host-now-q {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-top: 0.15rem;
+}
+
+body.mobile-only-app.host-page .host-live-stats {
+  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+}
+
+body.mobile-only-app.host-page .host-live-stats .time-left-tracker {
+  font-size: 2rem;
+}
+
+body.mobile-only-app.host-page .host-primary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin-bottom: 0.65rem;
+}
+
+body.mobile-only-app.host-page .host-primary-grid .host-btn-xl {
+  grid-column: 1 / -1;
+}
+
+body.mobile-only-app.host-page .host-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+body.mobile-only-app.host-page .host-time-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+}
+
+body.mobile-only-app.host-page .host-time-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+body.mobile-only-app.host-page .host-btn-xl {
+  min-height: 56px !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+}
+
+body.mobile-only-app.host-page .host-btn-lg {
+  min-height: 52px !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+}
+
+body.mobile-only-app.host-page .host-btn-md {
+  min-height: 48px !important;
+  font-size: 0.9rem !important;
+}
+
+body.mobile-only-app.host-page .host-btn-sm {
+  min-height: 44px !important;
+  min-width: 56px !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+body.mobile-only-app.host-page .host-cheat-card {
+  border-color: rgba(59, 130, 246, 0.25);
+}
+
+body.mobile-only-app.host-page .overlay-controls {
+  margin-top: 0.75rem;
+}
+
+body.mobile-only-app.host-page .overlay-controls .host-btn-xl {
+  width: 100%;
+}
+
+body.mobile-only-app.host-page .award-panel {
+  margin-top: 0.75rem;
+}
+
+body.mobile-only-app.host-page .host-footer-actions {
+  padding: 1rem 0 0.5rem;
+}
+
+body.mobile-only-app.host-page .host-footer-actions .btn {
+  width: 100%;
+}
+
 
 body.mobile-only-app.audience-page #view-container {
   max-width: none;
@@ -2333,24 +2492,6 @@ body.mobile-only-app.audience-page .show-layout {
   padding: 1rem;
   padding-top: calc(1rem + env(safe-area-inset-top));
   padding-bottom: calc(1rem + env(safe-area-inset-bottom));
-}
-
-body.mobile-only-app.host-page .host-layout {
-  min-height: 100vh;
-  min-height: 100dvh;
-}
-
-body.mobile-only-app.host-page .host-controls-duplicate {
-  display: none !important;
-}
-
-body.mobile-only-app.host-page .mobile-host-dock {
-  display: flex !important;
-}
-
-body.mobile-only-app.host-page .solo-admin-pane {
-  padding: 1rem;
-  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
 }
 
 body.mobile-only-app.audience-page .host-intro-card,

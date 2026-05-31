@@ -25,19 +25,55 @@
 
     <div id="view-host" class="host-layout">
       <div class="solo-admin-pane">
-        <div class="admin-panel-card host-intro-card">
-          <h1 class="mobile-app-title">Host Controls</h1>
-          <p class="mobile-app-desc">Open <a href="index.html" target="_blank" rel="noopener">the show page</a> on your TV or projector. Run the game from here.</p>
+
+        <header class="host-top-bar">
+          <div>
+            <h1 class="mobile-app-title">Host Controls</h1>
+            <p class="mobile-app-desc">Show link: <a href="index.html" target="_blank" rel="noopener">index.html</a></p>
+          </div>
           <div id="solo-admin-sync-status" class="sync-indicator disconnected">Display Offline</div>
-        </div>
+        </header>
+
+        <section class="host-command-deck" aria-label="Live round controls">
+          <div class="host-now-playing">
+            <div id="solo-admin-now-round" class="host-now-round">Round 1: Cultural Icons</div>
+            <div id="solo-admin-now-q" class="host-now-q">Question 1 of 5</div>
+          </div>
+
+          <div class="dashboard-timer-display host-live-stats">
+            <div id="solo-admin-time-tracker" class="time-left-tracker">40s</div>
+            <div id="solo-admin-fact-progress" class="fact-tracker">Hints: 1/4</div>
+          </div>
+
+          <div class="host-primary-grid">
+            <button id="solo-admin-play-btn" class="btn btn-success btn-glow host-btn-xl">▶️ Start Timer</button>
+            <button id="solo-admin-next-fact-btn" class="btn btn-outline host-btn-lg">💡 Next Hint</button>
+            <button id="solo-admin-reveal-answer-btn" class="btn btn-primary btn-glow host-btn-lg">🔓 Reveal Answer</button>
+          </div>
+
+          <div class="host-nav-grid">
+            <button id="solo-admin-prev-q-btn" class="btn btn-outline host-btn-md">⬅️ Prev</button>
+            <button id="solo-admin-reset-q-btn" class="btn btn-outline host-btn-md">🔁 Restart</button>
+            <button id="solo-admin-next-q-btn" class="btn btn-outline host-btn-md">Next ➡️</button>
+          </div>
+
+          <div class="host-time-row">
+            <span class="host-time-label">Adjust timer</span>
+            <div class="time-controls-btns">
+              <button id="solo-admin-time-minus" class="btn btn-outline host-btn-sm">−5s</button>
+              <button id="solo-admin-time-plus" class="btn btn-outline host-btn-sm">+5s</button>
+            </div>
+          </div>
+
+          <div id="solo-admin-overlay-controls" class="overlay-controls hidden">
+            <button id="solo-admin-dismiss-overlay-btn" class="btn btn-primary btn-glow overlay-continue-btn host-btn-xl">Continue ▶</button>
+          </div>
+
+          <div id="solo-admin-award-panel" class="award-panel hidden"></div>
+        </section>
 
         <div class="admin-panel-card">
-          <div class="admin-panel-title">🎙️ Round Controls</div>
-
-          <div class="dashboard-timer-display">
-            <div id="solo-admin-time-tracker" class="time-left-tracker">Time Left: 40s</div>
-            <div id="solo-admin-fact-progress" class="fact-tracker">Facts: 1/4</div>
-          </div>
+          <div class="admin-panel-title">⚙️ Game Setup</div>
 
           <div class="category-selector-card">
             <label for="solo-admin-category-select">Category Pack</label>
@@ -45,7 +81,7 @@
           </div>
 
           <div class="timer-duration-row">
-            <label for="solo-admin-timer-duration">Timer</label>
+            <label for="solo-admin-timer-duration">Default Timer</label>
             <select id="solo-admin-timer-duration" class="form-select">
               <option value="30">30 seconds</option>
               <option value="40" selected>40 seconds</option>
@@ -53,26 +89,8 @@
             </select>
           </div>
 
-          <div class="main-controls-row host-controls-duplicate">
-            <button id="solo-admin-play-btn" class="btn btn-success btn-glow">▶️ Start</button>
-            <button id="solo-admin-reset-q-btn" class="btn btn-outline">🔁 Restart Q</button>
-          </div>
-
-          <div class="game-flow-actions host-controls-duplicate">
-            <button id="solo-admin-next-fact-btn" class="btn btn-outline">💡 Next Hint</button>
-            <button id="solo-admin-reveal-answer-btn" class="btn btn-primary btn-glow">🔓 Reveal Answer</button>
-          </div>
-
-          <div class="time-controls">
-            <span>Adjust Time:</span>
-            <div class="time-controls-btns">
-              <button id="solo-admin-time-minus" class="btn btn-outline">-5s</button>
-              <button id="solo-admin-time-plus" class="btn btn-outline">+5s</button>
-            </div>
-          </div>
-
           <div class="toggle-control">
-            <span class="switch-label">Auto-reveal hints</span>
+            <span class="switch-label">Auto-reveal hints with timer</span>
             <label class="switch">
               <input id="solo-admin-auto-advance-toggle" type="checkbox" checked>
               <span class="slider"></span>
@@ -86,12 +104,18 @@
               <span class="slider"></span>
             </label>
           </div>
+        </div>
 
-          <div id="solo-admin-overlay-controls" class="overlay-controls hidden">
-            <button id="solo-admin-dismiss-overlay-btn" class="btn btn-primary btn-glow overlay-continue-btn">Continue ▶</button>
+        <div class="admin-panel-card host-cheat-card">
+          <div class="cheat-sheet-header">
+            <div id="solo-admin-cheat-round" class="cheat-round">Round 1</div>
+            <h3 id="solo-admin-cheat-title" class="cheat-title">Answer</h3>
           </div>
-
-          <div id="solo-admin-award-panel" class="award-panel hidden"></div>
+          <ul id="solo-admin-cheat-facts" class="cheat-facts-list"></ul>
+          <div class="cheat-notes-box">
+            <h5>Host Notes</h5>
+            <p id="solo-admin-cheat-notes"></p>
+          </div>
         </div>
 
         <div class="admin-panel-card">
@@ -131,29 +155,12 @@
         </div>
 
         <div class="admin-panel-card">
-          <div class="cheat-sheet-header">
-            <div id="solo-admin-cheat-round" class="cheat-round">Round 1</div>
-            <h3 id="solo-admin-cheat-title" class="cheat-title">Answer</h3>
-          </div>
-          <ul id="solo-admin-cheat-facts" class="cheat-facts-list"></ul>
-          <div class="cheat-notes-box">
-            <h5>Host Notes</h5>
-            <p id="solo-admin-cheat-notes"></p>
-          </div>
-        </div>
-
-        <div class="admin-panel-card">
-          <div class="admin-panel-title">📋 Questions</div>
+          <div class="admin-panel-title">📋 Jump to Question</div>
           <div id="solo-admin-q-list" class="admin-q-list-mobile"></div>
         </div>
 
-        <div class="host-nav-row host-controls-duplicate">
-          <button id="solo-admin-prev-q-btn" class="btn btn-outline">⬅️ Prev</button>
-          <button id="solo-admin-next-q-btn" class="btn btn-outline">Next ➡️</button>
-        </div>
-
         <div class="admin-panel-card mobile-settings-card">
-          <div class="admin-panel-title">🎨 Settings</div>
+          <div class="admin-panel-title">🎨 Display Settings</div>
           <div class="theme-picker">
             <button type="button" class="btn btn-outline active" data-theme-option="midnight">Midnight</button>
             <button type="button" class="btn btn-outline" data-theme-option="canada-day">Canada Day</button>
@@ -172,14 +179,6 @@
           <button class="btn btn-danger btn-reset-game">🔄 Reset Game</button>
         </div>
       </div>
-
-      <nav class="mobile-host-dock" id="solo-mobile-dock" aria-label="Round controls">
-        <button type="button" class="dock-btn" data-dock-action="prev" aria-label="Previous question">⬅️</button>
-        <button type="button" class="dock-btn dock-btn-primary" data-dock-action="play" aria-label="Start or pause">▶️</button>
-        <button type="button" class="dock-btn" data-dock-action="hint" aria-label="Next hint">💡</button>
-        <button type="button" class="dock-btn dock-btn-accent" data-dock-action="reveal" aria-label="Reveal answer">🔓</button>
-        <button type="button" class="dock-btn" data-dock-action="next" aria-label="Next question">➡️</button>
-      </nav>
     </div>
   </div>
 

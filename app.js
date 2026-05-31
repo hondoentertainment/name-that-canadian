@@ -705,15 +705,32 @@ function renderAdminScreen(targetPrefix) {
     const disabled = !!gameState.screenOverlay;
     playBtn.disabled = disabled;
     if (gameState.timerRunning) {
-      playBtn.innerHTML = '⏸️ Pause';
-      playBtn.className = 'btn btn-warning btn-glow';
+      playBtn.innerHTML = '⏸️ Pause Timer';
+      playBtn.className = 'btn btn-warning btn-glow host-btn-xl';
     } else {
-      playBtn.innerHTML = '▶️ Start';
-      playBtn.className = 'btn btn-success btn-glow';
+      playBtn.innerHTML = '▶️ Start Timer';
+      playBtn.className = 'btn btn-success btn-glow host-btn-xl';
     }
   }
 
-  document.getElementById(`${targetPrefix}-fact-progress`) && (document.getElementById(`${targetPrefix}-fact-progress`).textContent = `Facts: ${gameState.revealedFacts}/4`);
+  document.getElementById(`${targetPrefix}-fact-progress`) && (document.getElementById(`${targetPrefix}-fact-progress`).textContent = `Hints: ${gameState.revealedFacts}/4`);
+
+  const nowRound = document.getElementById(`${targetPrefix}-now-round`);
+  const nowQ = document.getElementById(`${targetPrefix}-now-q`);
+  if (nowRound) nowRound.textContent = question.roundName;
+  if (nowQ) {
+    nowQ.textContent = question.roundNum === FINAL_ROUND_NUM
+      ? 'Final Showstopper'
+      : `Question ${question.qNum} of ${QUESTIONS_PER_ROUND}`;
+  }
+
+  const prevBtn = document.getElementById(`${targetPrefix}-prev-q-btn`);
+  const nextBtn = document.getElementById(`${targetPrefix}-next-q-btn`);
+  const resetBtn = document.getElementById(`${targetPrefix}-reset-q-btn`);
+  const blocked = !!gameState.screenOverlay;
+  if (prevBtn) prevBtn.disabled = blocked || gameState.currentQuestionIndex <= 0;
+  if (nextBtn) nextBtn.disabled = blocked || gameState.currentQuestionIndex >= getQuestions().length - 1;
+  if (resetBtn) resetBtn.disabled = blocked;
 
   const nextFactBtn = document.getElementById(`${targetPrefix}-next-fact-btn`);
   if (nextFactBtn) nextFactBtn.disabled = gameState.revealedFacts >= 4 || !!gameState.screenOverlay;
@@ -721,12 +738,12 @@ function renderAdminScreen(targetPrefix) {
   const answerBtn = document.getElementById(`${targetPrefix}-reveal-answer-btn`);
   if (answerBtn) {
     if (gameState.answerRevealed) {
-      answerBtn.textContent = 'Answer Revealed';
-      answerBtn.className = 'btn btn-disabled';
+      answerBtn.textContent = '✓ Answer Revealed';
+      answerBtn.className = 'btn btn-disabled host-btn-lg';
       answerBtn.disabled = true;
     } else {
       answerBtn.textContent = '🔓 Reveal Answer';
-      answerBtn.className = 'btn btn-primary btn-glow';
+      answerBtn.className = 'btn btn-primary btn-glow host-btn-lg';
       answerBtn.disabled = !!gameState.screenOverlay;
     }
   }
@@ -751,7 +768,7 @@ function renderAdminScreen(targetPrefix) {
 
   const timeTracker = document.getElementById(`${targetPrefix}-time-tracker`);
   if (timeTracker) {
-    timeTracker.textContent = `Time Left: ${gameState.timeLeft}s`;
+    timeTracker.textContent = `${gameState.timeLeft}s`;
     timeTracker.className = gameState.timeLeft <= 5 ? 'time-left-tracker low' : 'time-left-tracker';
   }
 
