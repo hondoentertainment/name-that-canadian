@@ -2440,6 +2440,20 @@ body.mobile-only-app.host-page .host-btn-xl {
   font-weight: 700 !important;
 }
 
+body.mobile-only-app.host-page .host-start-round,
+body.mobile-only-app.host-page .host-start-ready {
+  box-shadow: 0 0 24px rgba(34, 197, 94, 0.35);
+}
+
+body.mobile-only-app.host-page .host-start-ready {
+  animation: host-start-pulse 2s ease-in-out infinite;
+}
+
+@keyframes host-start-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.3); }
+  50% { box-shadow: 0 0 32px rgba(34, 197, 94, 0.55); }
+}
+
 body.mobile-only-app.host-page .host-btn-lg {
   min-height: 52px !important;
   font-size: 0.95rem !important;
@@ -2484,6 +2498,19 @@ body.mobile-only-app.host-page .host-footer-actions .btn {
 
 body.mobile-only-app.audience-page #view-container {
   max-width: none;
+}
+
+.timer-circle.timer-idle {
+  opacity: 0.45;
+}
+
+.timer-circle.timer-idle .progress-circle {
+  stroke: var(--border-subtle);
+}
+
+body.mobile-only-app.audience-page .presenter-q-num {
+  color: var(--accent-gold);
+  font-style: italic;
 }
 
 body.mobile-only-app.audience-page .show-layout {

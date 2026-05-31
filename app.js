@@ -13,7 +13,8 @@ const isShowPage = document.body.dataset.page === 'show';
 const DEFAULT_STATE = {
   view: 'show',
   currentQuestionIndex: 0,
-  revealedFacts: 1,
+  revealedFacts: 0,
+  roundStarted: false,
   timeLeft: 40,
   timerMax: 40,
   timerDuration: 40,
@@ -142,6 +143,10 @@ function loadState() {
     }
   }
   gameState.view = isHostPage ? 'host' : 'show';
+  if (gameState.roundStarted === undefined) {
+    gameState.roundStarted = !!(gameState.timerRunning || gameState.answerRevealed);
+    if (!gameState.roundStarted) gameState.revealedFacts = 0;
+  }
 }
 
 function broadcastState() {
@@ -163,8 +168,17 @@ function stopTimerInterval() {
   if (window.gameAudio) window.gameAudio.stopSuspense();
 }
 
+function setQuestionIdle() {
+  stopTimerInterval();
+  applyTimerDuration();
+  gameState.revealedFacts = 0;
+  gameState.roundStarted = false;
+  gameState.timerRunning = false;
+  gameState.answerRevealed = false;
+}
+
 function startTimer() {
-  if (gameState.timerRunning || gameState.screenOverlay) return;
+  if (!gameState.roundStarted || gameState.timerRunning || gameState.screenOverlay) return;
   if (window.gameAudio) {
     window.gameAudio.init();
     window.gameAudio.startSuspense();
@@ -230,6 +244,38 @@ function pauseTimer() {
   saveState();
   broadcastState();
   render();
+}
+
+function isRoundPausedMidGame() {
+  if (!gameState.roundStarted || gameState.answerRevealed || gameState.screenOverlay) return false;
+  const max = gameState.timerMax || getTimerDuration();
+  return gameState.timeLeft < max || gameState.revealedFacts > 1;
+}
+
+function startRound() {
+  if (gameState.screenOverlay || gameState.timerRunning) return;
+  stopTimerInterval();
+  applyTimerDuration();
+  gameState.answerRevealed = false;
+  gameState.roundStarted = true;
+  gameState.revealedFacts = 1;
+  gameState.timerRunning = false;
+  saveState();
+  broadcastState();
+  startTimer();
+}
+
+function handleRoundPlayPause() {
+  if (gameState.screenOverlay) return;
+  if (gameState.timerRunning) {
+    pauseTimer();
+    return;
+  }
+  if (isRoundPausedMidGame()) {
+    startTimer();
+    return;
+  }
+  startRound();
 }
 
 function triggerLocalAndRemoteSound(soundName) {
@@ -311,10 +357,7 @@ function selectQuestion(idx, options = {}) {
   stopTimerInterval();
   gameState.currentQuestionIndex = idx;
   gameState.gameComplete = false;
-  applyTimerDuration();
-  gameState.revealedFacts = 1;
-  gameState.timerRunning = false;
-  gameState.answerRevealed = false;
+  setQuestionIdle();
   gameState.screenOverlay = null;
   gameState.pendingQuestionIndex = null;
 
@@ -345,7 +388,7 @@ function goToPrevQuestion() {
 }
 
 function revealNextFact() {
-  if (gameState.screenOverlay || gameState.revealedFacts >= 4) return;
+  if (!gameState.roundStarted || gameState.screenOverlay || gameState.revealedFacts >= 4) return;
   gameState.revealedFacts += 1;
   triggerLocalAndRemoteSound('reveal');
   saveState();
@@ -354,7 +397,7 @@ function revealNextFact() {
 }
 
 function revealAnswer() {
-  if (gameState.screenOverlay) return;
+  if (!gameState.roundStarted || gameState.screenOverlay) return;
   stopTimerInterval();
   gameState.timerRunning = false;
   gameState.answerRevealed = true;
@@ -381,7 +424,11 @@ function setTimerDuration(seconds) {
   gameState.timerDuration = seconds;
   applyTimerDuration();
   gameState.timerRunning = false;
-  gameState.revealedFacts = gameState.answerRevealed ? 4 : Math.min(gameState.revealedFacts, 4);
+  if (!gameState.roundStarted) {
+    applyTimerDuration();
+  } else {
+    gameState.revealedFacts = gameState.answerRevealed ? 4 : Math.min(gameState.revealedFacts, 4);
+  }
   saveState();
   broadcastState();
   render();
@@ -397,10 +444,7 @@ function changeCategory(categoryKey) {
   if (gameState.shuffleQuestions) {
     gameState.questionOrder = buildQuestionOrder(categoryKey);
   }
-  applyTimerDuration();
-  gameState.revealedFacts = 1;
-  gameState.timerRunning = false;
-  gameState.answerRevealed = false;
+  setQuestionIdle();
   getQuestions().forEach(q => prefetchWikipediaImage(q.canadian, q.imageUrl));
   saveState();
   broadcastState();
@@ -483,10 +527,7 @@ function playAgain() {
   if (gameState.shuffleQuestions) {
     gameState.questionOrder = buildQuestionOrder(gameState.activeCategory);
   }
-  applyTimerDuration();
-  gameState.revealedFacts = 1;
-  gameState.timerRunning = false;
-  gameState.answerRevealed = false;
+  setQuestionIdle();
   saveState();
   broadcastState();
   render();
@@ -503,11 +544,7 @@ function resetGame() {
 }
 
 function resetQuestion() {
-  stopTimerInterval();
-  applyTimerDuration();
-  gameState.revealedFacts = 1;
-  gameState.timerRunning = false;
-  gameState.answerRevealed = false;
+  setQuestionIdle();
   saveState();
   broadcastState();
   render();
@@ -614,9 +651,13 @@ function renderPresenterScreen(targetPrefix) {
 
   document.getElementById(`${targetPrefix}-round-name`).textContent = question.roundName;
   const qNumEl = document.getElementById(`${targetPrefix}-q-num`);
-  qNumEl.textContent = question.roundNum === FINAL_ROUND_NUM
-    ? 'Final Showstopper'
-    : `Question ${question.qNum} of ${QUESTIONS_PER_ROUND}`;
+  if (!gameState.roundStarted && !gameState.screenOverlay) {
+    qNumEl.textContent = 'Waiting for host to start…';
+  } else {
+    qNumEl.textContent = question.roundNum === FINAL_ROUND_NUM
+      ? 'Final Showstopper'
+      : `Question ${question.qNum} of ${QUESTIONS_PER_ROUND}`;
+  }
 
   const timeLeft = gameState.timeLeft;
   const timerMax = gameState.timerMax || getTimerDuration();
@@ -631,8 +672,13 @@ function renderPresenterScreen(targetPrefix) {
     ring.style.strokeDashoffset = circumference - (timePercent * circumference);
     const timerCircle = document.getElementById(`${targetPrefix}-timer`);
     timerCircle.className = 'timer-circle';
-    if (timeLeft <= 5) timerCircle.classList.add('low-time-critical');
-    else if (timeLeft <= 15) timerCircle.classList.add('low-time');
+    if (!gameState.roundStarted && !gameState.screenOverlay) {
+      timerCircle.classList.add('timer-idle');
+    } else if (timeLeft <= 5) {
+      timerCircle.classList.add('low-time-critical');
+    } else if (timeLeft <= 15) {
+      timerCircle.classList.add('low-time');
+    }
   }
 
   const factsContainer = document.getElementById(`${targetPrefix}-facts-container`);
@@ -704,16 +750,25 @@ function renderAdminScreen(targetPrefix) {
   if (playBtn) {
     const disabled = !!gameState.screenOverlay;
     playBtn.disabled = disabled;
+    playBtn.classList.toggle('host-start-ready', !disabled && !gameState.roundStarted);
     if (gameState.timerRunning) {
-      playBtn.innerHTML = '⏸️ Pause Timer';
+      playBtn.innerHTML = '⏸️ Pause Question';
       playBtn.className = 'btn btn-warning btn-glow host-btn-xl';
-    } else {
-      playBtn.innerHTML = '▶️ Start Timer';
+    } else if (isRoundPausedMidGame()) {
+      playBtn.innerHTML = '▶️ Resume Question';
       playBtn.className = 'btn btn-success btn-glow host-btn-xl';
+    } else {
+      playBtn.innerHTML = '▶️ Start Question';
+      playBtn.className = 'btn btn-success btn-glow host-btn-xl host-start-round';
     }
   }
 
-  document.getElementById(`${targetPrefix}-fact-progress`) && (document.getElementById(`${targetPrefix}-fact-progress`).textContent = `Hints: ${gameState.revealedFacts}/4`);
+  const factProgress = document.getElementById(`${targetPrefix}-fact-progress`);
+  if (factProgress) {
+    factProgress.textContent = !gameState.roundStarted
+      ? 'Ready — tap Start Question'
+      : `Hints: ${gameState.revealedFacts}/4`;
+  }
 
   const nowRound = document.getElementById(`${targetPrefix}-now-round`);
   const nowQ = document.getElementById(`${targetPrefix}-now-q`);
@@ -733,7 +788,9 @@ function renderAdminScreen(targetPrefix) {
   if (resetBtn) resetBtn.disabled = blocked;
 
   const nextFactBtn = document.getElementById(`${targetPrefix}-next-fact-btn`);
-  if (nextFactBtn) nextFactBtn.disabled = gameState.revealedFacts >= 4 || !!gameState.screenOverlay;
+  if (nextFactBtn) {
+    nextFactBtn.disabled = !gameState.roundStarted || gameState.revealedFacts >= 4 || !!gameState.screenOverlay;
+  }
 
   const answerBtn = document.getElementById(`${targetPrefix}-reveal-answer-btn`);
   if (answerBtn) {
@@ -744,7 +801,7 @@ function renderAdminScreen(targetPrefix) {
     } else {
       answerBtn.textContent = '🔓 Reveal Answer';
       answerBtn.className = 'btn btn-primary btn-glow host-btn-lg';
-      answerBtn.disabled = !!gameState.screenOverlay;
+      answerBtn.disabled = !gameState.roundStarted || !!gameState.screenOverlay;
     }
   }
 
@@ -896,9 +953,7 @@ function render() {
 }
 
 function setupAdminActionListeners(prefix) {
-  document.getElementById(`${prefix}-play-btn`)?.addEventListener('click', () => {
-    gameState.timerRunning ? pauseTimer() : startTimer();
-  });
+  document.getElementById(`${prefix}-play-btn`)?.addEventListener('click', handleRoundPlayPause);
 
   document.getElementById(`${prefix}-reset-q-btn`)?.addEventListener('click', resetQuestion);
 
@@ -973,7 +1028,7 @@ function setupKeyboardShortcuts() {
     switch (e.key) {
       case ' ':
         e.preventDefault();
-        gameState.timerRunning ? pauseTimer() : startTimer();
+        handleRoundPlayPause();
         break;
       case 'n':
       case 'N':
@@ -1030,7 +1085,7 @@ function setupMobileHostDock(prefix) {
   const actions = {
     prev: () => goToPrevQuestion(),
     next: () => goToNextQuestion(),
-    play: () => { gameState.timerRunning ? pauseTimer() : startTimer(); },
+    play: () => handleRoundPlayPause(),
     hint: () => revealNextFact(),
     reveal: () => { if (!gameState.answerRevealed) revealAnswer(); }
   };
@@ -1055,8 +1110,8 @@ function updateMobileHostDock() {
       playBtn.classList.toggle('dock-btn-warning', gameState.timerRunning);
       playBtn.classList.toggle('dock-btn-primary', !gameState.timerRunning);
     }
-    if (hintBtn) hintBtn.disabled = gameState.revealedFacts >= 4 || !!gameState.screenOverlay;
-    if (revealBtn) revealBtn.disabled = gameState.answerRevealed || !!gameState.screenOverlay;
+    if (hintBtn) hintBtn.disabled = !gameState.roundStarted || gameState.revealedFacts >= 4 || !!gameState.screenOverlay;
+    if (revealBtn) revealBtn.disabled = !gameState.roundStarted || gameState.answerRevealed || !!gameState.screenOverlay;
   });
 }
 
