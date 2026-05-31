@@ -6,180 +6,33 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Name That Canadian! — Live Hosted Trivia Game</title>
-  <meta name="description" content="A live-hosted game show website with interactive countdowns, audio synthesis, and real-time presenter synchronization.">
+  <title>Name That Canadian!</title>
+  <meta name="description" content="Mobile trivia game show — host and present from one device.">
   <meta name="theme-color" content="#060913">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
 </head>
-<body data-theme="midnight">
+<body class="mobile-only-app" data-theme="midnight">
 
-  <!-- Ambient background glow elements -->
   <div class="ambient-glow-1"></div>
   <div class="ambient-glow-2"></div>
 
-  <!-- Root router container -->
-  <div id="view-container" data-current-view="splash">
+  <div id="view-container" data-current-view="solo">
 
-    <!-- 1. Splash Screen -->
-    <div id="view-splash" class="splash-wrapper">
-      <div class="splash-logo-container">
-        <div class="splash-title-sub">🍁 The Live Trivia Game Show 🍁</div>
-        <h1 class="splash-title">Name That Canadian</h1>
-        <p class="splash-desc">
-          Identify famous Canadians through 4 hints that reveal before time runs out. 
-          Perfect for live projection on double displays, Zoom streams, or local solo play.
-        </p>
-      </div>
-
-      <div class="role-buttons-grid">
-        <!-- Presenter Button -->
-        <div class="role-card" id="btn-view-presenter">
-          <div class="role-icon">🖥️</div>
-          <h2 class="role-name">Presenter Screen</h2>
-          <p class="role-desc">Project this tab onto the big screen or sharing stream. Displays questions, countdowns, and answer reveals.</p>
-        </div>
-
-        <!-- Admin Button -->
-        <div class="role-card" id="btn-view-admin">
-          <div class="role-icon">⚙️</div>
-          <h2 class="role-name">Admin Controller</h2>
-          <p class="role-desc">Open this tab on the host laptop. Control timers, trigger SFX, and manage state in real-time.</p>
-        </div>
-
-        <!-- Solo Button -->
-        <div class="role-card role-card-recommended-mobile" id="btn-view-solo">
-          <div class="role-icon">🎮</div>
-          <h2 class="role-name">Solo / Split Mode</h2>
-          <p class="role-desc">Best for phones & tablets. Switch between audience view and host controls with one tap.</p>
-          <span class="mobile-badge">📱 Recommended on mobile</span>
-        </div>
-      </div>
-
-      <div class="splash-mobile-tip mobile-only">
-        <strong>On your phone?</strong> Use <em>Solo Mode</em> to host a game, or open <em>Admin Controller</em> while presenting on another device.
-      </div>
-
-      <div class="splash-settings">
-        <h4>🎨 Theme</h4>
-        <div class="theme-picker">
-          <button type="button" class="btn btn-outline active" data-theme-option="midnight">Midnight</button>
-          <button type="button" class="btn btn-outline" data-theme-option="canada-day">Canada Day</button>
-          <button type="button" class="btn btn-outline" data-theme-option="stream">Stream Safe</button>
-        </div>
-        <label class="toggle-control splash-toggle">
-          <span class="switch-label">Large projection text</span>
-          <label class="switch">
-            <input id="big-text-toggle" type="checkbox">
-            <span class="slider"></span>
-          </label>
-        </label>
-      </div>
-
-      <div id="categories-load-error" class="splash-error hidden">
-        Could not load question packs. Please run from a local server or deploy to Vercel.
-      </div>
-
-      <div class="splash-instructions">
-        <h4>💡 Dual Screen Setup Guide:</h4>
-        <p>
-          Open the <strong>Presenter Screen</strong> in one tab, and the <strong>Admin Controller</strong> in another. 
-          Drag the Presenter tab to your second screen (projector/TV) and click <em>Fullscreen</em>. 
-          Control everything locally and instantly from the Admin tab!
-        </p>
-      </div>
+    <div id="categories-load-error" class="splash-error hidden">
+      Could not load question packs. Check your connection and refresh.
     </div>
 
-    <!-- 2. Presenter View (Projector) -->
-    <div id="view-presenter" class="presenter-container hidden">
-      <!-- Header -->
-      <div class="presenter-header">
-        <div class="presenter-branding">NAME THAT <span>CANADIAN</span></div>
-        <div class="presenter-round-info">
-          <div id="presenter-round-name" class="presenter-round-name">Round 1: Cultural Icons</div>
-          <div id="presenter-q-num" class="presenter-q-num">Question 1 of 5</div>
-        </div>
+    <div id="view-solo" class="solo-layout solo-tab-host">
+
+      <!-- Host ↔ Show screen tabs -->
+      <div class="solo-mobile-tabs" role="tablist">
+        <button type="button" class="solo-tab-btn" data-solo-tab="presenter" role="tab" aria-selected="false">📺 Show</button>
+        <button type="button" class="solo-tab-btn active" data-solo-tab="host" role="tab" aria-selected="true">🎙️ Control</button>
       </div>
 
-      <!-- Main Section -->
-      <div class="presenter-main">
-        <!-- Facts Grid -->
-        <div id="presenter-facts-container" class="presenter-facts-layout">
-          <!-- Populated by JS -->
-        </div>
-
-        <!-- Leaderboard Panel -->
-        <div id="presenter-leaderboard-container" class="presenter-leaderboard-container hidden">
-          <div class="leaderboard-header">Scoreboard</div>
-          <div id="presenter-leaderboard-entries" class="leaderboard-entries"></div>
-        </div>
-
-        <!-- Timer Panel -->
-        <div class="presenter-timer-layout">
-          <div id="presenter-timer" class="timer-circle">
-            <svg>
-              <defs>
-                <linearGradient id="timer-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#3b82f6" />
-                  <stop offset="100%" stop-color="#8b5cf6" />
-                </linearGradient>
-              </defs>
-              <circle class="bg-circle" cx="100" cy="100" r="84"></circle>
-              <circle id="presenter-timer-ring" class="progress-circle" cx="100" cy="100" r="84" stroke-dasharray="527" stroke-dashoffset="0"></circle>
-            </svg>
-            <div id="presenter-timer-value" class="timer-value">40</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Round / Podium Screen Overlay -->
-      <div id="presenter-screen-overlay" class="screen-overlay hidden">
-        <div class="screen-overlay-content">
-          <h2 id="presenter-overlay-title" class="overlay-title">Round Complete</h2>
-          <p id="presenter-overlay-subtitle" class="overlay-subtitle">Get ready…</p>
-          <div id="presenter-overlay-podium" class="overlay-podium hidden"></div>
-          <button type="button" class="btn btn-primary btn-glow btn-dismiss-overlay hidden-host-only">Continue ▶</button>
-        </div>
-      </div>
-
-      <!-- Presenter Reveal Overlay -->
-      <div id="presenter-reveal-overlay" class="reveal-overlay hidden">
-        <div class="reveal-glow-bg"></div>
-        <div class="reveal-subtitle">🍁 Who is it? 🍁</div>
-        <h2 id="presenter-answer-name" class="reveal-title">Terry Fox</h2>
-        
-        <div class="reveal-media-container">
-          <img id="presenter-answer-image" class="reveal-image hidden" src="" alt="Famous Canadian Portrait">
-          <div id="presenter-avatar-fallback" class="avatar-fallback">TF</div>
-        </div>
-
-        <div id="presenter-answer-notes" class="reveal-notes-box">
-          Loading biographical information...
-        </div>
-      </div>
-
-      <!-- Footer / Controls -->
-      <div class="presenter-footer">
-        <button class="btn btn-outline btn-back-menu">🚪 Back to Menu</button>
-        <button class="btn btn-outline btn-fullscreen">
-          <span class="btn-icon-label">📺 Fullscreen</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Note: 3. Admin Control Panel has been moved to admin.html -->
-
-    <!-- 4. Solo / Split Mode -->
-    <div id="view-solo" class="solo-layout hidden">
-      <!-- Mobile tab switcher -->
-      <div class="solo-mobile-tabs mobile-only" role="tablist">
-        <button type="button" class="solo-tab-btn active" data-solo-tab="presenter" role="tab" aria-selected="true">📺 Audience</button>
-        <button type="button" class="solo-tab-btn" data-solo-tab="host" role="tab" aria-selected="false">🕹️ Host</button>
-      </div>
-
-      <!-- Left Screen: Presenter Projection Pane -->
+      <!-- Show screen (face the audience) -->
       <div class="solo-presenter-pane">
-        <!-- Presenter Header -->
         <div class="presenter-header">
           <div class="presenter-branding">NAME THAT <span>CANADIAN</span></div>
           <div class="presenter-round-info">
@@ -188,21 +41,13 @@
           </div>
         </div>
 
-        <!-- Presenter Main -->
         <div class="presenter-container">
           <div class="presenter-main">
-            <!-- Facts List -->
-            <div id="solo-presenter-facts-container" class="presenter-facts-layout">
-              <!-- Populated by JS -->
-            </div>
-
-            <!-- Leaderboard Panel -->
+            <div id="solo-presenter-facts-container" class="presenter-facts-layout"></div>
             <div id="solo-presenter-leaderboard-container" class="presenter-leaderboard-container hidden">
               <div class="leaderboard-header">Scoreboard</div>
               <div id="solo-presenter-leaderboard-entries" class="leaderboard-entries"></div>
             </div>
-
-            <!-- Timer Circle -->
             <div class="presenter-timer-layout">
               <div id="solo-presenter-timer" class="timer-circle">
                 <svg>
@@ -215,7 +60,6 @@
           </div>
         </div>
 
-        <!-- Round / Podium Screen Overlay (Solo) -->
         <div id="solo-presenter-screen-overlay" class="screen-overlay hidden">
           <div class="screen-overlay-content">
             <h2 id="solo-presenter-overlay-title" class="overlay-title">Round Complete</h2>
@@ -224,37 +68,35 @@
           </div>
         </div>
 
-        <!-- Presenter Reveal Overlay -->
         <div id="solo-presenter-reveal-overlay" class="reveal-overlay hidden">
           <div class="reveal-glow-bg"></div>
           <div class="reveal-subtitle">🍁 Who is it? 🍁</div>
           <h2 id="solo-presenter-answer-name" class="reveal-title">Terry Fox</h2>
-          
           <div class="reveal-media-container">
-            <img id="solo-presenter-answer-image" class="reveal-image hidden" src="" alt="Famous Canadian Portrait">
+            <img id="solo-presenter-answer-image" class="reveal-image hidden" src="" alt="Answer portrait">
             <div id="solo-presenter-avatar-fallback" class="avatar-fallback">TF</div>
           </div>
-
-          <div id="solo-presenter-answer-notes" class="reveal-notes-box">
-            Loading biographical information...
-          </div>
+          <div id="solo-presenter-answer-notes" class="reveal-notes-box">Loading…</div>
         </div>
       </div>
 
-      <!-- Right Screen: Host Controls Pane -->
+      <!-- Host controls (presenter runs the game here) -->
       <div class="solo-admin-pane">
+        <div class="admin-panel-card host-intro-card">
+          <h1 class="mobile-app-title">Name That Canadian</h1>
+          <p class="mobile-app-desc">You control the rounds from this tab. Tap <strong>Show</strong> to face your audience.</p>
+        </div>
+
         <div class="admin-panel-card">
           <div class="admin-panel-title">
-            🕹️ Host Control Panel
-            <div id="solo-admin-sync-status" class="sync-indicator connected">Solo Play</div>
+            🎙️ Round Controls
           </div>
-          
+
           <div class="dashboard-timer-display">
             <div id="solo-admin-time-tracker" class="time-left-tracker">Time Left: 40s</div>
             <div id="solo-admin-fact-progress" class="fact-tracker">Facts: 1/4</div>
           </div>
 
-          <!-- Category Selector -->
           <div class="category-selector-card">
             <label for="solo-admin-category-select">Category Pack</label>
             <select id="solo-admin-category-select" class="form-select" data-category-select></select>
@@ -269,21 +111,21 @@
             </select>
           </div>
 
-          <div class="main-controls-row">
+          <div class="main-controls-row host-controls-duplicate">
             <button id="solo-admin-play-btn" class="btn btn-success btn-glow">▶️ Start</button>
             <button id="solo-admin-reset-q-btn" class="btn btn-outline">🔁 Restart Q</button>
           </div>
 
-          <div class="game-flow-actions">
+          <div class="game-flow-actions host-controls-duplicate">
             <button id="solo-admin-next-fact-btn" class="btn btn-outline">💡 Next Hint</button>
             <button id="solo-admin-reveal-answer-btn" class="btn btn-primary btn-glow">🔓 Reveal Answer</button>
           </div>
 
-          <div class="time-controls" style="margin-bottom: 1rem;">
+          <div class="time-controls">
             <span>Adjust Time:</span>
             <div class="time-controls-btns">
-              <button id="solo-admin-time-minus" class="btn btn-outline" style="padding: 0.4rem 0.8rem;">-5s</button>
-              <button id="solo-admin-time-plus" class="btn btn-outline" style="padding: 0.4rem 0.8rem;">+5s</button>
+              <button id="solo-admin-time-minus" class="btn btn-outline">-5s</button>
+              <button id="solo-admin-time-plus" class="btn btn-outline">+5s</button>
             </div>
           </div>
 
@@ -304,25 +146,22 @@
           </div>
 
           <div id="solo-admin-overlay-controls" class="overlay-controls hidden">
-            <button id="solo-admin-dismiss-overlay-btn" class="btn btn-primary btn-glow" style="width:100%;">Continue ▶</button>
+            <button id="solo-admin-dismiss-overlay-btn" class="btn btn-primary btn-glow overlay-continue-btn">Continue ▶</button>
           </div>
 
           <div id="solo-admin-award-panel" class="award-panel hidden"></div>
         </div>
 
-        <!-- Scoreboard Manager Card -->
         <div class="admin-panel-card">
-          <div class="admin-panel-title">🏆 Scoreboard Manager</div>
+          <div class="admin-panel-title">🏆 Teams</div>
           <div class="scoreboard-manager-content">
-            <div class="add-team-row" style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
-              <input type="text" id="solo-admin-team-input" placeholder="New Team Name..." class="form-input" style="flex: 1; padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-light); background: rgba(255,255,255,0.05); color: var(--text-primary);">
-              <button id="solo-admin-add-team-btn" class="btn btn-success" style="padding: 0.5rem 1rem;">Add</button>
+            <div class="add-team-row">
+              <input type="text" id="solo-admin-team-input" placeholder="Team name…" class="form-input">
+              <button id="solo-admin-add-team-btn" class="btn btn-success">Add</button>
             </div>
-            <div id="solo-admin-teams-list" class="admin-teams-list" style="display: flex; flex-direction: column; gap: 0.5rem;">
-              <!-- Teams will be dynamically listed here -->
-            </div>
+            <div id="solo-admin-teams-list" class="admin-teams-list"></div>
             <div class="toggle-control scoreboard-toggle-row">
-              <span class="switch-label">Show Scoreboard on Presenter Screen</span>
+              <span class="switch-label">Show scoreboard on Show screen</span>
               <label class="switch">
                 <input id="solo-admin-show-scoreboard-toggle" type="checkbox">
                 <span class="slider"></span>
@@ -330,28 +169,16 @@
             </div>
             <div class="scoreboard-actions">
               <button id="solo-admin-clear-scores-btn" class="btn btn-outline btn-sm">Clear Scores</button>
-              <button id="solo-admin-export-scores-btn" class="btn btn-outline btn-sm">Export Scores</button>
+              <button id="solo-admin-export-scores-btn" class="btn btn-outline btn-sm">Export</button>
               <button id="solo-admin-play-again-btn" class="btn btn-success btn-sm">Play Again</button>
             </div>
           </div>
         </div>
 
-        <div class="admin-panel-card keyboard-hints">
-          <div class="admin-panel-title">⌨️ Keyboard Shortcuts</div>
-          <ul class="shortcut-list">
-            <li><kbd>Space</kbd> Start / pause</li>
-            <li><kbd>N</kbd> Next hint · <kbd>R</kbd> Reveal</li>
-            <li><kbd>←</kbd><kbd>→</kbd> Prev / next question</li>
-            <li><kbd>1</kbd>–<kbd>4</kbd> Soundboard</li>
-            <li><kbd>Enter</kbd> Dismiss overlay</li>
-          </ul>
-        </div>
-
-        <!-- Soundboard -->
         <div class="admin-panel-card">
           <div class="admin-panel-title">
             🔊 Soundboard
-            <button id="solo-admin-mute-btn" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">🔊 Mute</button>
+            <button id="solo-admin-mute-btn" class="btn btn-outline btn-sm">🔊 Mute</button>
           </div>
           <div class="soundboard-grid">
             <button class="btn btn-outline solo-admin-sound-btn" data-sound="correct">⭐ Correct</button>
@@ -361,61 +188,61 @@
           </div>
         </div>
 
-        <!-- Cheat Sheet Card -->
         <div class="admin-panel-card">
           <div class="cheat-sheet-header">
-            <div id="solo-admin-cheat-round" class="cheat-round">Round 1: Cultural Icons</div>
-            <h3 id="solo-admin-cheat-title" class="cheat-title">Terry Fox</h3>
+            <div id="solo-admin-cheat-round" class="cheat-round">Round 1</div>
+            <h3 id="solo-admin-cheat-title" class="cheat-title">Answer</h3>
           </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <ul id="solo-admin-cheat-facts" class="cheat-facts-list">
-              <!-- Populated by JS -->
-            </ul>
-          </div>
-
+          <ul id="solo-admin-cheat-facts" class="cheat-facts-list"></ul>
           <div class="cheat-notes-box">
-            <h5>Discussion Notes:</h5>
-            <p id="solo-admin-cheat-notes">Discussion pointers go here.</p>
+            <h5>Host Notes</h5>
+            <p id="solo-admin-cheat-notes"></p>
           </div>
         </div>
 
-        <!-- Question selector -->
         <div class="admin-panel-card">
-          <div class="admin-panel-title">📋 Select Question</div>
-          <div id="solo-admin-q-list" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 200px; overflow-y: auto;">
-            <!-- Populated by JS -->
-          </div>
+          <div class="admin-panel-title">📋 Questions</div>
+          <div id="solo-admin-q-list" class="admin-q-list-mobile"></div>
         </div>
 
-        <!-- Navigation footer -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
-          <button id="solo-admin-prev-q-btn" class="btn btn-outline">⬅️ Previous</button>
+        <div class="host-nav-row host-controls-duplicate">
+          <button id="solo-admin-prev-q-btn" class="btn btn-outline">⬅️ Prev</button>
           <button id="solo-admin-next-q-btn" class="btn btn-outline">Next ➡️</button>
         </div>
 
-        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; padding-bottom: 5rem;">
-          <button class="btn btn-outline btn-back-menu" style="flex: 1;">🚪 Main Menu</button>
-          <button class="btn btn-danger btn-reset-game" style="flex: 1;">🔄 Reset</button>
+        <div class="admin-panel-card mobile-settings-card">
+          <div class="admin-panel-title">🎨 Settings</div>
+          <div class="theme-picker">
+            <button type="button" class="btn btn-outline active" data-theme-option="midnight">Midnight</button>
+            <button type="button" class="btn btn-outline" data-theme-option="canada-day">Canada Day</button>
+            <button type="button" class="btn btn-outline" data-theme-option="stream">Stream</button>
+          </div>
+          <label class="toggle-control splash-toggle">
+            <span class="switch-label">Large text on Show screen</span>
+            <label class="switch">
+              <input id="big-text-toggle" type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </label>
+        </div>
+
+        <div class="host-footer-actions">
+          <button class="btn btn-danger btn-reset-game">🔄 Reset Game</button>
         </div>
       </div>
 
-      <!-- Mobile quick-action dock (solo) -->
-      <nav class="mobile-host-dock mobile-only" id="solo-mobile-dock" aria-label="Quick host controls">
+      <nav class="mobile-host-dock" id="solo-mobile-dock" aria-label="Round controls">
         <button type="button" class="dock-btn" data-dock-action="prev" aria-label="Previous question">⬅️</button>
-        <button type="button" class="dock-btn dock-btn-primary" data-dock-action="play" aria-label="Start or pause timer">▶️</button>
+        <button type="button" class="dock-btn dock-btn-primary" data-dock-action="play" aria-label="Start or pause">▶️</button>
         <button type="button" class="dock-btn" data-dock-action="hint" aria-label="Next hint">💡</button>
         <button type="button" class="dock-btn dock-btn-accent" data-dock-action="reveal" aria-label="Reveal answer">🔓</button>
         <button type="button" class="dock-btn" data-dock-action="next" aria-label="Next question">➡️</button>
       </nav>
     </div>
-
   </div>
 
-  <!-- Load script resources -->
   <script src="js/config.js"></script>
   <script src="audio.js"></script>
-  <script src="sync.js"></script>
   <script src="app.js"></script>
 
 </body>

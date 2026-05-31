@@ -1,13 +1,13 @@
 # Name That Canadian 🍁
 
-A live-hosted trivia game show. Identify famous Canadians (and Canadian icons) through four progressive hints before time runs out.
+A mobile-first live trivia game show. Identify famous Canadians (and Canadian icons) through four progressive hints before time runs out — all from one phone or tablet.
 
 ## Quick Start
 
-1. Open `index.html` in a browser (use a local server or deploy — see below).
-2. **Presenter Screen** → drag to projector/TV → fullscreen.
-3. **Admin Controller** (`admin.html`) → host controls on laptop.
-4. Both tabs sync automatically via BroadcastChannel.
+1. Open the app in a browser (use a local server or deploy — see below).
+2. Start on the **Control** tab — pick a category, add teams, and run each round.
+3. Tap **Show** to flip the screen toward your audience between hints and reveals.
+4. Use the sticky bottom dock for quick round controls while hosting.
 
 ### Local development
 
@@ -37,7 +37,7 @@ Each category pack has **11 questions**:
 
 Questions live in [`data/categories.json`](data/categories.json) — edit that file to add or change content.
 
-## Host Keyboard Shortcuts (Admin / Solo)
+## Host Keyboard Shortcuts (optional, with external keyboard)
 
 | Key | Action |
 |-----|--------|
@@ -50,8 +50,7 @@ Questions live in [`data/categories.json`](data/categories.json) — edit that f
 
 ## Features
 
-- Dual-screen sync (presenter + admin)
-- Solo split-screen mode
+- Single-device mobile workflow (Control + Show tabs)
 - Configurable timer (30 / 40 / 60 s)
 - Team scoreboard with quick award buttons
 - Round transition screens + final podium
@@ -66,7 +65,7 @@ Questions live in [`data/categories.json`](data/categories.json) — edit that f
 vercel
 ```
 
-Static files only — no backend required. Presenter and admin must be on the **same origin** for sync to work.
+Static files only — no backend required.
 
 ## Adding Questions
 
@@ -78,15 +77,10 @@ Edit `data/categories.json`. Each question:
   "roundName": "Round 1: Cultural Icons",
   "roundNum": 1,
   "qNum": 1,
-  "canadian": "Name Here",
-  "facts": ["Hint 1", "Hint 2", "Hint 3", "Hint 4"],
-  "notes": "Host discussion notes.",
-  "imageUrl": "https://optional-image.jpg"
+  "canadian": "Terry Fox",
+  "facts": ["Fact 1…", "Fact 2…", "Fact 3…", "Fact 4…"],
+  "notes": "Host talking points…"
 }
 ```
 
-Final round uses `"roundNum": 3`.
-
-## License
-
-MIT — use freely for events, classrooms, and pub nights.
+Optional `imageUrl` overrides Wikipedia lookup for the reveal screen.

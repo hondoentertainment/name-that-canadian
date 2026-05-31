@@ -2307,3 +2307,168 @@ body.is-fullscreen .presenter-footer:hover {
   }
 }
 
+/* ===== MOBILE-ONLY APP (single device, host controls) ===== */
+
+body.mobile-only-app {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+}
+
+body.mobile-only-app #view-container {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+body.mobile-only-app .mobile-only {
+  display: flex !important;
+}
+
+body.mobile-only-app .desktop-only {
+  display: none !important;
+}
+
+body.mobile-only-app .btn {
+  min-height: 48px;
+  touch-action: manipulation;
+}
+
+body.mobile-only-app .form-input,
+body.mobile-only-app .form-select {
+  font-size: 16px;
+  min-height: 48px;
+}
+
+body.mobile-only-app .solo-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body.mobile-only-app .solo-mobile-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex !important;
+  gap: 0;
+  background: rgba(6, 9, 19, 0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.5rem;
+  padding-top: calc(0.5rem + env(safe-area-inset-top));
+}
+
+body.mobile-only-app .solo-tab-btn {
+  flex: 1;
+  min-height: 48px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+body.mobile-only-app .solo-tab-btn.active {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: var(--accent-blue);
+  color: var(--text-primary);
+}
+
+body.mobile-only-app .solo-tab-btn + .solo-tab-btn {
+  margin-left: 0.5rem;
+}
+
+body.mobile-only-app .solo-layout.solo-tab-presenter .solo-admin-pane {
+  display: none !important;
+}
+
+body.mobile-only-app .solo-layout.solo-tab-host .solo-presenter-pane {
+  display: none !important;
+}
+
+body.mobile-only-app .solo-layout.solo-tab-host .solo-mobile-dock,
+body.mobile-only-app .solo-layout.solo-tab-host #solo-mobile-dock {
+  display: flex !important;
+}
+
+body.mobile-only-app .solo-layout.solo-tab-presenter #solo-mobile-dock {
+  display: none !important;
+}
+
+body.mobile-only-app .solo-admin-pane {
+  padding: 1rem;
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
+
+body.mobile-only-app .host-controls-duplicate {
+  display: none !important;
+}
+
+body.mobile-only-app .host-intro-card {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+body.mobile-only-app .mobile-app-title {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+  font-weight: 800;
+}
+
+body.mobile-only-app .mobile-app-desc {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+body.mobile-only-app .admin-q-list-mobile {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.25rem;
+}
+
+body.mobile-only-app .admin-q-list-mobile .admin-q-item {
+  scroll-snap-align: start;
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+body.mobile-only-app .host-footer-actions {
+  padding: 1rem 0 0.5rem;
+}
+
+body.mobile-only-app .host-footer-actions .btn {
+  width: 100%;
+}
+
+body.mobile-only-app .mobile-host-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.5rem;
+  padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+  background: rgba(6, 9, 19, 0.95);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-subtle);
+}
+
+body.mobile-only-app .game-toast {
+  bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
+
+body.mobile-only-app.big-text .fact-text {
+  font-size: 1.2rem;
+}
+

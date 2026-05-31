@@ -1,12 +1,12 @@
 {
   "name": "Name That Canadian",
   "short_name": "Canadian Trivia",
-  "description": "Live-hosted Canadian trivia game show",
+  "description": "Mobile trivia game show — host and present from one device",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#060913",
   "theme_color": "#060913",
-  "orientation": "any",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍁</text></svg>",

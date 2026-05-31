@@ -1,4 +1,4 @@
-const CACHE_NAME = 'name-that-canadian-v2';
+const CACHE_NAME = 'name-that-canadian-v3';
 const ASSETS = [
   '/',
   '/index.html',
@@ -7,7 +7,6 @@ const ASSETS = [
   '/app.js',
   '/js/config.js',
   '/audio.js',
-  '/sync.js',
   '/data/categories.json',
   '/manifest.json'
 ];
