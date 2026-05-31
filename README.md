@@ -1,13 +1,19 @@
 # Name That Canadian 🍁
 
-A mobile-first live trivia game show. Identify famous Canadians (and Canadian icons) through four progressive hints before time runs out — all from one phone or tablet.
+A live-hosted trivia game show. Identify famous Canadians (and Canadian icons) through four progressive hints before time runs out.
 
 ## Quick Start
 
-1. Open the app in a browser (use a local server or deploy — see below).
-2. Start on the **Control** tab — pick a category, add teams, and run each round.
-3. Tap **Show** to flip the screen toward your audience between hints and reveals.
-4. Use the sticky bottom dock for quick round controls while hosting.
+**For players / audience** — share the main link:
+- `https://name-that-canadian.vercel.app/` (or `index.html`)
+
+Open it on a TV, projector, or cast to a screen. This page shows only the game — hints, timer, reveals, and scoreboard.
+
+**For hosts** — use the host link on your phone or laptop:
+- `https://name-that-canadian.vercel.app/host.html`
+- Legacy alias: `admin.html` redirects here
+
+Run rounds from the host page. Changes sync live to the audience display (same browser origin, two tabs or two devices on the same Wi‑Fi).
 
 ### Local development
 
@@ -16,7 +22,7 @@ npx serve .
 # or: python -m http.server 8080
 ```
 
-Then visit `http://localhost:3000` (or `:8080`).
+Then visit `http://localhost:3000` for the show and `http://localhost:3000/host.html` for controls.
 
 ## Game Structure
 
@@ -37,7 +43,7 @@ Each category pack has **11 questions**:
 
 Questions live in [`data/categories.json`](data/categories.json) — edit that file to add or change content.
 
-## Host Keyboard Shortcuts (optional, with external keyboard)
+## Host Keyboard Shortcuts
 
 | Key | Action |
 |-----|--------|
@@ -50,14 +56,15 @@ Questions live in [`data/categories.json`](data/categories.json) — edit that f
 
 ## Features
 
-- Single-device mobile workflow (Control + Show tabs)
+- Separate show and host URLs
+- Live sync between host controls and audience display
 - Configurable timer (30 / 40 / 60 s)
 - Team scoreboard with quick award buttons
 - Round transition screens + final podium
 - Shuffle question order per round
 - Three visual themes + large text mode
-- PWA / offline shell (installable)
-- Web Audio soundboard
+- PWA / offline shell (installable on show page)
+- Web Audio soundboard (plays on the display)
 
 ## Deploy to Vercel
 
@@ -65,7 +72,7 @@ Questions live in [`data/categories.json`](data/categories.json) — edit that f
 vercel
 ```
 
-Static files only — no backend required.
+Static files only — no backend required. Show and host must be on the **same origin** for sync to work.
 
 ## Adding Questions
 

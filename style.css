@@ -2316,8 +2316,56 @@ body.mobile-only-app {
 }
 
 body.mobile-only-app #view-container {
-  max-width: 480px;
   margin: 0 auto;
+}
+
+body.mobile-only-app.host-page #view-container {
+  max-width: 480px;
+}
+
+body.mobile-only-app.audience-page #view-container {
+  max-width: none;
+}
+
+body.mobile-only-app.audience-page .show-layout {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 1rem;
+  padding-top: calc(1rem + env(safe-area-inset-top));
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+}
+
+body.mobile-only-app.host-page .host-layout {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body.mobile-only-app.host-page .host-controls-duplicate {
+  display: none !important;
+}
+
+body.mobile-only-app.host-page .mobile-host-dock {
+  display: flex !important;
+}
+
+body.mobile-only-app.host-page .solo-admin-pane {
+  padding: 1rem;
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
+
+body.mobile-only-app.audience-page .host-intro-card,
+body.mobile-only-app.audience-page .solo-mobile-tabs,
+body.mobile-only-app.audience-page .mobile-host-dock {
+  display: none !important;
+}
+
+body.mobile-only-app .host-intro-card .sync-indicator {
+  margin-top: 0.75rem;
+}
+
+body.mobile-only-app .mobile-app-desc a {
+  color: var(--accent-blue);
+  font-weight: 600;
 }
 
 body.mobile-only-app .mobile-only {

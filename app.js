@@ -7,8 +7,11 @@ let timerInterval = null;
 let wikipediaImages = {};
 let categoriesLoaded = false;
 
+const isHostPage = document.body.dataset.page === 'host';
+const isShowPage = document.body.dataset.page === 'show';
+
 const DEFAULT_STATE = {
-  view: 'solo',
+  view: 'show',
   currentQuestionIndex: 0,
   revealedFacts: 1,
   timeLeft: 40,
@@ -35,7 +38,7 @@ function getWikiSearchTitle(name) {
 }
 
 function shouldSyncToPresenter() {
-  return false;
+  return isHostPage;
 }
 
 function shuffleArray(arr) {
@@ -138,11 +141,13 @@ function loadState() {
       console.error('Error loading saved state', e);
     }
   }
-  gameState.view = 'solo';
+  gameState.view = isHostPage ? 'host' : 'show';
 }
 
 function broadcastState() {
-  /* Mobile-only single-device app — no cross-tab sync */
+  if (window.gameSync && isHostPage) {
+    window.gameSync.broadcastState(gameState);
+  }
 }
 
 function applyTheme(theme) {
@@ -489,9 +494,10 @@ function playAgain() {
 
 function resetGame() {
   stopTimerInterval();
-  gameState = { ...DEFAULT_STATE, view: 'solo' };
+  gameState = { ...DEFAULT_STATE, view: isHostPage ? 'host' : 'show' };
   applyTimerDuration();
   saveState();
+  broadcastState();
   applyTheme(gameState.theme);
   render();
 }
@@ -598,7 +604,7 @@ function renderScreenOverlay(targetPrefix) {
     }
   }
 
-  if (continueBtn) continueBtn.style.display = '';
+  if (continueBtn) continueBtn.style.display = isHostPage ? '' : 'none';
 }
 
 function renderPresenterScreen(targetPrefix) {
@@ -776,7 +782,17 @@ function renderAdminScreen(targetPrefix) {
   }
 
   const syncStatus = document.getElementById(`${targetPrefix}-sync-status`);
-  if (syncStatus) syncStatus.classList.add('hidden');
+  if (syncStatus && window.gameSync) {
+    if (window.gameSync.isPresenterConnected) {
+      syncStatus.className = 'sync-indicator connected';
+      syncStatus.innerHTML = "<span class='pulse-dot'></span> Display Connected";
+    } else {
+      syncStatus.className = 'sync-indicator disconnected';
+      syncStatus.innerHTML = 'Display Offline — open the show link on your TV';
+    }
+  } else if (syncStatus) {
+    syncStatus.classList.add('hidden');
+  }
 
   const autoToggle = document.getElementById(`${targetPrefix}-auto-advance-toggle`);
   if (autoToggle) autoToggle.checked = gameState.autoReveal;
@@ -849,19 +865,16 @@ function render() {
     return;
   }
 
-  gameState.view = 'solo';
-  container.dataset.currentView = 'solo';
+  if (isShowPage) {
+    container.dataset.currentView = 'show';
+    document.getElementById('view-show')?.classList.remove('hidden');
+    renderPresenterScreen('solo-presenter');
+  }
 
-  const soloEl = document.getElementById('view-solo');
-  soloEl?.classList.remove('hidden');
-  renderPresenterScreen('solo-presenter');
-  renderAdminScreen('solo-admin');
-
-  if (soloEl) {
-    document.getElementById('solo-mobile-dock')?.classList.toggle(
-      'hidden',
-      soloEl.classList.contains('solo-tab-presenter')
-    );
+  if (isHostPage) {
+    container.dataset.currentView = 'host';
+    document.getElementById('view-host')?.classList.remove('hidden');
+    renderAdminScreen('solo-admin');
   }
 }
 
@@ -932,6 +945,8 @@ function setupAdminActionListeners(prefix) {
 }
 
 function setupKeyboardShortcuts() {
+  if (!isHostPage) return;
+
   document.addEventListener('keydown', e => {
     const tag = e.target.tagName;
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
@@ -977,7 +992,8 @@ function setupKeyboardShortcuts() {
 }
 
 function isMobileDevice() {
-  return document.body.classList.contains('mobile-only-app')
+  return document.body.classList.contains('host-page')
+    || document.body.classList.contains('mobile-only-app')
     || window.matchMedia('(max-width: 768px)').matches;
 }
 
@@ -987,35 +1003,6 @@ function setupMobileDetection() {
   };
   update();
   window.addEventListener('resize', update);
-}
-
-function setupSoloMobileTabs() {
-  const soloLayout = document.getElementById('view-solo');
-  if (!soloLayout) return;
-
-  const syncTabButtons = () => {
-    const isHost = soloLayout.classList.contains('solo-tab-host');
-    const isShow = soloLayout.classList.contains('solo-tab-presenter');
-    document.querySelectorAll('.solo-tab-btn').forEach(btn => {
-      const tab = btn.dataset.soloTab;
-      const active = (tab === 'host' && isHost) || (tab === 'presenter' && isShow);
-      btn.classList.toggle('active', active);
-      btn.setAttribute('aria-selected', active ? 'true' : 'false');
-    });
-    document.getElementById('solo-mobile-dock')?.classList.toggle('hidden', isShow);
-  };
-
-  syncTabButtons();
-
-  document.querySelectorAll('.solo-tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tab = btn.dataset.soloTab;
-      soloLayout.classList.remove('solo-tab-presenter', 'solo-tab-host');
-      soloLayout.classList.add(`solo-tab-${tab}`);
-      syncTabButtons();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  });
 }
 
 function setupMobileHostDock(prefix) {
@@ -1101,28 +1088,67 @@ async function initApp() {
   await loadCategories();
   loadState();
   applyTheme(gameState.theme);
-  populateCategorySelects();
 
-  document.querySelectorAll('.btn-reset-game').forEach(btn => {
-    btn.onclick = () => { if (confirm('Reset the entire game?')) resetGame(); };
-  });
+  if (isHostPage) {
+    populateCategorySelects();
 
-  setupAdminActionListeners('solo-admin');
-  setupThemePicker();
-  setupSoloMobileTabs();
-  setupMobileHostDock('solo-admin');
-  setupKeyboardShortcuts();
+    document.querySelectorAll('.btn-reset-game').forEach(btn => {
+      btn.onclick = () => { if (confirm('Reset the entire game?')) resetGame(); };
+    });
+
+    if (window.gameSync) {
+      window.gameSync.setAdminMode(true);
+      window.gameSync.onRequestStateReceived(() => window.gameSync.broadcastState(gameState));
+      window.gameSync.onPresenterStatusChange(connected => {
+        render();
+        if (connected) showToast('Display connected!');
+      });
+      window.gameSync.startHeartbeatMonitor(9000);
+      setInterval(() => window.gameSync.pingPresenter(), 3000);
+    }
+
+    setupAdminActionListeners('solo-admin');
+    setupThemePicker();
+    setupMobileHostDock('solo-admin');
+    setupKeyboardShortcuts();
+
+    getQuestions().forEach(q => prefetchWikipediaImage(q.canadian, q.imageUrl));
+
+    document.querySelectorAll('.btn-dismiss-overlay').forEach(btn => {
+      btn.onclick = dismissScreenOverlay;
+    });
+  }
+
+  if (isShowPage) {
+    if (window.gameSync) {
+      window.gameSync.setPresenterMode(true);
+      window.gameSync.onStateReceived(remoteState => {
+        gameState = { ...remoteState, view: 'show' };
+        applyTheme(gameState.theme);
+        if (window.gameAudio) window.gameAudio.setMuted(gameState.muted);
+        render();
+      });
+      window.gameSync.onSoundReceived(soundName => {
+        if (!window.gameAudio) return;
+        const map = {
+          tick: 'playTick',
+          warning: 'playWarning',
+          reveal: 'playReveal',
+          correct: 'playCorrect',
+          incorrect: 'playIncorrect',
+          fanfare: 'playFanfare'
+        };
+        window.gameAudio[map[soundName]]?.();
+      });
+      window.gameSync.requestState();
+    }
+
+    getQuestions().forEach(q => prefetchWikipediaImage(q.canadian, q.imageUrl));
+  }
 
   setupMobileDetection();
   setupTouchFeedback();
   setupMobileAudioUnlock();
-
-  getQuestions().forEach(q => prefetchWikipediaImage(q.canadian, q.imageUrl));
-
-  document.querySelectorAll('.btn-dismiss-overlay').forEach(btn => {
-    btn.onclick = dismissScreenOverlay;
-  });
-
   setupFullscreenHide();
   render();
 

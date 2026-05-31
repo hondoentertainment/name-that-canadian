@@ -1,12 +1,14 @@
-const CACHE_NAME = 'name-that-canadian-v3';
+const CACHE_NAME = 'name-that-canadian-v4';
 const ASSETS = [
   '/',
   '/index.html',
+  '/host.html',
   '/admin.html',
   '/style.css',
   '/app.js',
   '/js/config.js',
   '/audio.js',
+  '/sync.js',
   '/data/categories.json',
   '/manifest.json'
 ];
